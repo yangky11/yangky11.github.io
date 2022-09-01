@@ -10,10 +10,10 @@ locale                   : "en-US"
 title                    : "Kaiyu Yang"
 title_separator          : "-"
 name                     : &name "Kaiyu Yang"
-description              : &description "Ph.D. Student, Computer Science, Princeton University"
-url                      : https://www.cs.princeton.edu/~kaiyuy/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : &description "Postdoctoral Researcher, Computing + Mathematical Sciences (CMS), Caltech"
+url                      : https://yangky11.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  :  # the subpath of your site, e.g. "/blog"
-repository               : 
+repository               : "yangky11.github.io"
 teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
