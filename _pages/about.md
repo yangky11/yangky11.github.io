@@ -18,7 +18,7 @@ My research aims to make machine learning capable of symbolic reasoning. I have 
 In addition, I also work on constructing and analyzing machine learning datasets, focusing on fairness, privacy, and mitigating dataset bias. They collectively contribute to a future of machine learning we can trust, even in real-world, high-stake applications.
 
 
-[kaiyuy (at) cs.princeton.edu]
+[kaiyuy (at) caltech.edu]
 [<a style="text-decoration: none" class=".btn" target="_blank" href="files/Bio.txt">Bio</a>]
 [<a style="text-decoration: none" class=".btn" target="_blank" href="files/CV___Kaiyu_Yang.pdf">CV</a>]
 <!--[<a style="text-decoration: none" target="_blank" href="files/research-statement.pdf">Research</a>/<a style="text-decoration: none" target="_blank" href="files/teaching-statement.pdf">Teaching</a>/<a style="text-decoration: none" target="_blank" href="files/diversity-statement.pdf">Diversity</a> Statements]-->
