@@ -1,0 +1,7 @@
+@inproceedings{yang2019fairer,
+    title={Towards Fairer Datasets: Filtering and Balancing the Distribution of the People Subtree in the ImageNet Hierarchy},
+    author={Kaiyu Yang and Klint Qinami and Li Fei-Fei and Jia Deng and Olga Russakovsky},
+    booktitle={Conference on Fairness, Accountability, and Transparency (FAT*)},
+    doi={10.1145/3351095.3375709},
+    year={2020}
+}

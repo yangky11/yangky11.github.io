@@ -1,0 +1,6 @@
+@inproceedings{goyal2020rel3d,
+  title={Rel3D: A Minimally Contrastive Benchmark for Grounding Spatial Relations in 3D},
+  author={Goyal, Ankit and Yang, Kaiyu and Yang, Dawei and Deng, Jia},
+  booktitle={Neural Information Processing Systems (NeurIPS)},
+  year={2020}
+}

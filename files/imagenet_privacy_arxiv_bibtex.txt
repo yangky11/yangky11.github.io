@@ -1,0 +1,6 @@
+@article{yang2021imagenetfaces,
+ title={A Study of Face Obfuscation in ImageNet},
+ author={Yang, Kaiyu and Yau, Jacqueline and Fei-Fei, Li and Deng, Jia and Russakovsky, Olga},
+ journal={arXiv preprint arXiv:2103.06191},
+ year={2021}
+}
