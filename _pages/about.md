@@ -24,6 +24,7 @@ In addition, I also work on constructing and analyzing machine learning datasets
 <!--[<a style="text-decoration: none" target="_blank" href="files/research-statement.pdf">Research</a>/<a style="text-decoration: none" target="_blank" href="files/teaching-statement.pdf">Teaching</a>/<a style="text-decoration: none" target="_blank" href="files/diversity-statement.pdf">Diversity</a> Statements]-->
 
 
+<!--
 ## News ##
 
 * **9/2021** Awarded <a style="text-decoration: none" class=".btn" target="_blank" href="https://www.cs.princeton.edu/news/five-computer-science-graduate-students-honored-2022-siebel-scholar-awards">Siebel Scholar, Class of 2022</a>!
@@ -31,6 +32,7 @@ In addition, I also work on constructing and analyzing machine learning datasets
 * **5/2021** Awarded Outstanding Reviewer by CVPR 2020 and CVPR 2021!
 
 * **2/2020** Read about our work to improve the fairness and representation of ImageNet in <a style="text-decoration: none" target="_blank" href="https://engineering.princeton.edu/news/2020/02/12/researchers-devise-approach-reduce-biases-computer-vision-data-sets">Princeton Engineering News</a>.
+-->
 
 
 ## Publications ##
