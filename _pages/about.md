@@ -37,15 +37,15 @@ In addition, I also work on constructing and analyzing machine learning datasets
 
 ## Publications ##
 
-<a style="text-decoration: none" href="#nlproofs">Generating Natural Language Proofs with Verifier-Guided Search</a>  
-**Kaiyu Yang**, Jia Deng, and Danqi Chen  
-*Conference on Empirical Methods in Natural Language Processing (EMNLP), 2022*  
-<a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2205.12443">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princeton-nlp/NLProofS">[code]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_poster.pdf">[poster]</a>  
-
 <a style="text-decoration: none" href="#metaqnl">Learning Symbolic Rules for Reasoning in Quasi-Natural Language</a>  
 **Kaiyu Yang** and Jia Deng  
 <i>Under review</i>  
 <a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2111.12038">[paper]</a>  
+
+<a style="text-decoration: none" href="#nlproofs">Generating Natural Language Proofs with Verifier-Guided Search</a>  
+**Kaiyu Yang**, Jia Deng, and Danqi Chen  
+*Conference on Empirical Methods in Natural Language Processing (EMNLP), 2022*  
+<a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2205.12443">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princeton-nlp/NLProofS">[code]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_poster.pdf">[poster]</a> 
 
 <a style="text-decoration: none" href="#imagenet-privacy">A Study of Face Obfuscation in ImageNet</a>  
 **Kaiyu Yang**, Jacqueline Yau, Li Fei-Fei, Jia Deng, and Olga Russakovsky  
