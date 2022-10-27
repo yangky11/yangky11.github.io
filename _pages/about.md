@@ -44,7 +44,7 @@ In addition, I also work on constructing and analyzing machine learning datasets
 
 <a style="text-decoration: none" href="#nlproofs">Generating Natural Language Proofs with Verifier-Guided Search</a>  
 **Kaiyu Yang**, Jia Deng, and Danqi Chen  
-*Conference on Empirical Methods in Natural Language Processing (EMNLP), 2022, Oral presentation*  
+*Conference on Empirical Methods in Natural Language Processing (EMNLP), 2022, Oral*  
 <a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2205.12443">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princeton-nlp/NLProofS">[code]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/nlproofs_poster.pdf">[poster]</a> 
 
 <a style="text-decoration: none" href="#imagenet-privacy">A Study of Face Obfuscation in ImageNet</a>  
@@ -59,7 +59,7 @@ In addition, I also work on constructing and analyzing machine learning datasets
 
 <a style="text-decoration: none" href="#rel3d-img">Rel3D: A Minimally Contrastive Benchmark for Grounding Spatial Relations in 3D</a>  
 Ankit Goyal, **Kaiyu Yang**, Dawei Yang, and Jia Deng  
-*Neural Information Processing Systems (NeurIPS), 2020, Spotlight presentation*  
+*Neural Information Processing Systems (NeurIPS), 2020, Spotlight*  
 <a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2012.01634">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princeton-vl/Rel3D">[code]</a>  
 
 <a style="text-decoration: none" href="#imagenet-img">Towards Fairer Datasets: <br />Filtering and Balancing the Distribution of the People Subtree in the ImageNet Hierarchy</a>  
