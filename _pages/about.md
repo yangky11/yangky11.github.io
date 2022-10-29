@@ -136,7 +136,7 @@ In contrast, we use a powerful set of tools called proof assistants (a.k.a. inte
 
 ---------------------------------------
 
-<a target="_blank" href="https://arxiv.org/abs/1908.02660"><img id="spatialsense-img" src="images/SpatialSense.jpg" alt="SpatialSense" /></a>
+<a target="_blank" href="https://arxiv.org/abs/1908.02660"><img id="spatialsense-img" src="images/spatialsense.jpg" alt="SpatialSense" /></a>
 
 **Adversarial Crowdsourcing and SpatialSense**:
 Benchmarks in vision and language suffer from dataset bias---models can perform exceptionally well by exploiting simple cues without even looking at the image, which undermines the benchmark's value in measuring visual reasoning abilities. We propose adversarial crowdsourcing to reduce dataset bias. Annotators are explicitly tasked with finding examples that are difficult to predict using simple cues such as 2D spatial configuration or language priors. Specifically, we introduce SpatialSense, a challenging dataset for spatial relation recognition collected via adversarial crowdsourcing.
