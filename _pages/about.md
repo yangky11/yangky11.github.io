@@ -117,7 +117,7 @@ Symbolic reasoning, rule-based symbol manipulation, is a hallmark of human intel
 <a target="_blank" href="https://arxiv.org/abs/2010.14568"><img id="parsing-img" src="images/parsing.jpg" /></a>
 
 **Strongly Incremental Constituency Parsing**:
-Psycholinguistic research suggests that human parsing is strongly incremental&mdash;humans grow a single parse tree by adding exactly one token at each step. We propose a strongly incremental transition system for parsing named attach-juxtapose. It represents a partial sentence using a single tree, and each action adds exactly one token into the partial tree. Based on our transition system, we develop a strongly incremental parser that achieves state of the art on Penn Treebank and Chinese Treebank.
+Psycholinguistic research suggests that human parsing is strongly incremental&mdash;humans grow a single parse tree by adding exactly one token at each step. We propose a strongly incremental transition system for parsing named *Attach-Juxtapose*. It represents a partial sentence using a single tree, and each action adds exactly one token into the partial tree. Based on our transition system, we develop a strongly incremental parser that achieves state of the art on Penn Treebank and Chinese Treebank.
 
 
 <div style="text-align: right"><a style="text-decoration: none" target="_blank" href="https://arxiv.org/abs/2010.14568">[paper]</a></div>
