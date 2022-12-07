@@ -50,7 +50,8 @@ In addition, I also work on constructing and analyzing machine learning datasets
 <a style="text-decoration: none" href="#imagenet-privacy">A Study of Face Obfuscation in ImageNet</a>  
 **Kaiyu Yang**, Jacqueline Yau, Li Fei-Fei, Jia Deng, and Olga Russakovsky  
 *International Conference on Machine Learning (ICML), 2022*  
-<a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2103.06191">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princetonvisualai/imagenet-face-obfuscation">[code]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/imagenet_privacy_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://youtu.be/VnszYe8abRs?t=889">[talk]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/imagenet_face_obfuscation_icml_poster.pdf">[poster]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="http://image-net.org/face-obfuscation">[project]</a>    
+<a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/2103.06191">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://github.com/princetonvisualai/imagenet-face-obfuscation">[code]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/imagenet_privacy_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://youtu.be/VnszYe8abRs?t=889">[talk]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/imagenet_face_obfuscation_icml_poster.pdf">[poster]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="http://image-net.org/face-obfuscation">[project]</a> 
+<a style="text-decoration: none" class=".btn" target="_blank" href="https://insights.princeton.edu/2022/01/tradeoff-privacy-algorithm-performance/">[media]</a>  
 
 <a style="text-decoration: none" href="#parsing-img">Strongly Incremental Constituency Parsing with Graph Neural Networks</a>  
 **Kaiyu Yang** and Jia Deng  
@@ -66,7 +67,6 @@ Ankit Goyal, **Kaiyu Yang**, Dawei Yang, and Jia Deng
 **Kaiyu Yang**, Klint Qinami, Li Fei-Fei, Jia Deng, and Olga Russakovsky  
 <i>Conference on Fairness, Accountability, and Transparency (FAT*), 2020</i>  
 <a style="text-decoration: none" class=".btn" target="_blank" href="https://arxiv.org/abs/1912.07726">[paper]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="files/imagenet_debias_fat_slides.pdf">[slides]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://www.youtube.com/watch?v=MLaqxuNtgAo">[talk]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="http://image-net.org/update-sep-17-2019">[blog]</a> <a style="text-decoration: none" class=".btn" target="_blank" href="https://www.wired.com/story/ai-biased-how-scientists-trying-fix">[media]</a>  
-
 
 <a style="text-decoration: none" href="#coqgym-img">Learning to Prove Theorems via Interacting with Proof Assistants</a>  
 **Kaiyu Yang** and Jia Deng  
