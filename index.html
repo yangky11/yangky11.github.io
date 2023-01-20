@@ -399,27 +399,28 @@ In this paper, we examine ImageNet, a large-scale ontology of images that has sp
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2010.14568">
+              <a href="https://arxiv.org/abs/1905.0938">
                 <papertitle>Learning to Prove Theorems via Interacting with Proof Assistants</papertitle>
               </a>
               <br>
               <strong>Kaiyu Yang</strong>, 
               <a href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a>, 
               <br>
-              <em>Neural Information Processing Systems (NeurIPS)</em>, 2022
+              <em>International Conference on Machine Learning (ICML)</em>, 2019
               <br>
-              <a href="https://arxiv.org/abs/2010.14568">arXiv</a>
+              <a href="https://arxiv.org/abs/1905.0938">arXiv</a>
               /
-              <a href="https://github.com/princeton-vl/attach-juxtapose-parser">code</a>
+              <a href="https://github.com/princeton-vl/CoqGym">code</a>
               /
-              <a href="data/parsing_neurips_slides.pdf">slides</a>
+              <a href="data/coq_icml_slides.pdf">slides</a>
               /
-              <a href="https://crossminds.ai/video/strongly-incremental-constituency-parsing-with-graph-neural-networks-606fee03f43a7f2f827c13c3/">talk</a>
-              /
-              <a href="data/parsing_neurips_poster.pdf">poster</a>
+              <a href="data/coq_icml_poster.pdf">poster</a>
               <p></p>
               <p>
-                Psycholinguistic research suggests that human parsing is strongly incremental&mdash;humans grow a single parse tree by adding exactly one token at each step. We propose a strongly incremental transition system for parsing named *Attach-Juxtapose*. It represents a partial sentence using a single tree, and each action adds exactly one token into the partial tree. Based on our transition system, we develop a strongly incremental parser that achieves state of the art on Penn Treebank and Chinese Treebank.
+                We use machine learning to automatically prove theorems, including not only theorems in math but also theorems describing the behavior of software and hardware systems.
+Current theorem provers usually search for proofs represented at a low level, such as first-order logic and resolutions. Therefore they lack the high-level reasoning and problem-specific insights common to humans.
+
+In contrast, we use a powerful set of tools called proof assistants (a.k.a. interactive theorem provers). These are software that assists human experts in proving theorems. They thus provide a high-level framework that is close to human mathematical reasoning. Instead of humans, we develop machine learning agents to interact with proof assistants. Our agent can learn from human interactions by imitation learning using a large amount of data available online. We use this data to construct a large-scale dataset for training/evaluating the agent. We also develop a baseline model that can prove many new theorems not provable by existing methods.
               </p>
             </td>
           </tr>
@@ -443,27 +444,63 @@ In this paper, we examine ImageNet, a large-scale ontology of images that has sp
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2010.14568">
-                <papertitle>Strongly Incremental Constituency Parsing with Graph Neural Networks</papertitle>
+              <a href="https://arxiv.org/abs/1908.02660">
+                <papertitle>SpatialSense: An Adversarially Crowdsourced Benchmark for Spatial Relation Recognition</papertitle>
               </a>
               <br>
               <strong>Kaiyu Yang</strong>, 
-              <a href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a>, 
+              <a href="https://www.cs.princeton.edu/~olgarus/">Olga Russakovsky</a> 
+              <a href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a>
               <br>
-              <em>Neural Information Processing Systems (NeurIPS)</em>, 2022
+              <em>International Conference on Computer Vision (ICCV)</em>, 2019
               <br>
-              <a href="https://arxiv.org/abs/2010.14568">arXiv</a>
+              <a href="https://arxiv.org/abs/1908.02660">arXiv</a>
               /
-              <a href="https://github.com/princeton-vl/attach-juxtapose-parser">code</a>
+              <a href="https://github.com/princeton-vl/SpatialSense">code</a>
               /
-              <a href="data/parsing_neurips_slides.pdf">slides</a>
-              /
-              <a href="https://crossminds.ai/video/strongly-incremental-constituency-parsing-with-graph-neural-networks-606fee03f43a7f2f827c13c3/">talk</a>
-              /
-              <a href="data/parsing_neurips_poster.pdf">poster</a>
+              <a href="data/spatialsense_iccv_poster.pdf">poster</a>
               <p></p>
               <p>
-                Psycholinguistic research suggests that human parsing is strongly incremental&mdash;humans grow a single parse tree by adding exactly one token at each step. We propose a strongly incremental transition system for parsing named *Attach-Juxtapose*. It represents a partial sentence using a single tree, and each action adds exactly one token into the partial tree. Based on our transition system, we develop a strongly incremental parser that achieves state of the art on Penn Treebank and Chinese Treebank.
+                Benchmarks in vision and language suffer from dataset bias---models can perform exceptionally well by exploiting simple cues without even looking at the image, which undermines the benchmark's value in measuring visual reasoning abilities. We propose adversarial crowdsourcing to reduce dataset bias. Annotators are explicitly tasked with finding examples that are difficult to predict using simple cues such as 2D spatial configuration or language priors. Specifically, we introduce SpatialSense, a challenging dataset for spatial relation recognition collected via adversarial crowdsourcing.
+              </p>
+            </td>
+          </tr>
+
+          <tr onmouseout="nlproofs_stop()" onmouseover="nlproofs_start()"  bgcolor="#ffffd0">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='nlproofs_image'></div>
+                  <img src='images/nlproofs.jpg' width="160">
+                  <img src='images/nlproofs.jpg' width="160">
+                </div>
+              <script type="text/javascript">
+                function nlproofs_start() {
+                  document.getElementById('nlproofs_image').style.opacity = "1";
+                }
+
+                function nlproofs_stop() {
+                  document.getElementById('nlproofs_image').style.opacity = "0";
+                }
+                nlproofs_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://arxiv.org/abs/1603.06937">
+                <papertitle>Stacked Hourglass Networks for Human Pose Estimation</papertitle>
+              </a>
+              <br>
+              <a href="https://www.alejandronewell.com/">Alejandro Newell</a>,
+              <strong>Kaiyu Yang</strong>, 
+              <a href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a>
+              <br>
+              <em>European Conference on Computer Vision (ECCV)</em>, 2016
+              <br>
+              <a href="https://arxiv.org/abs/1603.06937">arXiv</a>
+              /
+              <a href="https://github.com/princeton-vl/pose-hg-train">code</a>
+              <p></p>
+              <p>
+                We introduce the hourglass network: a novel convolutional network architecture for human pose estimation. It has become a standard component in many state-of-the-art methods for pose estimation.
               </p>
             </td>
           </tr>
