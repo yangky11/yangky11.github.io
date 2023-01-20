@@ -27,15 +27,15 @@
                 and also worked with <a style="text-decoration: none" target="_blank" href="https://www.cs.princeton.edu/~olgarus/">Olga Russakovsky</a> and <a style="text-decoration: none" target="_blank" href="https://www.cs.princeton.edu/~danqic/">Danqi Chen</a>. 
               </p>
               <p style="text-align:center">
-                <a href="mailto:kaiyuy@caltech.edu">kaiyuy (at) caltech.edu</a> &nbsp/&nbsp
-                <a href="data/CV___Kaiyu_Yang.pdf">CV</a> &nbsp/&nbsp
-                <a href="data/Bio.txt">Bio</a> &nbsp/&nbsp
-                <a href="https://scholar.google.com/citations?user=FciCu4EAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://github.com/yangky11">Github</a>
+                kaiyuy (at) caltech.edu &nbsp/&nbsp
+                <a target="_blank" href="data/CV___Kaiyu_Yang.pdf">CV</a> &nbsp/&nbsp
+                <a target="_blank" href="data/Bio.txt">Bio</a> &nbsp/&nbsp
+                <a target="_blank"href="https://scholar.google.com/citations?user=FciCu4EAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
+                <a target="_blank" href="https://github.com/yangky11">Github</a>
               </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/JonBarron.jpg"><img style="width:100%;max-width:100%" alt="profile photo" src="images/JonBarron_circle.jpg" class="hoverZoomLink"></a>
+              <a href="images/Kaiyu Yang.jpg"><img style="width:100%;max-width:100%" alt="profile photo" src="images/JonBarron_circle.jpg" class="hoverZoomLink"></a>
             </td>
           </tr>
         </tbody></table>
@@ -44,7 +44,10 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Research</heading>
               <p>
-                I'm interested in computer vision, machine learning, optimization, and image processing. Much of my research is about inferring the physical world (shape, motion, color, light, etc) from images. Representative papers are <span class="highlight">highlighted</span>.
+                My research aims to make machine learning capable of symbolic reasoning. I have approached the goal from two angles: (1) applying machine learning to symbolic reasoning tasks, such as automated theorem proving; (2) introducing symbolic components into machine learning models to make them more interpretable, verifiable, and data-efficient. 
+              </p>
+              <p>
+                In addition, I also work on constructing and analyzing machine learning datasets, focusing on fairness, privacy, and mitigating dataset bias. They collectively contribute to a future of machine learning we can trust, even in real-world, high-stake applications.
               </p>
             </td>
           </tr>
@@ -52,42 +55,38 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 				
 		  
-          <tr onmouseout="mira_stop()" onmouseover="mira_start()">
+          <tr onmouseout="metaqnl_stop()" onmouseover="metaqnl_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
-                <div class="two" id='mira_image'>
-                  <img src='images/mira_after.jpg' width="160"></div>
-                <img src='images/mira_before.jpg' width="160">
+                <div class="two" id='metaqnl_image'>
+                  <img src='images/metaqnl.jpg' width="160"></div>
+                <img src='images/metaqnl.jpg' width="160">
               </div>
               <script type="text/javascript">
-                function mira_start() {
-                  document.getElementById('mira_image').style.opacity = "1";
+                function metaqnl_start() {
+                  document.getElementById('metaqnl_image').style.opacity = "1";
                 }
 
-                function mira_stop() {
-                  document.getElementById('mira_image').style.opacity = "0";
+                function metaqnl_stop() {
+                  document.getElementById('metaqnl_image').style.opacity = "0";
                 }
-                mira_stop()
+                metaqnl_stop()
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
               <a href="https://openreview.net/forum?id=AmPeAFzU3a4">
-                <papertitle>MIRA: Mental Imagery for Robotic Affordances</papertitle>
+                <papertitle>Learning Symbolic Rules for Reasoning in Quasi-Natural Language</papertitle>
               </a>
               <br>
-              <a href="https://yenchenlin.me/">Lin Yen-Chen</a>, 
-              <a href="http://www.peteflorence.com/">Pete Florence</a>, 
-              <a href="https://andyzeng.github.io/">Andy Zeng</a>, <strong>Jonathan T. Barron</strong>, 
-              <a href="https://yilundu.github.io/">Yilun Du</a>,
-              <a href="https://people.csail.mit.edu/weichium/">Wei-Chiu Ma</a>,
-              <a href="https://anthonysimeonov.github.io/">Anthony Simeonov</a>,
-              <a href="https://meche.mit.edu/people/faculty/ALBERTOR@MIT.EDU">Alberto Rodriguez</a>,
-              <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>
+              <strong>Kaiyu Yang</strong>, 
+              <a href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a>, 
               <br>
-              <em>CoRL</em>, 2022
+              <em>Under review</em>, 2022
+              <br>
+              <a href="https://arxiv.org/abs/2111.12038">arXiv</a>
               <p></p>
               <p>
-                NeRF lets us synthesize novel orthographic views that work well with pixel-wise algorithms for robotic manipulation.
+                Symbolic reasoning, rule-based symbol manipulation, is a hallmark of human intelligence. However, rule-based systems have had limited success competing with learning-based systems outside formalized domains such as automated theorem proving. We hypothesize that this is due to the manual construction of rules in past attempts. In this work, we ask how to build a rule-based system that can reason with natural language input but without the manual construction of rules. We propose *MetaQNL*, a "Quasi-Natural" language that can express both formal logic and natural language sentences, and *MetaInduce*, a learning algorithm that induces MetaQNL rules from training data. 
               </p>
             </td>
           </tr>		
@@ -145,13 +144,7 @@
             <td style="padding:0px">
               <br>
               <p style="text-align:right;font-size:small;">
-                Feel free to steal this website's <a href="https://github.com/jonbarron/jonbarron_website">source code</a>,
-                just add a link back to my website.
-                <strong>Do not</strong> scrape the HTML from the deployed instance of this website at http://jonbarron.info,
-                as it includes analytics tags that you do not want on your own website &mdash; use the github code instead.
-                If you'd like your new page linked to from here, submit a pull request adding yourself.
-                <br>
-                Also, consider using <a href="https://leonidk.com/">Leonid Keselman</a>'s <a href="https://github.com/leonidk/new_website">Jekyll fork</a> of this page.
+                Website template credit: <a target="_blank" href="https://jonbarron.info/">Jon Barron</a>
               </p>
             </td>
           </tr>
