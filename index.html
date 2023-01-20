@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Kaiyu Yang</title>
+  
+  <meta name="author" content="Kaiyu Yang">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+</head>
+
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:63%;vertical-align:middle">
+              <p style="text-align:center">
+                <name>Kaiyu Yang</name>
+              </p>
+              <p> 
+                I am a postdoctoral researcher in <a style="text-decoration: none" target="_blank" href="https://www.cms.caltech.edu/">the Computing + Mathematical Sciences Department</a> 
+                at Caltech, working with <a style="text-decoration: none" target="_blank" href="http://tensorlab.cms.caltech.edu/users/anima/">Anima Anandkumar</a>. 
+                I received my Ph.D. from Princeton University, where I was advised by <a style="text-decoration: none" target="_blank" href="https://www.cs.princeton.edu/~jiadeng/">Jia Deng</a> 
+                and also worked with <a style="text-decoration: none" target="_blank" href="https://www.cs.princeton.edu/~olgarus/">Olga Russakovsky</a> and <a style="text-decoration: none" target="_blank" href="https://www.cs.princeton.edu/~danqic/">Danqi Chen</a>. 
+              </p>
+              <p style="text-align:center">
+                <a href="mailto:kaiyuy@caltech.edu">kaiyuy (at) caltech.edu</a> &nbsp/&nbsp
+                <a href="data/CV___Kaiyu_Yang.pdf">CV</a> &nbsp/&nbsp
+                <a href="data/Bio.txt">Bio</a> &nbsp/&nbsp
+                <a href="https://scholar.google.com/citations?user=FciCu4EAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
+                <a href="https://github.com/yangky11">Github</a>
+              </p>
+            </td>
+            <td style="padding:2.5%;width:40%;max-width:40%">
+              <a href="images/JonBarron.jpg"><img style="width:100%;max-width:100%" alt="profile photo" src="images/JonBarron_circle.jpg" class="hoverZoomLink"></a>
+            </td>
+          </tr>
+        </tbody></table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <heading>Research</heading>
+              <p>
+                I'm interested in computer vision, machine learning, optimization, and image processing. Much of my research is about inferring the physical world (shape, motion, color, light, etc) from images. Representative papers are <span class="highlight">highlighted</span>.
+              </p>
+            </td>
+          </tr>
+        </tbody></table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+				
+		  
+          <tr onmouseout="mira_stop()" onmouseover="mira_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='mira_image'>
+                  <img src='images/mira_after.jpg' width="160"></div>
+                <img src='images/mira_before.jpg' width="160">
+              </div>
+              <script type="text/javascript">
+                function mira_start() {
+                  document.getElementById('mira_image').style.opacity = "1";
+                }
+
+                function mira_stop() {
+                  document.getElementById('mira_image').style.opacity = "0";
+                }
+                mira_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://openreview.net/forum?id=AmPeAFzU3a4">
+                <papertitle>MIRA: Mental Imagery for Robotic Affordances</papertitle>
+              </a>
+              <br>
+              <a href="https://yenchenlin.me/">Lin Yen-Chen</a>, 
+              <a href="http://www.peteflorence.com/">Pete Florence</a>, 
+              <a href="https://andyzeng.github.io/">Andy Zeng</a>, <strong>Jonathan T. Barron</strong>, 
+              <a href="https://yilundu.github.io/">Yilun Du</a>,
+              <a href="https://people.csail.mit.edu/weichium/">Wei-Chiu Ma</a>,
+              <a href="https://anthonysimeonov.github.io/">Anthony Simeonov</a>,
+              <a href="https://meche.mit.edu/people/faculty/ALBERTOR@MIT.EDU">Alberto Rodriguez</a>,
+              <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>
+              <br>
+              <em>CoRL</em>, 2022
+              <p></p>
+              <p>
+                NeRF lets us synthesize novel orthographic views that work well with pixel-wise algorithms for robotic manipulation.
+              </p>
+            </td>
+          </tr>		
+          
+          
+          <tr onmouseout="dreamfusion_stop()" onmouseover="dreamfusion_start()"  bgcolor="#ffffd0">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='dreamfusion_image'><video  width=100% height=100% muted autoplay loop>
+                <source src="images/dreamfusion.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video></div>
+                <img src='images/dreamfusion.jpg' width="160">
+              </div>
+              <script type="text/javascript">
+                function dreamfusion_start() {
+                  document.getElementById('dreamfusion_image').style.opacity = "1";
+                }
+
+                function dreamfusion_stop() {
+                  document.getElementById('dreamfusion_image').style.opacity = "0";
+                }
+                dreamfusion_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://dreamfusion3d.github.io/">
+                <papertitle>DreamFusion: Text-to-3D using 2D Diffusion</papertitle>
+              </a>
+              <br>
+              <a href="https://cs.stanford.edu/~poole/">Ben Poole</a>,
+              <a href="https://www.ajayj.com/">Ajay Jain</a>,
+              <strong>Jonathan T. Barron</strong>,
+							<a href="https://bmild.github.io/">Ben Mildenhall</a>
+              <br>
+              <em>arXiv</em>, 2022
+              <br>
+              <a href="https://dreamfusion3d.github.io/">project page</a>
+              /
+              <a href="https://arxiv.org/abs/2209.14988">arXiv</a>
+              /
+              <a href="https://dreamfusion3d.github.io/gallery.html">gallery</a>
+              <p></p>
+              <p>
+              We optimize a NeRF from scratch using a pretrained text-to-image diffusion model to do text-to-3D generative modeling.
+              </p>
+            </td>
+          </tr>
+		  
+					
+        </tbody></table>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+            <td style="padding:0px">
+              <br>
+              <p style="text-align:right;font-size:small;">
+                Feel free to steal this website's <a href="https://github.com/jonbarron/jonbarron_website">source code</a>,
+                just add a link back to my website.
+                <strong>Do not</strong> scrape the HTML from the deployed instance of this website at http://jonbarron.info,
+                as it includes analytics tags that you do not want on your own website &mdash; use the github code instead.
+                If you'd like your new page linked to from here, submit a pull request adding yourself.
+                <br>
+                Also, consider using <a href="https://leonidk.com/">Leonid Keselman</a>'s <a href="https://github.com/leonidk/new_website">Jekyll fork</a> of this page.
+              </p>
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
