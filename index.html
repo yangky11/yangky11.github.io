@@ -89,7 +89,45 @@
         </tbody></table>
 	      
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          
+	  <tr onmouseout="lean_copilot_stop()" onmouseover="lean_copilot_start()" bgcolor="#ffffd0">
+            <td style="padding:5px;width:17%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='lean_copilot_image'>
+                  <img src='images/lean_copilot-1.jpg' width="150">
+                </div>
+                <img src='images/lean_copilot-2.jpg' width="150">
+              </div>
+              <script type="text/javascript">
+                function lean_copilot_start() {
+                  document.getElementById('lean_copilot_image').style.opacity = "1";
+                }
 
+                function lean_copilot_stop() {
+                  document.getElementById('lean_copilot_image').style.opacity = "0";
+                }
+                lean_copilot_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:83%;vertical-align:middle">
+              <a target="_blank" href="https://arxiv.org/abs/2111.12038">
+                <papertitle>Towards Large Language Models as Copilots for Theorem Proving in Lean</papertitle>
+              </a>
+              <br />
+	      <a target="_blank" href="https://peiyang-song.github.io/">Peiyang Song</a>, <strong>Kaiyu Yang<sup>†</sup></strong>, and <a target="_blank" href="http://tensorlab.cms.caltech.edu/users/anima/">Anima Anandkumar<sup>†</sup></a>
+              <br />
+              <em>Under submission at the NeurIPS MATH-AI Workshop</em>, 2023
+              <br />
+              Manuscript available upon request
+	      /
+              <a target="_blank" href="https://github.com/lean-dojo/LeanInfer">code</a>
+              <p></p>
+              <p>
+                We introduce a framework for running neural network inference directly in Lean. It enables programmers to build various LLM-based proof automation tools that integrate seamlessly into the workflow of Lean users. 
+              </p>
+            </td>
+          </tr>
+	
           <tr onmouseout="leandojo_stop()" onmouseover="leandojo_start()" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
