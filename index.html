@@ -127,8 +127,21 @@
           <tr onmouseout="leandojo_stop()" onmouseover="leandojo_start()" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
-                <img src='images/leandojo.jpg' width="150">
+                <div class="two" id='leandojo_image'>
+                  <img src='images/leandojo-1.jpg' width="150">
+                </div>
+                <img src='images/leandojo-2.jpg' width="150">
               </div>
+              <script type="text/javascript">
+                function leandojo_start() {
+                  document.getElementById('leandojo_image').style.opacity = "1";
+                }
+
+                function leandojo_stop() {
+                  document.getElementById('leandojo_image').style.opacity = "0";
+                }
+                leandojo_stop()
+              </script>
             </td>
             <td style="padding:20px;width:83%;vertical-align:middle">
               <a target="_blank" href="https://leandojo.org/">
