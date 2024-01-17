@@ -89,7 +89,43 @@
         </tbody></table>
 	      
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
+
+	  <tr onmouseout="sciglm_stop()" onmouseover="sciglm_start()">
+            <td style="padding:5px;width:17%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='sciglm_image'>
+                  <img src='images/sciglm-1.png' width="150">
+                </div>
+                <img src='images/sciglm-2.png' width="150">
+              </div>
+              <script type="text/javascript">
+                function sciglm_start() {
+                  document.getElementById('sciglm_image').style.opacity = "1";
+                }
+
+                function sciglm_stop() {
+                  document.getElementById('sciglm_image').style.opacity = "0";
+                }
+                sciglm_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:83%;vertical-align:middle">
+              <papertitle>SciGLM: Training Scientific Language Models with Self-Reflective Instruction Annotation and Tuning</papertitle>
+              <br />
+	      Dan Zhang, <a target="_blank" href="https://acbull.github.io/">Ziniu Hu</a>, Sining Zhoubian, <a target="_blank" href="https://zxdu.xyz/">Zhengxiao Du</a>, <strong>Kaiyu Yang</strong>, <a target="_blank">Zihan Wang</a>, <a target="_blank" href="https://www.yisongyue.com/">Yisong Yue</a>, <a target="_blank" href="https://keg.cs.tsinghua.edu.cn/yuxiao/">Yuxiao Dong</a>, and <a target="_blank" href="https://keg.cs.tsinghua.edu.cn/jietang/">Jie Tang</a>
+              <br />
+              <em>In submission</em>, 2023
+              <br />
+              <a target="_blank" href="https://arxiv.org/abs/2401.07950">arXiv</a>
+	       /
+	      <a target="_blank" href="https://github.com/THUDM/SciGLM">code</a>
+              <p></p>
+              <p>
+                We curated SciInstruct, a diverse and high-quality dataset of college-level mathematics, physics, chemistry, and formal proofs. Using SciInstruct to finetune the ChatGLM family of LLMs, we introduce SciGLM, a suite of scientific language models for college-level mathematical/scientific reasoning. 
+              </p>
+            </td>
+          </tr>
+		
 	  <tr onmouseout="lean_copilot_stop()" onmouseover="lean_copilot_start()" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
