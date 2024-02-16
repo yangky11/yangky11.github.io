@@ -77,9 +77,9 @@
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Research</heading>
-              <p>I work on <em>AI for Mathematics</em>, specifically focusing on:</p>
+              <p>I work on <strong>AI for Mathematics</strong>, specifically focusing on:</p>
 	      <ul>
-		<li>Large language models (LLMs) for formal theorem proving: [CoqGym], [LeanDojo]</li>
+		<li>Large language models (LLMs) for formal theorem proving: <a href="#coqgym">[CoqGym]</a>, [LeanDojo]</li>
 		<li>AI as copilots for mathematicians: [Lean Copilot]</li>
 		<li>LLMs for solving problems in mathematics and sciences: [SciGLM]</li>
 		<li>Synergies between logical/mathematical reasoning with natural language and verified code generation: [NLProofS]</li>
@@ -92,7 +92,7 @@
 	      
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-	  <tr onmouseout="sciglm_stop()" onmouseover="sciglm_start()">
+	  <tr onmouseout="sciglm_stop()" onmouseover="sciglm_start()", id="sciglm">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <img src='images/sciglm-1.png' width="150">
@@ -115,7 +115,7 @@
             </td>
           </tr>
 		
-	  <tr onmouseout="lean_copilot_stop()" onmouseover="lean_copilot_start()" bgcolor="#ffffd0">
+	  <tr onmouseout="lean_copilot_stop()" onmouseover="lean_copilot_start()" bgcolor="#ffffd0" id="leancopilot">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='lean_copilot_image'>
@@ -153,7 +153,7 @@
             </td>
           </tr>
 	
-          <tr onmouseout="leandojo_stop()" onmouseover="leandojo_start()" bgcolor="#ffffd0">
+          <tr onmouseout="leandojo_stop()" onmouseover="leandojo_start()" bgcolor="#ffffd0" id="leandojo">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='leandojo_image'>
@@ -225,7 +225,7 @@
             </td>
           </tr>	
 		  
-          <tr onmouseout="metaqnl_stop()" onmouseover="metaqnl_start()" bgcolor="#ffffd0">
+          <tr onmouseout="metaqnl_stop()" onmouseover="metaqnl_start()" bgcolor="#ffffd0" id="metaqnl">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='metaqnl_image'>
@@ -265,7 +265,7 @@
           </tr>		
           
           
-          <tr onmouseout="nlproofs_stop()" onmouseover="nlproofs_start()" bgcolor="#ffffd0">
+          <tr onmouseout="nlproofs_stop()" onmouseover="nlproofs_start()" bgcolor="#ffffd0" id="nlproofs">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='nlproofs_image'>
@@ -472,7 +472,7 @@
             </td>
           </tr>
 
-          <tr onmouseout="coqgym_stop()" onmouseover="coqgym_start()"  bgcolor="#ffffd0">
+          <tr onmouseout="coqgym_stop()" onmouseover="coqgym_start()"  bgcolor="#ffffd0" id="coqgym">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='coqgym_image'>
