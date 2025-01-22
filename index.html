@@ -90,14 +90,13 @@
         </tbody></table>
 	      
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
-	  <tr id="lips" bgcolor="#ffffd0">
+	  <tr onmouseout="lips_stop()" onmouseover="lips_start()" id="lips" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='lips_image'>
-                  <img src='images/lips-1.png' width="150">
+                  <img src='images/lips-2.png' width="150">
                 </div>
-                <img src='images/lips-2.png' width="150">
+                <img src='images/lips-1.png' width="150">
               </div>
               <script type="text/javascript">
                 function lips_start() {
@@ -121,7 +120,7 @@
               <br />
 	      <a target="_blank" href="https://openreview.net/forum?id=FiyS0ecSm0">OpenReview</a>
               <p></p>
-              <p>A fundamental challenge in formal theorem proving is navigating the vast and complex space of tactics. We introduce a neuro-symbolic tactic generator that synergizes the mathematical intuition learned by LLMs with domain-specific insights encoded by symbolic methods. Focusing on competition-style inequalities problems, we analyze and distill human techniques into two types of tactics: (1) scaling, handled by symbolic methods, and (2) rewriting, handled by LLMs. Evaluated on 161 challenging inequalities from multiple math competitions, our method achieves state-of-the-art performance and significantly outperforms existing LLM and symbolic approaches.</p>
+              <p>Focusing on proving inequalities in math competitions, we analyze and distill human techniques into two types of tactics: (1) scaling, handled by symbolic methods, and (2) rewriting, handled by LLMs. The resulting framework combines LLMs with domain-specific mathematical insights, significantly outperforming existing LLM and symbolic approaches.</p>
             </td>
           </tr>
 		
