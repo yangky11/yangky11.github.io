@@ -94,8 +94,21 @@
 	  <tr id="lips" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
-                <img src='images/lips.png' width="150">
+                <div class="two" id='lips_image'>
+                  <img src='images/lips-1.png' width="150">
+                </div>
+                <img src='images/lips-2.png' width="150">
               </div>
+              <script type="text/javascript">
+                function lips_start() {
+                  document.getElementById('lips_image').style.opacity = "1";
+                }
+
+                function lips_stop() {
+                  document.getElementById('lips_image').style.opacity = "0";
+                }
+                lips_stop()
+              </script>
             </td>
             <td style="padding:20px;width:83%;vertical-align:middle">
 	      <a target="_blank" href="https://openreview.net/forum?id=FiyS0ecSm0">
