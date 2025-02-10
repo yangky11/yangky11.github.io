@@ -135,6 +135,45 @@
               <p>To prove inequalities in math competitions, we analyze and distill human techniques into scaling and rewriting, which are well-suited for symbolic methods and LLMs respectively. By integrating LLMs with domain-specific mathematical insights, our approach substantially outperforms existing methods.</p>
             </td>
           </tr>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+	  <tr onmouseout="goedel_stop()" onmouseover="goedel_start()" id="goedel">
+            <td style="padding:5px;width:17%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='goedel_image'>
+                  <img src='images/goedel-2.png' width="150">
+                </div>
+                <img src='images/goedel-1.png' width="150">
+              </div>
+              <script type="text/javascript">
+                function lips_start() {
+                  document.getElementById('goedel_image').style.opacity = "1";
+                }
+
+                function lips_stop() {
+                  document.getElementById('goedel_image').style.opacity = "0";
+                }
+                goedel_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:83%;vertical-align:middle">
+	      <a target="_blank" href="https://openreview.net/forum?id=FiyS0ecSm0">
+                <papertitle>Goedel-Prover: A Frontier Model for Open-Source Automated Theorem Proving</papertitle>
+	      </a>
+              <br />
+	      <a target="_blank" href="https://linyongver.github.io/Website/">Yong Lin</a>*, <a target="_blank" href="https://shangetang.github.io/">Shange Tang</a>* <a>Wen Tang</a>, <a target="_blank" href="https://lyubh.cn/">Bohan Lyu</a>, <a>Yuan Yao</a>, <a target="_blank" href="https://ic-hub.github.io/">Jiayun Wu</a>, <a target="_blank" href="http://www.hongzhoulin.com/">Hongzhou Lin</a>, <strong>Kaiyu Yang</strong>, <a>Jia Li</a>, <a target="_blank" href="https://xiamengzhou.github.io/">Mengzhou Xia</a>, <a target="_blank" href="https://www.cs.princeton.edu/~danqic/">Danqi Chen</a>, <a target="_blank" href="https://www.cs.princeton.edu/~arora/">Sanjeev Arora</a>, <a target="_blank" href="https://sites.google.com/view/cjin/home">Chi Jin</a>
+              <br />
+              <em>Technical Report</em>, 2025
+              <br />
+	      <a target="_blank">arXiv (coming soon)</a>
+	       /
+              <a target="_blank" href="https://goedel-lm.github.io/">project</a>
+	       /
+              <a target="_blank" href="https://github.com/Goedel-LM/Goedel-Prover">code</a>
+              <p></p>
+              <p>We introduce Goedel-Prover, an open-source, state-of-the-art LLM for automated theorem proving in Lean. The key is to synthesize 1.64 million formal statements through autoformalization.</p>
+            </td>
+          </tr>
 		
 	  <tr id="formal-mathematical-reasoning" bgcolor="#ffffd0">
             <td style="padding:5px;width:17%;vertical-align:middle">
