@@ -98,6 +98,41 @@
           </tr>
 		
         </tbody></table>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+	  <tr onmouseout="shortest_path_stop()" onmouseover="shortest_path_start()" id="shortest_path">
+            <td style="padding:5px;width:17%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='shortest_path_image'>
+                  <img src='images/shortest_path-2.png' width="150">
+                </div>
+                <img src='images/shortest_path-1.png' width="150">
+              </div>
+              <script type="text/javascript">
+                function shortest_path_start() {
+                  document.getElementById('shortest_path_image').style.opacity = "1";
+                }
+
+                function shortest_path_stop() {
+                  document.getElementById('shortest_path_image').style.opacity = "0";
+                }
+                lips_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:83%;vertical-align:middle">
+	      <a target="_blank" href="https://arxiv.org/abs/2502.08794">
+                <papertitle>Spectral Journey: How Transformers Predict the Shortest Path</papertitle>
+	      </a>
+              <br />
+	      <a>Andrew Cohen</a>, <a target="_blank" href="https://sites.google.com/view/andreygromov">Andrey Gromov</a>, <strong>Kaiyu Yang</strong>, <a target="_blank" href="https://yuandong-tian.com/">Yuandong Tian</a>
+              <br />
+              <em>Preprint</em>, 2025
+              <br />
+	      <a target="_blank" href="https://arxiv.org/abs/2502.08794">arXiv</a>
+              <p></p>
+              <p>We show that decoder-only Transformers learn to solve the graph shortest path problem through a mechanism highly correlated with spectral decomposition..</p>
+            </td>
+          </tr>
 	      
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 	  <tr onmouseout="lips_stop()" onmouseover="lips_start()" id="lips" bgcolor="#ffffd0">
