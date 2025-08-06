@@ -92,6 +92,45 @@
         </tbody></table>
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+	  <tr onmouseout="goedel2_stop()" onmouseover="goedel2_start()" id="goedel2">
+            <td style="padding:5px;width:17%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='goedel2_image'>
+                  <img src='images/goedel2-2.png' width="150">
+                </div>
+                <img src='images/goedel2-1.png' width="150">
+              </div>
+              <script type="text/javascript">
+                function goedel2_start() {
+                  document.getElementById('goedel2_image').style.opacity = "1";
+                }
+
+                function goedel2_stop() {
+                  document.getElementById('goedel2_image').style.opacity = "0";
+                }
+                goedel2_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:83%;vertical-align:middle">
+	      <a target="_blank" href="https://goedel-lm.github.io/">
+                <papertitle>Goedel-Prover-V2: Scaling Formal Theorem Proving with Scaffolded Data Synthesis and Self-Correction</papertitle>
+	      </a>
+              <br />
+	      <a target="_blank" href="https://linyongver.github.io/Website/">Yong Lin</a>*, <a target="_blank" href="https://shangetang.github.io/">Shange Tang</a>*, <a target="_blank" href="https://lyubh.cn/">Bohan Lyu</a>*, Ziran Yang, Jui-Hui Chung, Haoyu Zhao, Lai Jiang, Yihan Geng, Jiawei Ge, Jingruo Sun, <a target="_blank" href="https://ic-hub.github.io/">Jiayun Wu</a>, Jiri Gesi, Ximing Lu, David Acuna, <strong>Kaiyu Yang</strong>, <a target="_blank" href="http://www.hongzhoulin.com/">Hongzhou Lin</a>, <a target="_blank" href="https://yejinc.github.io/">Yejin Choi</a>, <a target="_blank" href="https://www.cs.princeton.edu/~danqic/">Danqi Chen</a>, <a target="_blank" href="https://www.cs.princeton.edu/~arora/">Sanjeev Arora</a>, <a target="_blank" href="https://sites.google.com/view/cjin/home">Chi Jin</a>*
+              <br />
+              <em>arXiv</em>, 2025
+              <br />
+	      <a target="_blank" href="https://arxiv.org/abs/2508.03613">arXiv</a>
+	       /
+              <a target="_blank" href="https://blog.goedel-prover.com/">project</a>
+	       /
+              <a target="_blank" href="https://github.com/Goedel-LM/Goedel-Prover-V2">code</a>
+              <p></p>
+              <p>Our Goedel-Prover-V2 doubled the SOTA Pass@32 performance on PutnamBench with a 20x smaller model, making it the strongest open-source theorem prover to date.</p>
+            </td>
+          </tr>
+	      
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 	  <tr onmouseout="veria_stop()" onmouseover="verina_start()" id="verina">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
@@ -234,9 +273,7 @@
               <br />
 	      <a target="_blank" href="https://arxiv.org/abs/2502.07640">arXiv</a>
 	       /
-              <a target="_blank" href="https://goedel-lm.github.io/">project (V1)</a>
-	       /
-	      <a target="_blank" href="https://blog.goedel-prover.com/">project (V2)</a>
+              <a target="_blank" href="https://goedel-lm.github.io/">project</a>
 	       /
               <a target="_blank" href="https://github.com/Goedel-LM/Goedel-Prover">code</a>
               <p></p>
