@@ -93,11 +93,24 @@
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-	   <tr id="proofoptimizer">
+	  <tr onmouseout="proofoptimizer_stop()" onmouseover="proofoptimizer_start()" id="proofoptimizer">
             <td style="padding:5px;width:17%;vertical-align:middle">
               <div class="one">
-                <img src='images/proofoptimizer.png' width="150">
+                <div class="two" id='proofoptimizer_image'>
+                  <img src='images/proofoptimizer-2.png' width="150">
+                </div>
+                <img src='images/proofoptimizer-1.png' width="150">
               </div>
+              <script type="text/javascript">
+                function proofoptimizer_start() {
+                  document.getElementById('proofoptimizer_image').style.opacity = "1";
+                }
+
+                function proofoptimizer_stop() {
+                  document.getElementById('proofoptimizer_image').style.opacity = "0";
+                }
+                lips_stop()
+              </script>
             </td>
             <td style="padding:20px;width:83%;vertical-align:middle">
 	      <a target="_blank" href="https://proof-optimizer.github.io/">
