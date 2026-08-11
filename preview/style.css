@@ -1,0 +1,302 @@
+/* Kaiyu Yang — personal site, 2026 redesign */
+
+:root {
+  --bg: #faf9f6;
+  --ink: #1d1c19;
+  --muted: #6e6a61;
+  --faint: #97928a;
+  --accent: #175f53;
+  --accent-hover: #0c4038;
+  --rule: #e5e2da;
+  --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --mono: "SF Mono", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-feature-settings: "liga", "kern";
+  text-rendering: optimizeLegibility;
+}
+
+.page {
+  max-width: 42.5rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 3rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
+}
+
+::selection { background: #dbe8e2; }
+
+/* ---------- header ---------- */
+
+.masthead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.masthead h1 {
+  font-size: 2.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.masthead .hanzi {
+  font-weight: 400;
+  color: var(--faint);
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.role {
+  margin: 0.6rem 0 0;
+  font-size: 1.0625rem;
+  color: var(--muted);
+}
+
+.role a { color: inherit; border-bottom-color: color-mix(in srgb, var(--muted) 35%, transparent); }
+.role a:hover { color: var(--accent-hover); }
+
+.portrait {
+  flex: 0 0 auto;
+  width: 7.25rem;
+  height: 7.25rem;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: saturate(0.92);
+}
+
+/* ---------- contact row ---------- */
+
+.contact {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.contact a {
+  color: var(--muted);
+  border-bottom-color: var(--rule);
+}
+
+.contact a:hover { color: var(--accent-hover); }
+
+/* ---------- sections ---------- */
+
+section { margin-top: 3.25rem; }
+
+h2 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* research focus items */
+
+.focus { margin: 0; padding: 0; list-style: none; }
+
+.focus li { margin: 0 0 1.15rem; }
+.focus li:last-child { margin-bottom: 0; }
+
+.focus .lede {
+  font-weight: 700;
+}
+
+/* selected work */
+
+.work { margin: 0; padding: 0; list-style: none; }
+
+.work li {
+  margin: 0 0 1.35rem;
+}
+.work li:last-child { margin-bottom: 0; }
+
+.tag {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  margin-bottom: 0.15rem;
+}
+
+.work .title { font-weight: 700; }
+
+.work .note {
+  display: block;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ---------- footer ---------- */
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--faint);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+footer a { color: var(--faint); border-bottom-color: var(--rule); }
+footer a:hover { color: var(--accent-hover); }
+
+/* ---------- background page ---------- */
+
+.crumb {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.crumb a { color: var(--muted); border-bottom-color: var(--rule); }
+.crumb a:hover { color: var(--accent-hover); }
+
+.entry {
+  display: grid;
+  grid-template-columns: 8.25rem 1fr;
+  gap: 0.2rem 1.25rem;
+  margin-bottom: 1.1rem;
+}
+.entry:last-child { margin-bottom: 0; }
+
+.entry .when {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--faint);
+  padding-top: 0.3rem;
+  white-space: nowrap;
+}
+
+.entry .what { min-width: 0; }
+.entry .what .org { font-weight: 700; }
+.entry .what .detail { color: var(--muted); font-size: 1rem; }
+
+/* publications */
+
+.pubnote { color: var(--muted); font-size: 0.9375rem; }
+
+.pub {
+  display: grid;
+  grid-template-columns: 8.25rem 1fr;
+  gap: 0.2rem 1.25rem;
+  margin-bottom: 1.3rem;
+}
+
+.pub .venue {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--faint);
+  padding-top: 0.3rem;
+}
+
+.pub .body { min-width: 0; }
+.pub .body .title { font-weight: 700; }
+.pub .body .authors {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.pub .body .authors .me { color: var(--ink); }
+.pub .body .extra {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--accent);
+}
+
+/* simple lists on background page */
+
+.plain { margin: 0; padding-left: 1.1rem; }
+.plain li { margin-bottom: 0.5rem; }
+.plain li:last-child { margin-bottom: 0; }
+.plain .sub { color: var(--muted); font-size: 0.9375rem; }
+
+/* talks */
+
+.talk { margin-bottom: 1rem; }
+.talk:last-child { margin-bottom: 0; }
+.talk .title { font-weight: 700; }
+.talk .where { color: var(--muted); font-size: 0.9375rem; }
+
+/* ---------- load animation ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    opacity: 0;
+    transform: translateY(9px);
+    animation: rise 600ms cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  }
+  .rise:nth-child(1) { animation-delay: 40ms; }
+  .rise:nth-child(2) { animation-delay: 110ms; }
+  .rise:nth-child(3) { animation-delay: 180ms; }
+  .rise:nth-child(4) { animation-delay: 250ms; }
+  .rise:nth-child(5) { animation-delay: 320ms; }
+  .rise:nth-child(6) { animation-delay: 390ms; }
+  .rise:nth-child(7) { animation-delay: 460ms; }
+
+  @keyframes rise {
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 620px) {
+  .page { padding-top: 2.75rem; }
+
+  .masthead { flex-direction: column-reverse; }
+  .masthead .portrait { width: 5.5rem; height: 5.5rem; }
+  .masthead h1 { font-size: 1.9rem; }
+  .masthead .hanzi { display: block; margin: 0.35rem 0 0; font-size: 1.05rem; }
+
+  .entry, .pub { grid-template-columns: 1fr; gap: 0.1rem; }
+  .entry .when, .pub .venue { padding-top: 0; }
+}
