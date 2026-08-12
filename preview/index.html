@@ -15,11 +15,11 @@
 
   <title>Kaiyu Yang — Apodex</title>
   <meta name="author" content="Kaiyu Yang">
-  <meta name="description" content="Kaiyu Yang leads a research team at Apodex working on the mathematical capabilities of large language models and on verification for AI systems and agents.">
+  <meta name="description" content="Kaiyu Yang leads a research team at Apodex working on the mathematical capabilities of language models and on verification — formal guarantees for training infrastructure, and verifiers for long-horizon agents.">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kaiyu Yang — Apodex">
-  <meta property="og:description" content="Research leader working on the mathematical capabilities of LLMs and on verification for AI systems and agents.">
+  <meta property="og:description" content="I lead a research team at Apodex working on the mathematical capabilities of language models and on verification.">
   <meta property="og:url" content="https://yangky11.github.io/preview/">
   <meta property="og:image" content="https://yangky11.github.io/images/Kaiyu%20Yang.jpg">
 
@@ -47,10 +47,14 @@
 
     <section class="rise">
       <p>
-        I lead a research team at Apodex building AI that is both capable and
-        verifiable. Mathematics is where reasoning ability is hardest to fake, and
-        verification is what makes that ability dependable at scale — we work on
-        both. Most of our current work is not yet public.
+        I lead a research team at Apodex working on the mathematical capabilities of
+        language models and on verification. AI systems now produce code, proofs, and
+        arguments faster than anyone can check them, and checking is often slower than
+        doing the work by hand. Formal systems dissolve that bottleneck: a model can
+        deliver a solution together with a specification and a machine-checkable proof,
+        so a person reviews the specification and the proof checker handles the rest.
+        Mathematics is where this is furthest along. Most of our current work is not
+        yet public.
       </p>
     </section>
 
@@ -59,13 +63,16 @@
       <ul class="focus">
         <li>
           <span class="lede">Mathematical capabilities of LLMs.</span>
-          The full training stack — pre-training, mid-training, post-training, and
-          agents — directed at models that can do mathematics.
+          We work across the training stack rather than at a single stage — data,
+          mid-training, post-training, and agents — because no one stage creates
+          mathematical ability, and each stage bounds what the next can add.
         </li>
         <li>
           <span class="lede">Verification.</span>
-          Formal verification for LLM training infrastructure, and verifiers that make
-          agents efficient and reliable on long-horizon tasks.
+          Two directions: formal guarantees for the infrastructure that training runs
+          on, and verifiers that tell an agent whether it is still on track. The longer
+          the task, the more errors compound, and the more a cheap, reliable check is
+          worth.
         </li>
       </ul>
     </section>
@@ -73,11 +80,12 @@
     <section class="rise">
       <h2>Background</h2>
       <p>
-        Before Apodex, I was a research scientist at Meta FAIR in New York, a
-        postdoctoral fellow at Caltech, and earned a PhD in computer science at
-        Princeton. I have worked on machine learning for formal mathematics and
-        theorem proving since 2018, and much of the open-source tooling my
-        collaborators and I built is in regular use across that field.
+        I have worked on machine learning for formal mathematics since 2018, beginning
+        with CoqGym, a learning environment for the Coq proof assistant, and later
+        LeanDojo and Lean Copilot, which connect language models to Lean and are in
+        regular use in that community. Before Apodex I was a research scientist at Meta
+        FAIR and a postdoctoral fellow at Caltech, after a PhD in computer science at
+        Princeton.
         <a href="background.html">Full background and publications&nbsp;→</a>
       </p>
     </section>
