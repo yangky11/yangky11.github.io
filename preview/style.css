@@ -30,14 +30,16 @@ body {
 }
 
 .page {
-  max-width: 42.5rem;
+  max-width: 50rem;
   margin: 0 auto;
   padding: 4.5rem 1.5rem 3rem;
 }
 
-/* list-heavy pages (background) get a wider column: fewer stub lines in
-   long titles and author lists, and no prose paragraphs to over-widen */
-.page--wide { max-width: 50rem; }
+/* the column is sized for lists and grids; running prose keeps a shorter
+   reading measure so paragraphs don't stretch past ~75 characters */
+section p,
+.focus li,
+.work .note { max-width: 42.5rem; }
 
 a {
   color: var(--accent);
