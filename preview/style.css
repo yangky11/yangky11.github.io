@@ -246,10 +246,12 @@ footer a:hover { color: var(--accent-hover); }
   font-size: 0.9375rem;
 }
 .pub .body .authors .me { color: var(--ink); }
-.pub .body .extra {
+.pub .body .links {
   display: block;
-  font-size: 0.9375rem;
-  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  color: var(--faint);
 }
 
 /* simple lists on background page */
