@@ -106,6 +106,9 @@ a:hover {
   color: var(--muted);
 }
 
+/* email sits on its own line; the links share the line below it */
+.contact .email { flex: 0 0 100%; }
+
 .contact a {
   color: var(--muted);
   border-bottom-color: var(--rule);
