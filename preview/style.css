@@ -232,7 +232,7 @@ footer a:hover { color: var(--accent-hover); }
 
 .pubnote { color: var(--muted); font-size: 0.9375rem; }
 
-.masthead + .pubnote { margin-top: 1.5rem; }
+.masthead + .pubnote, .contact + .pubnote { margin-top: 1.5rem; }
 
 .pub {
   display: grid;
