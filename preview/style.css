@@ -232,6 +232,8 @@ footer a:hover { color: var(--accent-hover); }
 
 .pubnote { color: var(--muted); font-size: 0.9375rem; }
 
+.masthead + .pubnote { margin-top: 1.5rem; }
+
 .pub {
   display: grid;
   grid-template-columns: 8.25rem 1fr;
