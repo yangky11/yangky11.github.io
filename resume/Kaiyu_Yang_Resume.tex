@@ -51,24 +51,23 @@
 {\color{accent!40}\rule{\textwidth}{0.8pt}}
 \vspace{0.35em}
 
-I lead a research team at Apodex working on the mathematical capabilities of language models
-and on verification. AI systems now generate code, proofs, and arguments faster than anyone
-can check them, and formal systems remove that bottleneck: a solution arrives with a
-specification and a machine-checkable proof. I have worked on machine learning for formal
-mathematics since 2018, from early benchmarks (CoqGym) to open-source platforms
-(LeanDojo, Lean Copilot) and open provers (Goedel-Prover).
+I lead a research team at Apodex working on large language models for mathematics and
+verification. AI systems generate code and proofs faster than anyone can check them; as
+generation gets cheaper, verification becomes the bottleneck. I have worked on machine
+learning for formal mathematics since my PhD, from early neural theorem proving (CoqGym)
+to open-source infrastructure (LeanDojo) and open provers (Goedel-Prover).
 
 \section{Experience}
 
 \entry{Apodex}{Redwood City, CA}{Lead Scientist}{Mar 2026 -- Present}
 \begin{itemize}
-  \item Lead a research team on the mathematical capabilities of LLMs, working across the
-        training stack rather than at a single stage --- data, mid-training, post-training,
-        and agents --- since no one stage creates mathematical ability and each bounds what
-        the next can add.
-  \item Second workstream on verification: formal guarantees for the infrastructure that
-        training runs on, and verifiers that tell an agent whether it is still on track,
-        which matters more as tasks lengthen and errors compound.
+  \item Lead research on the mathematical capabilities of LLMs across the training stack:
+        pre-training data that aims to capture all the math on the web, synthetic
+        mid-training data distilled from research papers, and post-training pushing toward
+        research-level mathematics.
+  \item Second workstream on verification: verifiers that help agents complete long-horizon
+        tasks, applied to AI's own training pipelines, from the correctness of GPU kernels
+        to the quality of training data.
   \item Direct the research agenda and external academic collaborations on theorem proving
         and verified code generation.
 \end{itemize}
@@ -79,19 +78,24 @@ mathematics since 2018, from early benchmarks (CoqGym) to open-source platforms
   \item Co-authored \textit{Formal Mathematical Reasoning: A New Frontier in AI}
         (ICML 2025 position paper; also in \textit{Communications of the ACM}),
         which lays out the research agenda connecting LLMs with formal methods.
-  \item Advised the Goedel-Prover series (COLM 2025, ICLR 2026) --- open-source theorem
-        provers that set the state of the art among open models --- and ProofOptimizer
-        (ICLR 2026), a model that simplifies machine-generated proofs without human demonstrations.
-  \item Collaborations on verified code generation (Verina, ICLR 2026) and neuro-symbolic
+  \item Advised Goedel-Prover and Goedel-Prover-V2 (COLM 2025, ICLR 2026), theorem provers
+        that set the state of the art among open models at release, outperforming provers
+        20$\times$ their size; V2 is downloaded about 10,000 times a month.
+  \item Worked on ProofOptimizer (ICLR 2026), a model that simplifies machine-generated
+        proofs without human demonstrations; collaborations on verified code generation
+        (Verina, ICLR 2026; early adopters include AWS and Harmonic) and neuro-symbolic
         olympiad problem solving (ICLR 2025, CAV 2025).
 \end{itemize}
 
 \vspace{0.5em}
 \entry{California Institute of Technology}{Pasadena, CA}{Postdoctoral Fellow}{Sep 2022 -- May 2024}
 \begin{itemize}
-  \item Built \href{https://www.leandojo.org/}{LeanDojo} (NeurIPS 2023), an open-source
-        platform for LLM-based theorem proving in Lean, and Lean Copilot, which runs LLM
-        inference natively inside the Lean proof assistant; both are in regular use in the field.
+  \item Built \href{https://www.leandojo.org/}{LeanDojo} (NeurIPS 2023), the first
+        open-source infrastructure for theorem proving with LLMs in Lean, used by projects
+        at Meta, ByteDance, and DeepSeek; and Lean Copilot, which runs LLM inference
+        natively inside the Lean proof assistant.
+  \item Autoformalizing Euclidean Geometry (ICML 2024) enabled the first faithful
+        formalization of Euclid's \textit{Elements}, Book I, in a modern proof assistant.
 \end{itemize}
 
 \section{Education}
@@ -121,7 +125,7 @@ ECCV, CAV).
   \pub{Goedel-Prover-V2: Scaling Formal Theorem Proving with Scaffolded Data Synthesis and Self-Correction}
       {Y.~Lin*, S.~Tang*, B.~Lyu*, Z.~Yang*, et al. ICLR 2026.}
       {https://blog.goedel-prover.com/}
-  \pub{Goedel-Code-Prover: Hierarchical Proof Search for Open Code Verification}
+  \pub{Goedel-Code-Prover: Hierarchical Proof Search for Open State-of-the-Art Code Verification}
       {Z.~Li*, Z.~Yang*, D.~He, H.~Zhao, A.~Zhao, S.~Tang, K.~Yang, A.~Gupta, Z.~Su, C.~Jin. COLM 2026.}
       {https://arxiv.org/abs/2603.19329}
   \pub{ProofOptimizer: Training Language Models to Simplify Proofs without Human Demonstrations}
@@ -130,15 +134,6 @@ ECCV, CAV).
   \pub{Verina: Benchmarking Verifiable Code Generation}
       {Z.~Ye, Z.~Yan, T.~Kasriel, J.~He, K.~Yang, D.~Song. ICLR 2026.}
       {https://verina.io/}
-  \pub{Lean Copilot: Large Language Models as Copilots for Theorem Proving in Lean}
-      {P.~Song, K.~Yang, A.~Anandkumar. NeuS 2025.}
-      {https://arxiv.org/abs/2404.12534}
-  \pub{A Survey on Deep Learning for Theorem Proving}
-      {Z.~Li, J.~Sun, L.~Murphy, Q.~Su, Z.~Li, X.~Zhang, K.~Yang, X.~Si. COLM 2024.}
-      {https://arxiv.org/abs/2404.09939}
-  \pub{Proving Olympiad Inequalities by Synergizing LLMs and Symbolic Reasoning}
-      {Z.~Li*, Z.~Li*, W.~Tang, X.~Zhang, Y.~Yao, X.~Si, F.~Yang, K.~Yang\textsuperscript{\dag}, X.~Ma\textsuperscript{\dag}. ICLR 2025.}
-      {https://arxiv.org/abs/2502.13834}
   \pub{Generating Natural Language Proofs with Verifier-Guided Search}
       {K.~Yang, J.~Deng, D.~Chen. EMNLP 2022.}
       {https://arxiv.org/abs/2205.12443}
@@ -165,7 +160,7 @@ assistants:
   \item \href{https://github.com/princeton-vl/CoqGym}{CoqGym} --- learning environment for
         the Coq proof assistant; 400+ stars.
   \item \href{https://huggingface.co/collections/kaiyuy/leandojo}{LeanDojo models} on Hugging Face ---
-        retrieval and tactic-generation models; about 7,000 downloads a month.
+        retrieval and tactic-generation models; about 8,000 downloads a month.
 \end{itemize}
 
 \section{Service and Community}
@@ -180,12 +175,12 @@ assistants:
         2025); guest lecturer at Caltech and CUHK.
   \item Invited talks at OpenAI, Google, Meta FAIR, the Simons Institute, UC Berkeley, Stanford,
         CMU, and other universities.
-  \item Mentored students and junior researchers who went on to PhD programs at Toronto,
-        Cornell, CUHK, and UIUC, and to industry labs.
+  \item Mentored students and junior researchers who went on to PhD programs at CMU,
+        Toronto, Cornell, CUHK, and UIUC, and to industry labs.
   \item Work on AI for mathematics covered in \textit{Scientific American} (2024).
 \end{itemize}
 
 \vspace{0.4em}
-{\small * equal contribution \quad \textsuperscript{\dag} equal advising}
+{\small * equal contribution}
 
 \end{document}
