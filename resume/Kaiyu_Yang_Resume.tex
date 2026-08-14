@@ -1,8 +1,8 @@
-% Kaiyu Yang — Resume (2 pages)
+% Kaiyu Yang — Resume (1 page)
 % Build: latexmk -pdf Kaiyu_Yang_Resume.tex
-\documentclass[10.5pt]{article}
+\documentclass[10pt]{article}
 
-\usepackage[margin=0.75in]{geometry}
+\usepackage[hmargin=0.65in, vmargin=0.55in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{XCharter}            % matches the website's Charter
@@ -23,7 +23,7 @@
   {\normalsize\bfseries\scshape\color{accent}}
   {}{0pt}{}
   [\vspace{-0.55em}{\color{accent!40}\rule{\textwidth}{0.4pt}}]
-\titlespacing*{\section}{0pt}{1.1em}{0.55em}
+\titlespacing*{\section}{0pt}{0.55em}{0.35em}
 
 \newcommand{\entry}[4]{% org, location, title, dates
   \textbf{#1}, #2 \hfill #4\\*
@@ -32,10 +32,7 @@
 \newcommand{\pub}[3]{% title+link, authors, venue
   \item \href{#3}{\textbf{#1}}\\* {\small #2}}
 
-\newcommand{\pubnolink}[2]{%
-  \item \textbf{#1}\\ {\small #2}}
-
-\setlist[itemize]{leftmargin=1.15em, itemsep=0.18em, parsep=0pt, topsep=0.25em}
+\setlist[itemize]{leftmargin=1.15em, itemsep=0.08em, parsep=0pt, topsep=0.15em}
 
 \begin{document}
 
@@ -47,9 +44,9 @@
   \href{https://github.com/yangky11}{github.com/yangky11}
 \end{tabular}
 
-\vspace{0.35em}
+\vspace{0.3em}
 {\color{accent!40}\rule{\textwidth}{0.8pt}}
-\vspace{0.35em}
+\vspace{0.3em}
 
 I lead a research team at Apodex working on large language models for mathematics and
 verification. AI systems generate code and proofs faster than anyone can check them; as
@@ -60,114 +57,79 @@ learning for formal mathematics since my PhD.
 
 \entry{Apodex}{Redwood City, CA}{Lead Scientist}{Mar 2026 -- Present}
 \begin{itemize}
-  \item Lead research on the mathematical capabilities of LLMs across the training stack:
-        pre-training data that aims to capture all the math on the web, synthetic
-        mid-training data distilled from research papers, and post-training pushing toward
-        research-level mathematics.
+  \item Lead a team of five researchers on the mathematical capabilities of LLMs across the
+        training stack: pre-training data that aims to capture all the math on the web,
+        synthetic mid-training data distilled from research papers, and post-training
+        pushing toward research-level mathematics.
   \item Build verifiers that help agents complete long-horizon tasks, applied to AI's own
         training pipelines, from the correctness of GPU kernels to the quality of training data.
 \end{itemize}
 
-\vspace{0.5em}
+\vspace{0.25em}
 \entry{Meta Fundamental AI Research (FAIR)}{New York, NY}{Research Scientist}{Jun 2024 -- Dec 2025}
 \begin{itemize}
   \item Advised Goedel-Prover and Goedel-Prover-V2 (COLM 2025, ICLR 2026), theorem provers
         that set the state of the art among open models at release, outperforming provers
         20$\times$ their size; V2 is downloaded about 10,000 times a month.
-  \item Worked on ProofOptimizer (ICLR 2026), a model that simplifies machine-generated
-        proofs without human demonstrations; collaborations on verified code generation
-        (Verina, ICLR 2026; early adopters include AWS and Harmonic) and neuro-symbolic
-        olympiad problem solving (ICLR 2025, CAV 2025).
+  \item Co-developed ProofOptimizer (ICLR 2026), a model that simplifies machine-generated
+        proofs without human demonstrations; collaborated on verified code generation
+        (Verina, ICLR 2026; early adopters include AWS and Harmonic).
 \end{itemize}
 
-\vspace{0.5em}
+\vspace{0.25em}
 \entry{California Institute of Technology}{Pasadena, CA}{Postdoctoral Fellow}{Sep 2022 -- May 2024}
 \begin{itemize}
   \item Built \href{https://www.leandojo.org/}{LeanDojo} (NeurIPS 2023), the first
         open-source infrastructure for theorem proving with LLMs in Lean, used by projects
-        at Meta, ByteDance, and DeepSeek; and Lean Copilot, which runs LLM inference
-        natively inside the Lean proof assistant.
+        at Meta, ByteDance, and DeepSeek.
   \item Autoformalizing Euclidean Geometry (ICML 2024) enabled the first faithful
         formalization of Euclid's \textit{Elements}, Book I, in a modern proof assistant.
 \end{itemize}
 
 \section{Education}
 
-\entry{Princeton University}{Princeton, NJ}{PhD in Computer Science}{2022}
-\vspace{0.35em}
-\entry{University of Michigan}{Ann Arbor, MI}{MS in Computer Science and Engineering}{2018}
-\vspace{0.35em}
-\entry{Tsinghua University}{Beijing, China}{B.Eng.\ in Computer Science and B.S.\ in Mathematics}{2016}
+\textbf{Princeton University} --- PhD in Computer Science \hfill 2022\\[0.05em]
+\textbf{University of Michigan} --- MS in Computer Science and Engineering \hfill 2018\\[0.05em]
+\textbf{Tsinghua University} --- B.Eng.\ in Computer Science and B.S.\ in Mathematics \hfill 2016
 
 \section{Selected Publications}
 
-Full list on \href{https://scholar.google.com/citations?user=FciCu4EAAAAJ}{Google Scholar}:
-30+ papers, over 10,000 citations (NeurIPS, ICML, ICLR, COLM, CACM, EMNLP, CVPR, ICCV,
-ECCV, CAV).
+Full list on \href{https://scholar.google.com/citations?user=FciCu4EAAAAJ}{Google Scholar}.
 
 \begin{itemize}
   \pub{LeanDojo: Theorem Proving with Retrieval-Augmented Language Models}
-      {K.~Yang, A.~Swope, A.~Gu, R.~Chalamala, P.~Song, S.~Yu, S.~Godil, R.~Prenger, A.~Anandkumar. NeurIPS 2023.}
+      {\textbf{K.~Yang}, A.~Swope, A.~Gu, R.~Chalamala, P.~Song, S.~Yu, S.~Godil, R.~Prenger, A.~Anandkumar. NeurIPS 2023.}
       {https://www.leandojo.org/}
   \pub{Formal Mathematical Reasoning: A New Frontier in AI}
-      {K.~Yang, G.~Poesia, J.~He, W.~Li, K.~Lauter, S.~Chaudhuri, D.~Song. ICML 2025; Communications of the ACM.}
+      {\textbf{K.~Yang}, G.~Poesia, J.~He, W.~Li, K.~Lauter, S.~Chaudhuri, D.~Song. ICML 2025; Communications of the ACM.}
       {https://arxiv.org/abs/2412.16075}
-  \pub{Goedel-Prover: A Frontier Model for Open-Source Automated Theorem Proving}
-      {Y.~Lin*, S.~Tang*, B.~Lyu, J.~Wu, H.~Lin, K.~Yang, J.~Li, M.~Xia, D.~Chen, S.~Arora, C.~Jin. COLM 2025.}
-      {https://blog.goedel-prover.com/}
   \pub{Goedel-Prover-V2: Scaling Formal Theorem Proving with Scaffolded Data Synthesis and Self-Correction}
-      {Y.~Lin*, S.~Tang*, B.~Lyu*, Z.~Yang*, et al. ICLR 2026.}
+      {Y.~Lin, S.~Tang, B.~Lyu, Z.~Yang, \ldots, \textbf{K.~Yang}, \ldots, C.~Jin. ICLR 2026.}
       {https://blog.goedel-prover.com/}
-  \pub{Goedel-Code-Prover: Hierarchical Proof Search for Open State-of-the-Art Code Verification}
-      {Z.~Li*, Z.~Yang*, D.~He, H.~Zhao, A.~Zhao, S.~Tang, K.~Yang, A.~Gupta, Z.~Su, C.~Jin. COLM 2026.}
-      {https://arxiv.org/abs/2603.19329}
-  \pub{ProofOptimizer: Training Language Models to Simplify Proofs without Human Demonstrations}
-      {A.~Gu, B.~Piotrowski, F.~Gloeckle, K.~Yang, A.~Markosyan. ICLR 2026.}
-      {https://arxiv.org/abs/2510.15700}
-  \pub{Verina: Benchmarking Verifiable Code Generation}
-      {Z.~Ye, Z.~Yan, T.~Kasriel, J.~He, K.~Yang, D.~Song. ICLR 2026.}
-      {https://verina.io/}
-  \pub{Generating Natural Language Proofs with Verifier-Guided Search}
-      {K.~Yang, J.~Deng, D.~Chen. EMNLP 2022.}
-      {https://arxiv.org/abs/2205.12443}
   \pub{Learning to Prove Theorems via Interacting with Proof Assistants}
-      {K.~Yang, J.~Deng. ICML 2019.}
+      {\textbf{K.~Yang}, J.~Deng. ICML 2019.}
       {https://arxiv.org/abs/1905.09381}
 \end{itemize}
 
 \section{Open Source}
 
-Core developer of open-source tooling for machine learning with the Lean and Coq proof
-assistants:
-
-\begin{itemize}
-  \item \href{https://github.com/lean-dojo/LeanDojo}{LeanDojo} --- interacting with Lean
-        from machine-learning pipelines; 800+ GitHub stars.
-  \item \href{https://github.com/lean-dojo/ReProver}{ReProver} --- retrieval-augmented
-        theorem prover; 300+ stars.
-  \item \href{https://github.com/lean-dojo/LeanCopilot}{Lean Copilot} --- LLM inference
-        inside Lean for proof automation; 1,300+ stars.
-  \item \href{https://github.com/princeton-vl/CoqGym}{CoqGym} --- learning environment for
-        the Coq proof assistant; 400+ stars.
-  \item \href{https://huggingface.co/collections/kaiyuy/leandojo}{LeanDojo models} on Hugging Face ---
-        retrieval and tactic-generation models; about 8,000 downloads a month.
-\end{itemize}
+Core developer of \href{https://github.com/lean-dojo/LeanDojo}{LeanDojo},
+\href{https://github.com/lean-dojo/ReProver}{ReProver},
+\href{https://github.com/lean-dojo/LeanCopilot}{Lean Copilot}, and
+\href{https://github.com/princeton-vl/CoqGym}{CoqGym} --- open-source tooling for machine
+learning with the Lean and Coq proof assistants; 2,800+ GitHub stars across repositories.
 
 \section{Service and Community}
 
 \begin{itemize}
-  \item Co-organizer, Workshop on Mathematical Reasoning and AI (MATH-AI) at NeurIPS 2023,
-        2025, and 2026; co-organizer of the NeurIPS 2023 tutorial on machine learning for
-        theorem proving.
-  \item Area Chair: ICML 2025 \& 2026, NeurIPS 2026, ECCV 2024. Reviewer for NSF panels and
-        ERC Advanced Grants.
-  \item Guest co-instructor, \textit{Advanced Large Language Model Agents} (UC Berkeley \& MOOC,
-        2025); guest lecturer at Caltech and CUHK.
-  \item Invited talks at OpenAI, Google, Meta FAIR, the Simons Institute, UC Berkeley, Stanford,
-        CMU, and other universities.
+  \item Co-organizer of the MATH-AI workshop at NeurIPS 2023, 2025, 2026; Area Chair for
+        ICML, NeurIPS, and ECCV.
+  \item Invited talks at OpenAI, Google, Meta FAIR, the Simons Institute, UC Berkeley,
+        Stanford, and CMU; guest co-instructor of \textit{Advanced Large Language Model
+        Agents} (UC Berkeley \& MOOC, 2025).
   \item Mentored students and junior researchers who went on to PhD programs at CMU,
-        Toronto, Cornell, CUHK, and UIUC, and to industry labs.
-  \item Work on AI for mathematics covered in \textit{Scientific American} (2024).
+        Toronto, Cornell, CUHK, and UIUC, and to industry labs; work covered in
+        \textit{Scientific American} (2024).
 \end{itemize}
 
 \end{document}
