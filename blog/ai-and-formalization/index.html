@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js), shared with the personal site. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B5LHBSZYY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0B5LHBSZYY');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Happens When Proofs Become Cheap? — Kaiyu Yang</title>
+  <meta name="author" content="Kaiyu Yang">
+  <meta name="description" content="A personal reflection on eight years of AI and formalization: cheaper proofs, GPU kernel verification, and the questions that remain after the proof checker says yes.">
+  <link rel="canonical" href="https://yangky11.github.io/blog/ai-and-formalization/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Happens When Proofs Become Cheap?">
+  <meta property="og:description" content="A personal reflection on eight years of AI and formalization. By Kaiyu Yang.">
+  <meta property="og:url" content="https://yangky11.github.io/blog/ai-and-formalization/">
+  <meta property="og:image" content="https://yangky11.github.io/images/Kaiyu%20Yang.jpg">
+  <meta property="og:image:alt" content="Kaiyu Yang">
+  <meta property="article:published_time" content="2026-09-22">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+  <div class="page post-page">
+    <nav class="post-nav" aria-label="Breadcrumb">
+      <a href="/">← Kaiyu Yang</a>
+      <span>Writing</span>
+    </nav>
+
+    <main>
+      <article aria-labelledby="post-title">
+        <header class="post-header">
+          <h1 id="post-title">What Happens When Proofs Become Cheap?</h1>
+          <p class="post-subtitle">A personal reflection on eight years of AI and formalization</p>
+          <div class="post-meta">
+            <span class="post-author"><img src="/images/Kaiyu%20Yang.jpg" alt="" width="32" height="32"><a href="/" rel="author">Kaiyu Yang</a></span>
+            <time datetime="2026-09-22">September 22, 2026</time>
+            <span>13 min read</span>
+          </div>
+        </header>
+
+        <!-- The live essay is maintained directly in this HTML file. -->
+        <div class="post-body">
+        <p>I started working on machine learning for theorem proving in 2018. When people ask how I got into the field so early, I have sometimes given an answer that makes me sound quite visionary.</p>
+
+        <p>The actual story is that my advisor had a student leaving, and he assigned the project to me. My apologies to everyone who got the visionary version.</p>
+
+        <p>It was a fortunate assignment. I got to help build <a href="https://arxiv.org/abs/1905.09381">CoqGym</a>, later <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a>, and other tools for learning from and interacting with proof assistants. When I started, neural theorem proving was a small corner of AI. It already had a history: <a href="https://arxiv.org/abs/1606.04442">DeepMath</a> and <a href="https://arxiv.org/abs/1608.02644">Holophrasm</a>, for example, predated my work, as did learning-based approaches to automated reasoning. Researchers including Christian Szegedy, Tony Wu, Albert Jiang, and many others helped develop the field over the following years. I was lucky to participate early in something that grew much larger than I expected.</p>
+
+        <p>For most of those eight years, I have been an enthusiastic proponent of AI for formal reasoning. I still am. But my view of what formalization can do for AI has changed considerably, including since our <a href="https://arxiv.org/abs/2412.16075">position paper on mathematical reasoning and verification</a>.</p>
+
+        <p>I keep having versions of this conversation with friends, collaborators, and students deciding what to work on. Writing it down seems more efficient than gradually turning every coffee chat into the same seminar. It also forces me to figure out which parts I actually believe.</p>
+
+        <p>Some of these views are speculative, and some of my friends will probably disagree. I have been wrong many times before and may be wrong again. I am happy to discuss these ideas; I do not expect to convince everyone.</p>
+
+        <p>I will also leave “formalization” somewhat overloaded. Roughly, I mean expressing reasoning in a formal system with precise syntax and semantics, so that claims and their derivations can be checked mechanically. My experience is mostly with Lean and Coq. Different formal systems offer different tradeoffs, but the questions I want to discuss extend beyond a particular proof assistant.</p>
+
+        <p>The attraction has always been easy to explain. A neural network can propose a proof that is brilliant, plausible, or completely wrong. A proof checker can tell us whether it establishes a precisely stated claim. We can train on verified solutions, use feedback to guide search, and check results that would be expensive for people to review. That combination remains powerful.</p>
+
+        <p>What has changed is how far I expect it to take us. I used to put much more weight on formalization as a general route toward trustworthy AI, especially AI that writes code. I now think its usefulness depends much more sharply on the domain and on the particular question being asked. I no longer see it as a silver bullet for safety, trust, or even software correctness in the broad sense people usually care about.</p>
+
+        <p>Our position paper already discussed the difficulty of checking whether a formal statement matches its informal intent. This was not a problem I had never heard of. The change is in how central I think that problem becomes once other obstacles get smaller.</p>
+
+        <p>And those other obstacles really are getting smaller.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="cheaper-proofs"><a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s formalization of Fermat’s Last Theorem</a> is an extraordinary example. It formalizes an existing human proof, building on mathematical and formalization work by a large community. That distinction matters: formalizing Wiles’s proof is a different achievement from discovering it. Both deserve credit.</p>
+
+        <p><a href="https://openai.com/index/navier-stokes-solution/">OpenAI’s account of its Navier–Stokes result</a> describes a different sequence: discovery first, followed by Lean formalization and verification. In that account, Lean’s clearest contribution is certifying a proposed result. Certification is a substantial contribution when the result is difficult and consequential; it should not be dismissed just because it comes later.</p>
+
+        <p>There are also examples where formal feedback participates in discovery. <a href="https://arxiv.org/abs/2605.22763">AlphaProof Nexus</a> reports new solutions to open Erdős problems and OEIS conjectures through a search process that uses Lean feedback. So I would not claim that formal systems only transcribe mathematics discovered elsewhere. They can help explore, reject, and assemble ideas. How much they contribute to developing major new mathematical theories is a further question, and these different roles should not be collapsed into one headline.</p>
+
+        <p>My broader observation is that producing a checked proof is becoming much less of an exceptional event. Proofs are becoming cheap. Parts of autoformalization are becoming cheap too.</p>
+
+        <p>“Cheap” is relative. Large projects still require substantial compute, libraries, good agent infrastructure, and people who know what they are doing. My point is mainly about the declining amount of specialized human labor needed to get a well-understood argument through a proof assistant.</p>
+
+        <p>I sometimes describe autoformalization and proof search as effectively solved. Here is the scope I have in mind: for many well-specified problems whose mathematics is already within a frontier model’s reach, getting from that understanding to a checked proof is becoming routine enough that it stops being the main bottleneck. There are still difficult failures and plenty of engineering to do. I am not predicting that we will run out of unproved theorems.</p>
+
+        <p>There is a particularly important distinction inside the word “autoformalization.” Encoding a sufficiently precise mathematical statement in Lean is one task. Deciding whether that statement faithfully represents an informal request is another. Progress on the first does not automatically settle the second.</p>
+
+        <p>This is also changing my view of specialized theorem-proving models. My default bet is that Lean will increasingly be a capability of the strongest general reasoning and coding models. The frontier labs have a reason to train on this domain, and much of the data and methodology is public. A model being general-purpose does not mean that it received no specialized training along the way.</p>
+
+        <p>I would now want a concrete reason to build a separate Lean model: substantially lower cost, distinctive data, or a process that continually generates valuable verified training data from real use. These can be excellent reasons. Specialized systems can also win on particular workloads, as results such as <a href="https://mistral.ai/news/leanstral-1-5/">Leanstral</a> illustrate. My claim is a research bet about where a durable advantage will come from, rather than a universal ranking of models.</p>
+
+        <p>The ceiling of the underlying reasoning ability matters enormously. Lean can expose mistakes, organize a search, and make intermediate results trustworthy. It does not make the need for mathematical insight disappear. If neither the model nor its search process can find the crucial idea, greater fluency in Lean will only take it so far.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="veritile">The experience that made these questions concrete for me was <strong>VeriTile</strong>, our project led by Zenan Li on verifying Triton GPU kernels in Lean.</p>
+
+        <p>GPU kernels initially looked like an unusually good application. Pretraining is expensive. A subtle error can be difficult to diagnose. Kernels are relatively small, their computations appear mathematical, and optimized implementations can be compared with simpler reference implementations. If formal verification was going to deliver practical value, this seemed like a promising place.</p>
+
+        <p>VeriTile gives us a formal language and execution model for reasoning about these kernels. We can state what a kernel should compute, how it reads and writes memory, and when an optimization preserves the observable result. The project includes worked examples involving operations such as normalization, softmax, and attention.</p>
+
+        <p>For a concrete example, consider a computation that multiplies two tensors, applies SiLU, and adds a residual. An unfused implementation launches several kernels and stores intermediate tensors. A fused implementation does the work in one launch. We can prove, within the modeled arithmetic and execution semantics, that the two produce the same public output and preserve unrelated memory. The scratch space they happen to use internally need not be identical.</p>
+
+        <p>That is a useful guarantee. It applies to every input satisfying the theorem’s assumptions. Tests on a collection of inputs do not establish the same thing. VeriTile succeeded at proving meaningful properties of kernels.</p>
+
+        <p>But the decision I ultimately wanted help with was whether an optimization was safe to use in a long training run.</p>
+
+        <p>An exact equivalence proof in a faithful execution model can justify a replacement without requiring a theory of why the reference implementation trains well. Such guarantees can compose. The more revealing case is a useful optimization that changes numerical behavior.</p>
+
+        <p>Two computations can be equivalent over the real numbers and produce different results in floating-point arithmetic. Addition is not associative. Changing a reduction order can change the answer. Two algorithms for computing variance can describe the same mathematical quantity without agreeing bit for bit on a GPU.</p>
+
+        <p>If we ask Lean to prove exact equivalence in a setting where it is false, a better prover will not fix the problem.</p>
+
+        <p>We can improve the arithmetic model, make rounding explicit, and prove a different property. VeriTile models selected rounding boundaries, but it does not contain a complete model of IEEE-754, the compiler, PTX, and GPU execution. Its claims have to be read within those boundaries.</p>
+
+        <p>Now suppose, hypothetically, that we have gone further and proved that the output of an optimized kernel differs from the reference by at most a small numerical tolerance. That sounds reassuring. How small should the tolerance be?</p>
+
+        <p>The question the training team ultimately cares about is whether using this kernel will harm the training run. A local discrepancy can interact with optimizer state, normalization, other numerical approximations, and many subsequent training steps. A useful answer would require some connection between the local error we can bound and the eventual behavior we care about.</p>
+
+        <p>Numerical analysis and stability theory give us ways to study pieces of this problem. For the training systems and optimizations we cared about, though, we did not have a tractable connection from the local guarantee to the outcome we wanted to protect. We may be able to prove an error bound and still not know whether it justifies deploying the optimization.</p>
+
+        <p>That was the important update for me. The difficulty can remain even after the formalization succeeds.</p>
+
+        <p>Engineers still compare training trajectories, run experiments against trusted implementations, and sometimes give up an optimization when they cannot get enough confidence in its consequences. Those experiments are expensive and imperfect. They also ask a question closer to the operational decision than a theorem about a local kernel necessarily does.</p>
+
+        <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
+
+        <p>AI may help develop that science too. I am certainly not claiming that the missing mathematics must be supplied by humans. But making proof construction cheap does not, by itself, give us the theory that connects an easy-to-state property to a difficult real-world outcome.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="specifications">I find it useful to think of four steps:</p>
+
+        <ol class="reasoning-steps" role="list">
+
+          <li><span class="step-number" aria-hidden="true">01</span><span><span class="step-title">Intent</span><span class="step-description">Figure out what we want.</span></span></li>
+
+          <li><span class="step-number" aria-hidden="true">02</span><span><span class="step-title">Mathematical model</span><span class="step-description">Find a mathematical model and a property that capture the relevant part of it.</span></span></li>
+
+          <li><span class="step-number" aria-hidden="true">03</span><span><span class="step-title">Formal statement</span><span class="step-description">Express that property in a formal system.</span></span></li>
+
+          <li><span class="step-number" aria-hidden="true">04</span><span><span class="step-title">Proof</span><span class="step-description">Prove that the implementation satisfies it.</span></span></li>
+
+        </ol>
+
+        <p>For a long time, steps three and four consumed so much effort that they dominated the discussion. AI is rapidly reducing that effort. In the settings I increasingly care about, steps one and two are becoming decisive.</p>
+
+        <p>Sometimes intent is implicit or incomplete. Sometimes different people want incompatible things. Sometimes nobody has decided what should happen in an unusual case until the system encounters it. And sometimes the intent is reasonably clear, but we cannot model the relevant world accurately enough to derive the guarantee we want.</p>
+
+        <p>There is a tempting response: have another AI check whether the specification captures the intent. That can help. It can catch omitted cases, question assumptions, and propose better tests. But unless that check has its own adequate formal specification, its reliability is empirical. We have introduced another useful reviewer, with its own possibility of being wrong.</p>
+
+        <p>This matters even more for broad claims about AI safety or alignment. We can prove specific properties of a system under specific assumptions. Getting from those properties to confidence that an agent will behave acceptably across an open-ended environment requires additional reasoning about goals, people, and the environment. I no longer expect a proof assistant to make those questions disappear.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="where-formalization-fits">I still see very strong applications for formalization. My enthusiasm is greatest when the cost of an error is high and we can state a stable, meaningful property mathematically. Parts of hardware, cryptography, access control, and financial infrastructure have this shape. Regulated industries may create further demand where requirements can be made precise and the evidence is useful to the people evaluating them.</p>
+
+        <p>These are favorable conditions, not requirements for every use. If automation makes verification cheap enough, even an ordinary program may benefit from a proof of a modest invariant. A property can be worth proving without describing the entire purpose of the system.</p>
+
+        <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/">Jane Street’s recent discussion of formal methods</a> is interesting in this light: cheaper proof work and growing amounts of AI-generated code change the economics of verification. More code creates more things worth checking. It also creates more opportunities to spend effort checking properties that are easy to state but do not matter very much. Choosing well becomes part of the job.</p>
+
+        <p>I suspect much of everyday formalization will become part of the same development workflow as testing and property-based testing. A coding agent might prove a local invariant, use a formal model as a test oracle, and run experiments for behavior outside the model. <a href="https://www.amazon.science/blog/how-we-built-cedar-with-automated-reasoning-and-differential-testing">Cedar’s published development process</a>, combining proofs about a model with differential testing against the implementation, gives a concrete example of this kind of mixture.</p>
+
+        <p>The distinction between proof and testing remains essential. A universal proof of a narrow property is stronger than sampling that property on a few inputs. What may converge is their role in development: different ways to remove particular uncertainties, routinely used together. The result can be substantially better software without an end-to-end guarantee that the whole system does everything its users intended.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="ai-for-mathematics">Mathematics has a special position in this discussion. Its statements are unusually well suited to formal reasoning, and for people who care about mathematics intrinsically, mathematical progress supplies its own motivation. I would not try to talk a mathematician out of caring about a theorem because it lacks a business model.</p>
+
+        <p>From an AI research perspective, I think two other motivations have driven much of the interest. Mathematics has been a compelling way to demonstrate reasoning ability. It also provides difficult environments with unusually good feedback.</p>
+
+        <p>I am less motivated by the first argument than I used to be. There was a time when getting a neural network to prove a nontrivial theorem was itself a striking demonstration. Today I would want a sharper explanation of what an additional benchmark gain teaches us, or what capability it unlocks. If the whole pitch is “look, AI can do math,” I think that particular party is largely over. There is plenty of mathematics left to do.</p>
+
+        <p>The second argument remains strong. Challenging tasks with reliable feedback are valuable for training and evaluating reasoning. Formal systems supply especially strong feedback. Strong models are also becoming useful critics of informal arguments, opening up other forms of mathematical feedback, although a model’s approval is fallible in a way that kernel checking a proof is not. Understanding when that cheaper, less exact feedback is enough is itself an interesting research problem.</p>
+
+        <p>For a student choosing a project, I would now start with the decision the work is supposed to improve. What uncertainty would a proof remove? Is that uncertainty actually preventing someone from doing something useful? What would remain unresolved even with perfect proof automation? The answers might point toward a new prover, a better specification, a numerical experiment, or a problem outside formal methods altogether.</p>
+
+        <hr aria-hidden="true">
+
+        <p id="looking-ahead">This is roughly where I find myself after eight years. I expect formalization to become more capable and more widely used. At the same time, I expect a smaller fraction of the questions I most want to work on to be settled by formalization alone. Those expectations seem quite compatible to me.</p>
+
+        <p>I remain interested in verification in the broader sense. What evidence should make us trust an output? How can a weaker or cheaper verifier evaluate a stronger system? Can we train systems to make their work easier to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>? These questions become more pressing as agents work together and participate in changing the systems that produce them.</p>
+
+        <p>I do not have a settled answer about what comes next. I do know that formalization is no longer the sole lens through which I want to approach these questions.</p>
+
+        <p>Working on proof assistants taught me to ask exactly what a claim says, what it assumes, and what would count as evidence for it. I expect to keep that habit. Increasingly, I want to spend my time on the questions that remain after the proof checker says yes.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="post-footer">
+      <span>© 2026 Kaiyu Yang</span>
+      <a href="#post-title">Back to top ↑</a>
+    </footer>
+  </div>
+</body>
+</html>
