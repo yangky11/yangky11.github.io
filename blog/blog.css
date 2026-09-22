@@ -61,6 +61,20 @@
 .post-body p { margin: 0 0 1.35rem; }
 .post-body a { overflow-wrap: anywhere; }
 
+.post-body h2 {
+  margin: 2.75rem 0 1.25rem;
+  padding-bottom: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-transform: none;
+  color: var(--ink);
+  scroll-margin-top: 2rem;
+  text-wrap: balance;
+}
+
 .post-body .thought {
   margin: 2rem 0;
   padding: 0.25rem 0 0.25rem 1.25rem;
@@ -113,6 +127,7 @@
   .post-page { padding-top: 1.75rem; }
   .post-nav { margin-bottom: 2.5rem; }
   .post-body { font-size: 1.0625rem; }
+  .post-body h2 { font-size: 1.45rem; }
   .post-subtitle { font-size: 1.125rem; }
   .reasoning-steps { grid-template-columns: 1fr; }
   .reasoning-steps li:nth-child(even) { padding-left: 0; }
@@ -125,6 +140,7 @@
   .post-nav, .post-footer { display: none; }
   .post-body { max-width: none; font-size: 11pt; }
   .post-header h1 { font-size: 26pt; }
+  .post-body h2 { break-after: avoid; }
   .post-body a { color: inherit; border-bottom-color: #999; }
   .reasoning-steps, .thought { break-inside: avoid; }
 }
