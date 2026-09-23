@@ -292,7 +292,9 @@ print(sequential, pairwise)</code></pre>
 
         <p>Consider smart contracts: programs on a blockchain that can control real money. Bugs can be expensive and difficult to fix after deployment. This looks like an excellent application for formal verification, and tools such as the <a href="https://docs.certora.com/en/latest/docs/user-guide/index.html">Certora Prover</a> already let developers check properties of their contracts.</p>
 
-        <p>But knowing that you want to protect users’ money does not tell you exactly what to prove. Auditing also involves understanding the intended behavior and questioning the assumptions behind it. Developers may not have an explicit specification of everything that matters. Certora’s own documentation makes the dependency clear: without adequate specifications, the prover can check only very basic properties.</p>
+        <p>My conversations with smart-contract auditing companies have given me a more nuanced picture. Their work draws on human review, static analysis, testing, fuzzing, and formal verification. In most of the companies I have spoken with, formal verification is only a small part of that work.</p>
+
+        <p>A lot of the work is figuring out what the client actually wants the system to do. The clients themselves often do not have a clear answer at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is part of the audit, and making proofs cheaper does not automatically resolve that work.</p>
 
         <figure class="specification-figure" aria-labelledby="specification-figure-title">
           <div class="specification-figure-title" id="specification-figure-title">From an intended outcome to a checked claim</div>
