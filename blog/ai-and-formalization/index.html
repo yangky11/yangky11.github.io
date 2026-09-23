@@ -132,7 +132,7 @@
           <aside class="sidenote" role="note" aria-label="Note 3">
             <details id="note-3">
               <summary><span class="note-number">3</span> Reasoning and formal feedback</summary>
-              <div class="note-content"><p>In <a href="https://openai.com/index/navier-stokes-solution/">OpenAI’s account of its Navier–Stokes result</a>, the model found the argument before formalizing it in Lean. Formalization can also help during discovery: <a href="https://arxiv.org/abs/2605.22763">AlphaProof Nexus</a> uses Lean feedback to test intermediate ideas while working on open mathematical problems.</p></div>
+              <div class="note-content"><p><a href="https://openai.com/index/navier-stokes-solution/">OpenAI reports</a> that its agents reached a solution to the Navier–Stokes problem, followed by a separate stage of Lean formalization and verification.</p></div>
             </details>
           </aside>
         </div>
@@ -144,20 +144,20 @@
 
           <p>That is the sense in which I mean formalization is becoming cheap: far less specialist human labor is needed to get a mathematical argument or software property into a checked form. Compute and libraries still matter. But the automation now covers much more of the work that used to require an expert at the keyboard.</p>
 
-          <p>In that practical sense, I sometimes call proof search and parts of <em>autoformalization</em>—the translation of informal arguments into formal statements and proofs—effectively solved. For many well-specified problems within the reasoning ability of a frontier model, the labor of formalization is no longer the main obstacle.</p>
+          <p>In that practical sense, I sometimes call proof search and parts of <em>autoformalization</em> effectively solved. For many well-specified problems within the reasoning ability of a frontier model, the labor of formalization is no longer the main obstacle.</p>
 
           <p>This is much of what I hoped for when I entered the field. If the labor of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p></div>
           <div class="sidenote-stack">
             <aside class="sidenote" role="note" aria-label="Note 4">
               <details id="note-4">
                 <summary><span class="note-number">4</span> Learning from specialists</summary>
-                <div class="note-content"><p>One mechanism is <a href="https://thinkingmachines.ai/blog/on-policy-distillation/">on-policy distillation</a>: a model generates its own attempts and learns from an expert model’s predictions along the way. The <a href="https://arxiv.org/html/2607.24653v1">Kimi K3 report</a> describes combining several domain experts into one model this way. Specialized training can therefore contribute to a general model’s capabilities. These public examples do not disclose how OpenAI or Anthropic train their Lean capabilities.</p></div>
+                <div class="note-content"><p>One mechanism is <a href="https://thinkingmachines.ai/blog/on-policy-distillation/">on-policy distillation</a>: a model generates its own attempts and learns from an expert model’s predictions along the way. Specialized training can therefore contribute to a general model’s capabilities.</p></div>
               </details>
             </aside>
             <aside class="sidenote" role="note" aria-label="Note 5">
               <details id="note-5">
                 <summary><span class="note-number">5</span> Can a specialist keep its advantage?</summary>
-                <div class="note-content"><p>The source of a specialist’s advantage matters. If your Lean data comes from public resources such as mathlib, Lean’s mathematical library, or from a readily reproducible pipeline for generating problems and proofs, OpenAI or Anthropic can build similar data internally. Having that data first can be valuable, but it does not by itself give a separate Lean model a lasting advantage.</p>
+                <div class="note-content"><p>The source of a specialist’s advantage matters. If your Lean data comes from public resources such as mathlib or from a readily reproducible pipeline for generating problems and proofs, OpenAI or Anthropic can build similar data internally. Having that data first can be valuable, but it does not by itself give a separate Lean model a lasting advantage.</p>
                 <p>My guess is that much of the earlier advantage of models such as Goedel-Prover came from giving Lean the attention it had not yet received in OpenAI’s and Anthropic’s main training runs. If that was the gap, it was unlikely to last once the labs became interested.</p></div>
               </details>
             </aside>
