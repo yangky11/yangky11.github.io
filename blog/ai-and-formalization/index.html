@@ -166,39 +166,40 @@
 
         <h2 id="veritile">What VeriTile changed for me</h2>
 
-        <p><a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, our project led by <a href="https://lizn-zn.github.io/">Zenan Li</a>, uses Lean to verify GPU kernels written in Triton, which perform much of the numerical work in AI training.</p>
+        <p><a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, our project led by <a href="https://lizn-zn.github.io/">Zenan Li</a>, uses Lean to verify GPU kernels written in Triton: the small, performance-critical programs that do much of the numerical work in AI training.</p>
 
-        <p>They initially looked like an unusually good application. Training a large model is expensive, and subtle errors can be difficult to diagnose. Kernels are relatively small, their computations appear mathematical, and optimized implementations can be compared with simpler reference implementations. Here was a setting where both the stakes and the mathematical structure seemed right.</p>
+        <p>This initially looked like an unusually good application of formal verification. Training a large model is expensive, and a subtle error may only become visible much later. Kernels are relatively small, their computations appear mathematical, and we can compare optimized implementations with simpler reference implementations. Both the stakes and the mathematical structure seemed right.</p>
+
         <div class="note-block">
-          <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, an efficient way of computing attention, the operation that lets a language model combine information from different parts of its input. A straightforward implementation constructs large intermediate arrays. FlashAttention reorganizes the computation into smaller blocks, reducing how much data has to move through GPU memory.</p>
-          <p>VeriTile proves that its FlashAttention-1 forward kernel computes the same mathematical attention function as a straightforward reference implementation, under a real-number arithmetic model and the theorem’s assumptions.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The guarantee covers every valid input under those assumptions, rather than just a collection of test cases.</p></div>
+          <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, which makes the attention computation in language models more efficient. Attention combines information from different parts of the input. FlashAttention reorganizes this computation into smaller blocks, avoiding large intermediate arrays and reducing how much data moves through GPU memory.</p>
+          <p>VeriTile proves that its FlashAttention kernel computes the same mathematical function as a straightforward reference implementation, using a model of arithmetic over the real numbers.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The guarantee covers every valid input under the theorem’s assumptions, including inputs nobody thought to test.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
-              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence to a separately verified naive kernel, including causal and noncausal variants. The result concerns modeled kernels and real arithmetic; it is not bit-for-bit equivalence to a running Hugging Face implementation, nor a verification of the GPU compiler and hardware.</p></div>
+              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence between VeriTile’s FlashAttention-1 forward kernel and a separately verified naive kernel, including causal and noncausal variants. This result uses real-number arithmetic; it does not establish identical floating-point outputs on a GPU. VeriTile also models selected rounding boundaries, but does not provide a complete model of hardware arithmetic or verify the compiler and GPU.</p></div>
             </details>
           </aside>
         </div>
 
-        <p>That is a useful guarantee. But the practical decision we ultimately want help with is whether an optimization is safe to use in a long training run.</p>
+        <p>That is a meaningful result. But the question motivating the work was more practical: can we use the faster kernel in a long training run without harming the outcome?</p>
 
-        <p>An exact equivalence proof in a faithful execution model can justify replacing a reference implementation. We do not need a theory of why the reference trains well to make that substitution.</p>
+        <p>For optimizations that preserve exact numerical behavior, an equivalence proof in a faithful execution model can justify the replacement. We do not need a theory of why the reference trains well to show that the replacement behaves the same way.</p>
 
-        <p>The harder case is a useful optimization that changes numerical behavior. GPUs represent numbers with limited precision, so arithmetic operations may round their results. In particular, floating-point addition is <strong>not associative</strong>: grouping a sum as <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. An optimization that changes how a large sum is grouped can therefore change its answer, even though both versions compute the same thing in exact mathematics.</p>
+        <p>Many useful optimizations, however, change how arithmetic is carried out. GPUs calculate with limited precision, and floating-point addition is <strong>not associative</strong>: <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. Changing how a sum is grouped can therefore change the numbers a kernel produces. Two implementations can compute the same function over the real numbers while giving different floating-point outputs.</p>
 
-        <p>A FlashAttention algorithm can implement the correct real-number function while its floating-point execution differs from a straightforward implementation. If exact numerical equivalence is false, a better prover will not make it true.</p>
+        <p>Demanding exact equivalence would rule out those optimizations. A better prover cannot prove a statement that is false. We could instead model rounding and try to bound the difference between the two implementations.</p>
 
-        <p>We can make rounding explicit and prove a different property. VeriTile models selected rounding boundaries, although it does not contain a complete model of floating-point arithmetic and GPU execution. Suppose we went further and proved that the optimized kernel’s output differs from the reference by at most some small amount. We would still need to know how small is small enough.</p>
+        <p>Suppose we succeeded, and proved that the optimized kernel’s output differs from the reference by at most some small amount. How small is small enough for training?</p>
 
-        <p>Over a long training run, a small local difference can interact with optimizer state and many subsequent computations. To justify using the optimization, we need a connection between the local error we can bound and the training outcome we want to protect.</p>
+        <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
-        <p>For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer. We could improve the formal model and automate more proofs while still being unable to settle the decision. Engineers therefore compare training trajectories, run experiments against trusted implementations, and sometimes give up optimizations when they cannot get enough confidence in their consequences.</p>
+        <p>In practice, engineers compare training trajectories, run experiments against trusted implementations, and sometimes give up an optimization when they cannot get enough confidence in its consequences. Those experiments address the behavior we care about more directly, even though they cannot give the universal guarantee we would like.</p>
+
+        <p>We knew what we wanted: faster training without harming the result. What we lacked was the theory needed to connect a local numerical guarantee to that outcome.</p>
 
         <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
 
-        <p>Here, we knew what outcome we wanted. What we lacked was the theory needed to connect a local numerical guarantee to that outcome.</p>
-
-        <p>That was the important update for me. VeriTile succeeded at proving useful properties, and that success made the remaining difficulty clearer. AI may help develop the missing science too. Automating formalization, by itself, does not give us the connection between a property we can state and the outcome we care about.</p>
+        <p>This was the important update for me. VeriTile succeeded at proving useful properties. For optimizations that change numerical behavior, those proofs could still leave the training question unsettled. Better AI may help us develop the missing theory too. Automating formalization, by itself, does not supply it.</p>
 
         <h2 id="specifications">The work before the proof</h2>
 
