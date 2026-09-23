@@ -180,7 +180,7 @@
 
         <p>Kernels seemed to offer a good way to answer that question. They are relatively compact, and their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Here it seemed we could specify exactly what “correct” meant.</p>
 
-        <p>The hope was appealing: keep the simple implementation as a reference, let AI optimize aggressively, and use proofs to justify the replacement. If AI could take over much of the proof work too, perhaps we could get both speed and confidence without requiring a formal-methods expert to scrutinize every change.</p>
+        <p>The hope was that AI could optimize these kernels and prove the replacements correct, giving us speed and confidence without requiring a formal-methods expert to scrutinize every change.</p>
 
         <h3 id="veritile-guarantees">What we could prove</h3>
 
@@ -227,7 +227,7 @@
 
         <p>If the faster kernel produces the same output for every input, down to the last bit, and otherwise behaves the same way, the rest of training cannot tell the difference. A proof of this <em>bitwise equivalence</em>, using an accurate model of execution, would justify replacing the reference kernel.</p>
 
-        <p>Many useful optimizations, however, change how arithmetic is carried out. GPUs calculate with limited precision, rounding results along the way. Floating-point addition is <strong>not associative</strong>: <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. Two implementations can compute the same function over the real numbers while giving different floating-point outputs.</p>
+        <p>Many useful optimizations, however, change how arithmetic is grouped. Floating-point calculations round intermediate results, so addition is <strong>not associative</strong>: changing the grouping can change the result.</p>
 
         <figure class="lean-example" id="floating-point-example">
           <figcaption>Python · Same sum, different grouping</figcaption>
@@ -239,56 +239,50 @@ print(sequential, pairwise)</code></pre>
 
         <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs creates an opportunity for parallel execution, but also changes the result.</p>
 
-        <p>This changes the verification problem. If we demand bitwise equivalence, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
+        <p>Demanding bitwise equivalence would rule out some useful optimizations. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
 
-        <p>A more faithful model of floating-point arithmetic would help us describe those differences. It would not make the two computations equal. A better prover cannot prove a statement that is false. We need a different claim, perhaps a bound on how much the optimized kernel’s output can differ from the reference.</p>
+        <p>A more faithful floating-point model could describe those differences, but it would not make the two computations equal. A better prover cannot prove a false statement. We need a different claim, perhaps a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
-        <p>Suppose we could prove such a bound for every relevant input. That would be stronger than checking a numerical tolerance on a collection of test cases. But we would still need to choose the tolerance. What difference can we afford, and why?</p>
+        <p>Even if we could prove an error bound for every relevant input, we would still need to know which bound is sufficient for training. Asking an AI to choose one does not remove the need to justify it.</p>
 
         <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect.</p>
 
         <p>That connection may also depend on the training data. There may be no useful worst-case guarantee across all datasets; the practical question may be whether an optimization works for the particular dataset we have. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
         <figure class="verification-figure" aria-labelledby="veritile-figure-caption">
-          <div class="verification-figure-title">From a kernel theorem to a training decision</div>
+          <div class="verification-figure-title">Three questions about correctness</div>
           <ol class="verification-levels" role="list">
             <li class="verification-level-proved">
               <span class="verification-status">Proved in VeriTile</span>
-              <strong>Same mathematical function</strong>
+              <strong>Same function?</strong>
               <div class="verification-symbol" aria-hidden="true">f<sub>optimized</sub> = f<sub>reference</sub></div>
-              <span>FlashAttention equivalence over real numbers, under the theorem’s assumptions.</span>
+              <span>Our FlashAttention kernel matches the reference over real numbers.</span>
             </li>
             <li>
-              <span class="verification-status">A further question</span>
-              <strong>How different on a GPU?</strong>
+              <span class="verification-status">Numerical question</span>
+              <strong>How different numerically?</strong>
               <div class="verification-symbol" aria-hidden="true">Δ output</div>
-              <span>Model rounding and establish a useful bound on the numerical difference.</span>
+              <span>Bound the difference in floating-point outputs.</span>
             </li>
             <li>
-              <span class="verification-status">The practical decision</span>
-              <strong>Safe to use in training?</strong>
+              <span class="verification-status">Training question</span>
+              <strong>Safe for training?</strong>
               <div class="verification-symbol" aria-hidden="true">?</div>
-              <span>Connect that difference to training outcomes on the data we actually use.</span>
+              <span>Is that difference acceptable on our data?</span>
             </li>
           </ol>
-          <figcaption id="veritile-figure-caption">For optimizations that change numerical behavior, answering the first question does not automatically answer the next two. Even a numerical bound needs a justification for why it is sufficient for training.</figcaption>
+          <figcaption id="veritile-figure-caption">Mathematical equivalence alone does not tell us whether numerical differences are acceptable for training.</figcaption>
         </figure>
-
-        <p>It is tempting to treat this as one more specification-writing task: tell the AI what error bound we want, then let it prove the bound. But the difficult part is knowing which bound would be enough. Asking the AI to choose one does not remove the need to justify that choice.</p>
 
         <p>In practice, engineers compare training trajectories on relevant data, using both optimized kernels and a slower trusted reference. These experiments are expensive and cannot guarantee what will happen in the eventual full-scale run, but they test the behavior we care about more directly. Sometimes engineers disable an optimization and accept slower training when they cannot get enough confidence in its consequences.</p>
 
-        <p>Proofs can still improve this process. Ruling out an indexing mistake or establishing mathematical equivalence removes a real source of uncertainty. Experiments can then investigate consequences the theorem does not address. Making the proof cheap does not make those experiments unnecessary.</p>
+        <p>For the self-improvement loop we imagined, proofs still remove real sources of uncertainty. But we may need expensive training experiments before adopting an AI’s faster kernel, even after Lean has checked a proof of mathematical equivalence.</p>
 
-        <p>We knew what we wanted: faster training without harming the result. What we lacked was the theory needed to connect a local numerical guarantee to that outcome.</p>
-
-        <p>This matters for the self-improvement loop we imagined. An AI might produce a faster kernel and a valid proof of mathematical equivalence, while the decision to use that kernel still depends on expensive training experiments. The proof is valuable, but “it passed Lean” is not, on its own, enough to approve every optimization.</p>
+        <p>This was the important update for me. We knew what we wanted: faster training without harming the result. VeriTile proved useful properties, but for optimizations that change numerical behavior, we did not know how to turn those properties into the assurance we wanted.</p>
 
         <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
-
-        <p>This was the important update for me. Kernels had seemed to offer a clear mathematical notion of correctness. VeriTile succeeded at proving useful properties, yet for optimizations that change numerical behavior, those proofs could still leave the training question unsettled.</p>
 
         <p>Better AI may help us develop the missing theory too. But that scientific progress is a different achievement from automating formalization; it does not follow simply from having a model that is very good at Lean.</p>
 
