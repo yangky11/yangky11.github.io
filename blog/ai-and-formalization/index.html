@@ -99,7 +99,7 @@
 
         <p>That requirement belongs in the program’s <em>specification</em>: a precise statement of what it should do. Once we add it, the empty-list trick no longer works.</p>
 
-        <details class="lean-example lean-details">
+        <details class="lean-example lean-details" open>
           <summary>See the fuller Lean specification</summary>
           <p class="code-explanation"><code>Pairwise (· ≤ ·)</code> requires the output to be sorted; <code>Perm</code> requires it to preserve the input’s elements.</p>
           <pre tabindex="0" aria-label="Lean specification requiring sorted output with the same elements as the input"><code class="language-lean"><span class="code-keyword">def</span> SortsCorrectly
