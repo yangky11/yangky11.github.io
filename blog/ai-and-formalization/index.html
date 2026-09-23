@@ -78,11 +78,11 @@
 
         <h2 id="formalization-basics">What a formal guarantee tells us</h2>
 
-        <p>A <strong>formal system</strong> gives us a language for precise claims and rules for deriving them from explicit assumptions. The claims might concern mathematical objects or the behavior of programs. A computer can check whether a proof follows these rules without having to trust the person or AI that produced it.</p>
+        <p>The appeal of formalization is that we can check an AI’s work without having to trust the AI. Whether it gives us a mathematical proof or a piece of software, we can ask it to spell out its claims, assumptions, and reasoning in a form a computer can check.</p>
 
-        <p>I use “formalization” broadly to include defining the objects we reason about, stating claims, and constructing proofs. For software, we build a <strong>mathematical model</strong> of the program and its environment and a <strong>specification</strong> of its intended behavior. <strong>Formal verification</strong> establishes that the program satisfies that specification within the model.</p>
+        <p>Suppose we ask an AI to write a sorting program and prove that its output is always sorted. It could give us a program that returns an empty list for every input. This comes with a perfectly valid proof.</p>
 
-        <p>Here is a small example in Lean, a <strong>proof assistant</strong> for writing and checking formal proofs. Suppose we want to verify a sorting program. The following “sort” throws away its input and always returns an empty list:</p>
+        <p>Here is the program and its proof in Lean, a proof assistant for writing and checking proofs:</p>
 
         <figure class="lean-example">
           <figcaption>Lean · A valid proof</figcaption>
@@ -95,21 +95,22 @@
   simp [badSort]</code></pre>
         </figure>
 
-        <p>Lean accepts the proof: an empty list has no elements out of order. The claim is true for every input. It just isn’t enough to make this a sorting algorithm.</p>
+        <p>An empty list has no elements out of order, so Lean accepts the proof. It is checking exactly what we asked it to check. We forgot to require that the output also contain the same elements as the input, including repetitions.</p>
 
-        <p>We also need the output to contain exactly the input’s elements, including repetitions. In Lean, <code>Perm</code> expresses this requirement. A fuller specification combines it with the ordering requirement:</p>
+        <p>That requirement belongs in the program’s <em>specification</em>: a precise statement of what it should do. Once we add it, the empty-list trick no longer works.</p>
 
-        <figure class="lean-example">
-          <figcaption>Lean · A fuller specification</figcaption>
+        <details class="lean-example lean-details">
+          <summary>See the fuller Lean specification</summary>
+          <p class="code-explanation"><code>Pairwise (· ≤ ·)</code> requires the output to be sorted; <code>Perm</code> requires it to preserve the input’s elements.</p>
           <pre tabindex="0" aria-label="Lean specification requiring sorted output with the same elements as the input"><code class="language-lean"><span class="code-keyword">def</span> SortsCorrectly
     (sort : List Nat → List Nat) : Prop :=
   ∀ xs, (sort xs).Pairwise (· ≤ ·) ∧
     (sort xs).Perm xs</code></pre>
-        </figure>
+        </details>
 
-        <p>Our empty-list implementation fails this specification for every nonempty input. The first proof was valid; the requirement we asked Lean to check was incomplete.</p>
+        <p>The proof was valid; our request was incomplete. Formal verification can establish that our stated requirements hold under our assumptions. Choosing those requirements and assumptions is part of the work, too.</p>
 
-        <p>For years, the labor of doing all this was the obstacle that dominated my thinking.</p>
+        <p>For years, the labor of writing all this down and getting the proofs checked was the obstacle that dominated my thinking.</p>
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
         <div class="note-block">
