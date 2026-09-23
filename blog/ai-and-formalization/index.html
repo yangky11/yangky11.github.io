@@ -102,22 +102,9 @@
 <span class="code-comment">-- Proof</span>
 <span class="code-keyword">theorem</span> sort_correct :
     SortsCorrectly sort := <span class="code-keyword">by</span>
-  intro xs
-  constructor
-  · simpa [sort] using
-      List.pairwise_mergeSort
-        (le := fun a b : Nat => a ≤ b)
-        (<span class="code-keyword">by</span>
-          intros
-          simp_all only
-            [decide_eq_true_eq]
-          omega)
-        (<span class="code-keyword">by</span>
-          intros
-          simp only [Bool.or_eq_true,
-            decide_eq_true_eq]
-          omega) xs
-  · exact List.mergeSort_perm xs _
+  grind [SortsCorrectly, sort,
+    List.pairwise_mergeSort,
+    List.mergeSort_perm]
 
 <span class="code-keyword">#eval</span> sort [3, 1, 2, 1]
 <span class="code-comment">-- [1, 1, 2, 3]</span></code></pre>
