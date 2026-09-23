@@ -78,15 +78,15 @@
 
         <h2 id="formalization-basics">What formalization actually means</h2>
 
-        <p>A <strong>proof assistant</strong> is software for stating precise claims about mathematics or programs and checking proofs of those claims. Lean and Coq are two examples.</p>
+        <p>A <strong>proof assistant</strong> is software for stating precise claims and checking their proofs. Lean and Coq are two examples. The claim might be a mathematical theorem or a property of a program. In either case, the proof must follow from explicit definitions, assumptions, and rules of logic.</p>
 
-        <p>The checker requires a justification that follows from the definitions, assumptions, and accepted logical rules. A fluent explanation cannot talk it into accepting an invalid step. Finding that justification may be difficult; checking it can be much easier. That asymmetry is a large part of the appeal.</p>
+        <p>Finding a proof can be hard; checking it can be much easier. That gives us a way to verify an AI’s work independently of the AI that produced it.</p>
 
-        <p>Formalization includes more than finding proofs. We have to decide what objects we are talking about, define how they behave, and express the claim we want to establish. When verifying software, we build a <strong>mathematical model</strong> of the program and its environment, and a <strong>specification</strong> stating what we require of it. <strong>Formal verification</strong> establishes that the program satisfies the specification, within the chosen model.</p>
+        <p>I use “formalization” broadly to include defining the objects we reason about, stating claims, and constructing proofs. For software, this means building a <strong>mathematical model</strong> of the program and its environment, along with a <strong>specification</strong> of the behavior we want. <strong>Formal verification</strong> establishes that the program satisfies that specification within the model.</p>
 
         <p>For example, suppose we want to verify a sorting program. We might prove that its output is always sorted. Unfortunately, a program that returns an empty list for every input meets that requirement. To capture what we intended, we also need to require that the output contains exactly the input’s elements, including repetitions. The proof checker can be doing its job perfectly while our specification is missing something essential.</p>
 
-        <p>I will use “formalization” broadly in this post. Most of my experience involves Lean and Coq, but related questions arise in other systems for reasoning precisely about mathematics and software.</p>
+        <p>For years, the labor of doing all this was the obstacle that dominated my thinking.</p>
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
         <div class="note-block">
