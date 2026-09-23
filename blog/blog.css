@@ -60,6 +60,54 @@
 
 .post-body p { margin: 0 0 1.35rem; }
 .post-body a { overflow-wrap: anywhere; }
+.post-body code { font-size: 0.9em; overflow-wrap: anywhere; }
+
+.note-block, .note-passage, .sidenote { min-width: 0; }
+.note-ref {
+  margin-left: 0.15em;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  border-bottom: 0;
+}
+.sidenote {
+  margin: -0.25rem 0 1.5rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.sidenote details { scroll-margin-top: 2rem; }
+.sidenote summary {
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: var(--mono);
+  color: var(--accent);
+}
+.note-number { font-weight: 700; }
+.note-content { padding-top: 0.65rem; }
+.post-body .note-content p { margin-bottom: 0.65rem; }
+.note-back { font-family: var(--mono); font-size: 0.6875rem; }
+.sidenote details:target { border-radius: 2px; outline: 1px solid var(--rule); outline-offset: 0.4rem; }
+.sidenote summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+@media (min-width: 1200px) {
+  .post-with-notes { max-width: 65rem; }
+  .post-with-notes .post-header,
+  .post-with-notes .post-nav,
+  .post-with-notes .post-footer { max-width: 44rem; }
+  .post-with-notes .post-body {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 15rem);
+    column-gap: 3rem;
+    align-items: start;
+  }
+  .post-body > * { grid-column: 1; min-width: 0; }
+  .note-block { display: contents; }
+  .note-passage { grid-column: 1; }
+  .sidenote { grid-column: 2; margin: 0.25rem 0 1.5rem; }
+}
 
 .post-body h2 {
   margin: 2.75rem 0 1.25rem;
@@ -139,6 +187,10 @@
   .post-page { max-width: none; padding: 0; }
   .post-nav, .post-footer { display: none; }
   .post-body { max-width: none; font-size: 11pt; }
+  .post-with-notes .post-body { display: block; }
+  .note-block { display: block; }
+  .sidenote { font-size: 9pt; break-inside: avoid; }
+  .note-back { display: none; }
   .post-header h1 { font-size: 26pt; }
   .post-body h2 { break-after: avoid; }
   .post-body a { color: inherit; border-bottom-color: #999; }
