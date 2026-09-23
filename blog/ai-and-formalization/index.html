@@ -43,7 +43,7 @@
           <div class="post-meta">
             <span class="post-author"><img src="/images/Kaiyu%20Yang.jpg" alt="" width="32" height="32"><a href="/" rel="author">Kaiyu Yang</a></span>
             <time datetime="2026-09-22">September 22, 2026</time>
-            <span>15 min read</span>
+            <span>20 min read</span>
           </div>
         </header>
 
@@ -168,11 +168,29 @@
 
         <p><a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, our project led by <a href="https://lizn-zn.github.io/">Zenan Li</a>, uses Lean to verify GPU kernels written in Triton: the small, performance-critical programs that do much of the numerical work in AI training.</p>
 
-        <p>This initially looked like an unusually good application of formal verification. Training a large model is expensive, and a subtle error may only become visible much later. Kernels are relatively small, their computations appear mathematical, and we can compare optimized implementations with simpler reference implementations. Both the stakes and the mathematical structure seemed right.</p>
+        <p>We thought kernels were an unusually promising application of formal verification. We also had a larger possibility in mind: they could be an important part of <em>recursive self-improvement</em>, with AI improving the infrastructure used to train future AI.</p>
+
+        <p>Imagine an AI optimizing its own GPU kernels, proving that its changes are correct, and using the faster kernels to train the next model. Formal verification could make that loop much easier to trust. This was a concrete way that better AI and better verification might reinforce each other.</p>
+
+        <h3 id="veritile-motivation">Why kernels looked so promising</h3>
+
+        <p>Training a large model is expensive, long-running, and difficult to debug. A program can keep running while quietly doing the wrong thing. A subtle error might only become visible much later as a spike in the training loss or a model that learns less well than expected. By then, finding the cause can be much harder than fixing the offending line of code.</p>
+
+        <p>At the same time, performance matters enormously. Engineers reorganize computations to make better use of GPU memory, combine operations to avoid writing temporary results, and change how work is divided up. A faster kernel can save time throughout a training run. But every optimization raises the same question: did we preserve the behavior we care about?</p>
+
+        <p>Kernels seemed to offer a good way to answer that question. They are relatively compact programs. Their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Unlike verifying an entire application with loosely defined requirements, here it seemed we could point to exactly what “correct” meant.</p>
+
+        <p>The hope was appealing: keep the simple implementation as a reference, let AI optimize aggressively, and use proofs to justify the replacement. If AI could take over much of the proof work too, perhaps we could get both speed and confidence without requiring a formal-methods expert to scrutinize every change. Both the stakes and the mathematical structure seemed right.</p>
+
+        <h3 id="veritile-guarantees">What we could prove</h3>
+
+        <p>VeriTile gives this idea a concrete form. It represents Triton kernels inside Lean and defines how their operations compute values and read or write memory. A kernel can then be checked against a mathematical specification or compared with a reference kernel. Proof agents use this framework to construct proofs, with Lean checking their work.</p>
+
+        <p>The memory part matters. A correct formula is not enough if the program reads from the wrong location, mishandles the end of an array, or overwrites something it should leave alone. VeriTile provides machinery for reasoning about these details as well as the mathematical computation. Its worked examples establish properties such as writing the specified output and preserving unrelated memory.</p>
 
         <div class="note-block">
-          <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, which makes the attention computation in language models more efficient. Attention combines information from different parts of the input. FlashAttention reorganizes this computation into smaller blocks, avoiding large intermediate arrays and reducing how much data moves through GPU memory.</p>
-          <p>VeriTile proves that its FlashAttention kernel computes the same mathematical function as a straightforward reference implementation, using a model of arithmetic over the real numbers.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The guarantee covers every valid input under the theorem’s assumptions, including inputs nobody thought to test.</p></div>
+          <div class="note-passage"><p>A more substantial example is <strong>FlashAttention</strong>, which makes the attention computation in language models more efficient. A straightforward implementation creates a large array of attention scores. FlashAttention works through smaller blocks and updates intermediate results as it goes, avoiding that large array and reducing how much data moves through GPU memory. The code looks quite different from the formula it implements.</p>
+          <p>VeriTile proves that its FlashAttention kernel computes the same mathematical function as a straightforward reference implementation, using a model of arithmetic over the real numbers.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The proof accounts for how the blocks are combined and how the implementation handles their boundaries. It covers every valid input under the theorem’s assumptions, including inputs nobody thought to test.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
@@ -181,25 +199,66 @@
           </aside>
         </div>
 
-        <p>That is a meaningful result. But the question motivating the work was more practical: can we use the faster kernel in a long training run without harming the outcome?</p>
+        <p>These are useful guarantees. They can rule out whole classes of implementation mistakes that testing might miss. The project website describes the <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">technical results</a> in more detail. What I want to dwell on here is what happened to the question that motivated me: can we use the faster kernel in a long training run without harming the outcome?</p>
+
+        <p>There is an obvious limitation: kernels are only part of a training system. Data loading, distributed communication, checkpointing, and the compiler also matter. But the issue that most changed my thinking arose even when we focused on replacing just one kernel.</p>
+
+        <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
         <p>For optimizations that preserve exact numerical behavior, an equivalence proof in a faithful execution model can justify the replacement. We do not need a theory of why the reference trains well to show that the replacement behaves the same way.</p>
 
-        <p>Many useful optimizations, however, change how arithmetic is carried out. GPUs calculate with limited precision, and floating-point addition is <strong>not associative</strong>: <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. Changing how a sum is grouped can therefore change the numbers a kernel produces. Two implementations can compute the same function over the real numbers while giving different floating-point outputs.</p>
+        <p>Many useful optimizations, however, change how arithmetic is carried out. GPUs calculate with limited precision, rounding results along the way. Floating-point addition is <strong>not associative</strong>: <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. Changing how a sum is grouped can therefore change the numbers a kernel produces. Two implementations can compute the same function over the real numbers while giving different floating-point outputs.</p>
 
-        <p>Demanding exact equivalence would rule out those optimizations. A better prover cannot prove a statement that is false. We could instead model rounding and try to bound the difference between the two implementations.</p>
+        <p>This changes the verification problem. If we demand exactly the same numbers, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
 
-        <p>Suppose we succeeded, and proved that the optimized kernel’s output differs from the reference by at most some small amount. How small is small enough for training?</p>
+        <p>A more faithful model of floating-point arithmetic would help us describe those differences. It would not make the two computations equal. A better prover cannot prove a statement that is false. We need a different claim, perhaps a bound on how much the optimized kernel’s output can differ from the reference.</p>
+
+        <h3 id="veritile-training">How small is small enough for training?</h3>
+
+        <p>Suppose we could prove such a bound for every relevant input. That would be stronger than checking a numerical tolerance on a collection of test cases. But we would still need to choose the tolerance. What difference can we afford, and why?</p>
 
         <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
-        <p>In practice, engineers compare training trajectories, run experiments against trusted implementations, and sometimes give up an optimization when they cannot get enough confidence in its consequences. Those experiments address the behavior we care about more directly, even though they cannot give the universal guarantee we would like.</p>
+        <figure class="verification-figure" aria-labelledby="veritile-figure-caption">
+          <div class="verification-figure-title">From a kernel theorem to a training decision</div>
+          <ol class="verification-levels" role="list">
+            <li class="verification-level-proved">
+              <span class="verification-status">Proved in VeriTile</span>
+              <strong>Same mathematical function</strong>
+              <div class="verification-symbol" aria-hidden="true">f<sub>optimized</sub> = f<sub>reference</sub></div>
+              <span>FlashAttention equivalence over real numbers, under the theorem’s assumptions.</span>
+            </li>
+            <li>
+              <span class="verification-status">A further question</span>
+              <strong>How different on a GPU?</strong>
+              <div class="verification-symbol" aria-hidden="true">Δ output</div>
+              <span>Model rounding and establish a useful bound on the numerical difference.</span>
+            </li>
+            <li>
+              <span class="verification-status">The practical decision</span>
+              <strong>Safe to use in training?</strong>
+              <div class="verification-symbol" aria-hidden="true">?</div>
+              <span>Connect that difference to the training outcome we want to preserve.</span>
+            </li>
+          </ol>
+          <figcaption id="veritile-figure-caption">For optimizations that change numerical behavior, answering the first question does not automatically answer the next two. Even a numerical bound needs a justification for why it is sufficient for training.</figcaption>
+        </figure>
+
+        <p>It is tempting to treat this as one more specification-writing task: tell the AI what error bound we want, then let it prove the bound. But the difficult part is knowing which bound would be enough. Asking the AI to choose one does not remove the need to justify that choice.</p>
+
+        <p>In practice, engineers compare training trajectories across runs using different implementations, including a slower trusted reference. They look for evidence that the optimized computation changes how the model learns. This is expensive and cannot guarantee what will happen in the eventual full-scale run, but it tests the consequential behavior more directly. Sometimes the response to insufficient confidence is to disable an optimization and accept slower training.</p>
+
+        <p>Proofs can still improve this process. Ruling out an indexing mistake or establishing mathematical equivalence removes a real source of uncertainty. Experiments can then investigate consequences the theorem does not address. Making the proof cheap does not make those experiments unnecessary.</p>
 
         <p>We knew what we wanted: faster training without harming the result. What we lacked was the theory needed to connect a local numerical guarantee to that outcome.</p>
 
+        <p>This matters for the self-improvement loop we imagined. An AI might produce a faster kernel and a valid proof of mathematical equivalence, while the decision to use that kernel still depends on expensive training experiments. The proof is valuable, but “it passed Lean” is not, on its own, enough to approve every optimization.</p>
+
         <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
 
-        <p>This was the important update for me. VeriTile succeeded at proving useful properties. For optimizations that change numerical behavior, those proofs could still leave the training question unsettled. Better AI may help us develop the missing theory too. Automating formalization, by itself, does not supply it.</p>
+        <p>This was the important update for me. I had been drawn to kernels because they seemed to combine high stakes with a clear mathematical notion of correctness. VeriTile succeeded at proving useful properties, yet for optimizations that change numerical behavior, those proofs could still leave the training question unsettled. The mathematical description we knew how to verify captured only part of what made the optimization worth using.</p>
+
+        <p>Better AI may help us develop the missing theory too. That would be valuable scientific progress. But it is a different achievement from automating formalization, and it does not follow simply from having a model that is very good at Lean.</p>
 
         <h2 id="specifications">The work before the proof</h2>
 

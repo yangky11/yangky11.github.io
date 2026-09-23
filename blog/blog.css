@@ -164,6 +164,96 @@
   text-wrap: balance;
 }
 
+.post-body h3 {
+  margin: 1.75rem 0 0.85rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 700;
+  scroll-margin-top: 2rem;
+  text-wrap: balance;
+}
+
+.verification-figure {
+  margin: 0.5rem 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #f5f4ef;
+}
+.verification-figure-title {
+  margin-bottom: 1.15rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.verification-levels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.verification-levels li {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.9rem 0.8rem;
+  border: 1px dashed #b7b2a7;
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.verification-levels .verification-level-proved {
+  border: 1px solid var(--accent);
+  background: #edf2ed;
+}
+.verification-status {
+  min-height: 2.8em;
+  margin-bottom: 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+.verification-level-proved .verification-status { color: var(--accent); }
+.verification-levels strong {
+  min-height: 2.8em;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.verification-symbol {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.1em;
+  margin: 1rem 0;
+  padding: 0.85rem 0;
+  border-block: 1px solid var(--rule);
+  color: var(--accent);
+  font-size: 1.375rem;
+  line-height: 1.5;
+}
+.verification-symbol sub { font-size: 0.5em; }
+.verification-figure figcaption {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .verification-figure { padding: 1rem; }
+  .verification-levels { grid-template-columns: 1fr; }
+  .verification-levels li { padding: 1rem; }
+  .verification-status, .verification-levels strong { min-height: 0; }
+  .verification-symbol { margin: 0.75rem 0; padding: 0.5rem 0; }
+}
+
 .post-body .thought {
   margin: 2rem 0;
   padding: 0.25rem 0 0.25rem 1.25rem;
@@ -237,6 +327,7 @@
   .post-header h1 { font-size: 26pt; }
   .post-body h2 { break-after: avoid; }
   .post-body a { color: inherit; border-bottom-color: #999; }
-  .reasoning-steps, .thought, .lean-example { break-inside: avoid; }
+  .reasoning-steps, .thought, .lean-example, .verification-figure { break-inside: avoid; }
+  .post-body h3 { break-after: avoid; }
   .post-body .lean-example pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
