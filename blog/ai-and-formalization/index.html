@@ -80,35 +80,20 @@
 
         <p>The appeal of formalization is that we can check an AI’s work without having to trust the AI. Whether it gives us a mathematical proof or a piece of software, we can ask it to spell out its claims, assumptions, and reasoning in a form a computer can check.</p>
 
-        <p>Suppose we ask an AI to write a sorting program and prove that its output is always sorted. It could give us a program that returns an empty list for every input. This comes with a perfectly valid proof.</p>
-
-        <p>Here is the program and its proof in Lean, a proof assistant for writing and checking proofs:</p>
+        <p>Suppose we want a program that sorts a list of numbers. Its output should be in ascending order and contain exactly the same numbers, including repetitions. Those two requirements are its <em>specification</em>. Here is how we can express them in Lean, a proof assistant for writing and checking proofs:</p>
 
         <figure class="lean-example">
-          <figcaption>Lean · A valid proof</figcaption>
-          <pre tabindex="0" aria-label="Lean code proving that badSort always returns a sorted list"><code class="language-lean"><span class="code-keyword">def</span> badSort (_xs : List Nat)
-    : List Nat := []
-
-<span class="code-comment">-- The output is always sorted.</span>
-<span class="code-keyword">theorem</span> badSort_sorted (xs : List Nat) :
-    (badSort xs).Pairwise (· ≤ ·) := <span class="code-keyword">by</span>
-  simp [badSort]</code></pre>
-        </figure>
-
-        <p>An empty list has no elements out of order, so Lean accepts the proof. It is checking exactly what we asked it to check. We forgot to require that the output also contain the same elements as the input, including repetitions.</p>
-
-        <p>That requirement belongs in the program’s <em>specification</em>: a precise statement of what it should do. Once we add it, the empty-list trick no longer works.</p>
-
-        <details class="lean-example lean-details" open>
-          <summary>See the fuller Lean specification</summary>
+          <figcaption>Lean · A sorting specification</figcaption>
           <p class="code-explanation"><code>Pairwise (· ≤ ·)</code> requires the output to be sorted; <code>Perm</code> requires it to preserve the input’s elements.</p>
           <pre tabindex="0" aria-label="Lean specification requiring sorted output with the same elements as the input"><code class="language-lean"><span class="code-keyword">def</span> SortsCorrectly
     (sort : List Nat → List Nat) : Prop :=
   ∀ xs, (sort xs).Pairwise (· ≤ ·) ∧
     (sort xs).Perm xs</code></pre>
-        </details>
+        </figure>
 
-        <p>The proof was valid; our request was incomplete. Formal verification can establish that our stated requirements hold under our assumptions. Choosing those requirements and assumptions is part of the work, too.</p>
+        <p>An AI can then write the program and prove that it meets this specification. Lean checks the proof. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification.</p>
+
+        <p>A <a href="sorting.lean">complete Lean example</a> combines this specification with a sorting implementation and a proof, using <a href="https://lean-lang.org/doc/api/Init/Data/List/Sort/Lemmas.html">Lean’s existing library results</a>.</p>
 
         <p>For years, the labor of writing all this down and getting the proofs checked was the obstacle that dominated my thinking.</p>
 
@@ -184,7 +169,7 @@
 
         <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
 
-        <p>This is a deeper difficulty than the sorting example. There, someone could notice an omitted requirement and add it. Here, knowing what outcome we want does not give us the theory needed to derive it from a local guarantee.</p>
+        <p>Here, we knew what outcome we wanted. What we lacked was the theory needed to connect a local numerical guarantee to that outcome.</p>
 
         <p>That was the important update for me. VeriTile succeeded at proving useful properties, and that success made the remaining difficulty clearer. AI may help develop the missing science too. Automating formalization, by itself, does not give us the connection between a property we can state and the outcome we care about.</p>
 

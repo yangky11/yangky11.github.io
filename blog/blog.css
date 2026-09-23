@@ -69,8 +69,7 @@
   border-radius: 4px;
   overflow: hidden;
 }
-.lean-example figcaption,
-.lean-details summary {
+.lean-example figcaption {
   padding: 0.55rem 1rem;
   border-bottom: 1px solid var(--rule);
   background: #f1f3ee;
@@ -79,8 +78,6 @@
   font-size: 0.6875rem;
   line-height: 1.6;
 }
-.lean-details summary { cursor: pointer; border-bottom: 0; }
-.lean-details[open] summary { border-bottom: 1px solid var(--rule); }
 .post-body .code-explanation {
   margin: 0;
   padding: 0.85rem 1rem 0;
@@ -104,8 +101,7 @@
 }
 .code-keyword { color: var(--accent); font-weight: 600; }
 .code-comment { color: var(--muted); }
-.lean-example pre:focus-visible,
-.lean-details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.lean-example pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
 .note-block, .note-passage, .sidenote { min-width: 0; }
 .note-ref {
@@ -226,7 +222,6 @@
   .post-body .thought { font-size: 1.2rem; }
   .lean-example pre { padding: 0.85rem 0.75rem; }
   .lean-example figcaption,
-  .lean-details summary,
   .post-body .code-explanation { padding-inline: 0.75rem; }
 }
 
