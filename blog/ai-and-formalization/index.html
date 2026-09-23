@@ -76,15 +76,38 @@
         </div>
 
 
-        <h2 id="formalization-basics">What formalization actually means</h2>
+        <h2 id="formalization-basics">What a formal guarantee tells us</h2>
 
-        <p>A <strong>proof assistant</strong> is software for stating precise claims and checking their proofs. Lean and Coq are two examples. The claim might be a mathematical theorem or a property of a program. In either case, the proof must follow from explicit definitions, assumptions, and rules of logic.</p>
+        <p>A <strong>formal system</strong> gives us a language for precise claims and rules for deriving them from explicit assumptions. The claims might concern mathematical objects or the behavior of programs. A computer can check whether a proof follows these rules without having to trust the person or AI that produced it.</p>
 
-        <p>Finding a proof can be hard; checking it can be much easier. That gives us a way to verify an AI’s work independently of the AI that produced it.</p>
+        <p>I use “formalization” broadly to include defining the objects we reason about, stating claims, and constructing proofs. For software, we build a <strong>mathematical model</strong> of the program and its environment and a <strong>specification</strong> of its intended behavior. <strong>Formal verification</strong> establishes that the program satisfies that specification within the model.</p>
 
-        <p>I use “formalization” broadly to include defining the objects we reason about, stating claims, and constructing proofs. For software, this means building a <strong>mathematical model</strong> of the program and its environment, along with a <strong>specification</strong> of the behavior we want. <strong>Formal verification</strong> establishes that the program satisfies that specification within the model.</p>
+        <p>Here is a small example in Lean, a <strong>proof assistant</strong> for writing and checking formal proofs. Suppose we want to verify a sorting program. The following “sort” throws away its input and always returns an empty list:</p>
 
-        <p>For example, suppose we want to verify a sorting program. We might prove that its output is always sorted. Unfortunately, a program that returns an empty list for every input meets that requirement. To capture what we intended, we also need to require that the output contains exactly the input’s elements, including repetitions. The proof checker can be doing its job perfectly while our specification is missing something essential.</p>
+        <figure class="lean-example">
+          <figcaption>Lean · A valid proof</figcaption>
+          <pre tabindex="0" aria-label="Lean code proving that badSort always returns a sorted list"><code class="language-lean"><span class="code-keyword">def</span> badSort (_xs : List Nat)
+    : List Nat := []
+
+<span class="code-comment">-- The output is always sorted.</span>
+<span class="code-keyword">theorem</span> badSort_sorted (xs : List Nat) :
+    (badSort xs).Pairwise (· ≤ ·) := <span class="code-keyword">by</span>
+  simp [badSort]</code></pre>
+        </figure>
+
+        <p>Lean accepts the proof: an empty list has no elements out of order. The claim is true for every input. It just isn’t enough to make this a sorting algorithm.</p>
+
+        <p>We also need the output to contain exactly the input’s elements, including repetitions. In Lean, <code>Perm</code> expresses this requirement. A fuller specification combines it with the ordering requirement:</p>
+
+        <figure class="lean-example">
+          <figcaption>Lean · A fuller specification</figcaption>
+          <pre tabindex="0" aria-label="Lean specification requiring sorted output with the same elements as the input"><code class="language-lean"><span class="code-keyword">def</span> SortsCorrectly
+    (sort : List Nat → List Nat) : Prop :=
+  ∀ xs, (sort xs).Pairwise (· ≤ ·) ∧
+    (sort xs).Perm xs</code></pre>
+        </figure>
+
+        <p>Our empty-list implementation fails this specification for every nonempty input. The first proof was valid; the requirement we asked Lean to check was incomplete.</p>
 
         <p>For years, the labor of doing all this was the obstacle that dominated my thinking.</p>
 
