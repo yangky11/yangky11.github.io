@@ -231,19 +231,13 @@
 
         <figure class="lean-example" id="floating-point-example">
           <figcaption>Python · Same sum, different grouping</figcaption>
-          <pre tabindex="0" aria-label="Python example comparing sequential and pairwise floating-point addition"><code class="language-python">a, b = 1e16, 1.0
-c, d = -1e16, 1.0
-
+          <pre tabindex="0" aria-label="Python example comparing sequential and pairwise floating-point addition"><code class="language-python">a, b, c, d = 1e16, 1.0, -1e16, 1.0
 sequential = ((a + b) + c) + d
-
-<span class="code-comment"># Two independent partial sums</span>
 pairwise = (a + b) + (c + d)
-
-print(sequential)  <span class="code-comment"># 1.0</span>
-print(pairwise)    <span class="code-comment"># 0.0</span></code></pre>
+print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>Both expressions equal 2 in real arithmetic. With Python’s floating-point numbers, adding 1 to either 10<sup>16</sup> or −10<sup>16</sup> loses the 1 to rounding. The sequential version keeps the final 1; the pairwise version loses both. Regrouping a sum this way lets a GPU compute partial sums in parallel, but it can change the result.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. With Python’s floating-point numbers, adding 1 to either 10<sup>16</sup> or −10<sup>16</sup> loses the 1 to rounding. The sequential version keeps the final 1; the pairwise version loses both. Regrouping a sum this way lets a GPU compute partial sums in parallel, but it can change the result.</p>
 
         <p>This changes the verification problem. If we demand bitwise equivalence, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
 
