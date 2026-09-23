@@ -87,7 +87,6 @@
 .note-number { font-weight: 700; }
 .note-content { padding-top: 0.65rem; }
 .post-body .note-content p { margin-bottom: 0.65rem; }
-.note-back { font-family: var(--mono); font-size: 0.6875rem; }
 .sidenote details:target { border-radius: 2px; outline: 1px solid var(--rule); outline-offset: 0.4rem; }
 .sidenote summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
@@ -190,7 +189,6 @@
   .post-with-notes .post-body { display: block; }
   .note-block { display: block; }
   .sidenote { font-size: 9pt; break-inside: avoid; }
-  .note-back { display: none; }
   .post-header h1 { font-size: 26pt; }
   .post-body h2 { break-after: avoid; }
   .post-body a { color: inherit; border-bottom-color: #999; }

@@ -43,24 +43,24 @@
           <div class="post-meta">
             <span class="post-author"><img src="/images/Kaiyu%20Yang.jpg" alt="" width="32" height="32"><a href="/" rel="author">Kaiyu Yang</a></span>
             <time datetime="2026-09-22">September 22, 2026</time>
-            <span>16 min read</span>
+            <span>15 min read</span>
           </div>
         </header>
 
         <!-- The live essay is maintained directly in this HTML file. -->
         <div class="post-body">
-        <p>I started working on machine learning for formal theorem proving in 2018: training neural networks to produce mathematical proofs that a computer can check. When people ask how I got into the field so early, I have sometimes given an answer that makes me sound quite visionary.</p>
+        <p>I started working on machine learning for formal theorem proving in 2018. When people ask how I got into the field so early, I have sometimes given an answer that makes me sound quite visionary.</p>
 
         <p>The actual story is that my advisor had a student leaving, and he assigned the project to me. My apologies to everyone who got the visionary version.</p>
 
-        <p>It was a fortunate assignment. Over the following years, I helped build tools that let AI systems learn from and interact with computer-checked mathematics. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI more trustworthy.</p>
+        <p>It was a fortunate assignment. Over the following years, I helped develop <a href="https://arxiv.org/abs/1905.09381">CoqGym</a>, <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a>, and other tools for AI-assisted formal reasoning. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI more trustworthy.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system checked it. A major obstacle was the labor of expressing everything precisely enough for the computer. Now coding agents—AI systems that edit files, run tools, and revise their work—are taking over more of that labor. They can write formal definitions, translate mathematical statements, and develop proofs by repeatedly consulting a checker.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
+          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system checked it. A major obstacle was the labor of expressing everything precisely enough for the computer. Now coding agents are taking over more of that labor. They can write formal definitions, translate mathematical statements, and develop proofs by repeatedly consulting a checker.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
           <p>That progress has made another question harder to ignore: when we have turned part of a problem into mathematics and checked it, how much of the original problem have we actually solved? Sometimes the answer is a great deal. Sometimes successful formalization leaves the important decision almost where it was.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 1">
             <details id="note-1">
               <summary><span class="note-number">1</span> Coding agents and Fermat</summary>
-              <div class="note-content"><p>A striking example is <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s September 2026 formalization of Fermat’s Last Theorem</a>. It used a Claude Code-based system of agents and the Prove2Me collaboration platform. This formalized an existing human proof, building on years of community work; it did not discover Fermat’s theorem or Wiles’s proof.</p><a class="note-back" href="#ref-1" aria-label="Back to note 1 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>A striking example is <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s September 2026 formalization of Fermat’s Last Theorem</a>. It used a Claude Code-based system of agents and the Prove2Me collaboration platform. This formalized an existing human proof, building on years of community work; it did not discover Fermat’s theorem or Wiles’s proof.</p></div>
             </details>
           </aside>
         </div>
@@ -70,7 +70,7 @@
           <aside class="sidenote" role="note" aria-label="Note 2">
             <details id="note-2">
               <summary><span class="note-number">2</span> The security incidents</summary>
-              <div class="note-content"><p>In research evaluations, models reached real systems outside their intended scope. <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">OpenAI’s Hugging Face report</a> describes agents circumventing intended isolation. <a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents">Anthropic’s assessment</a> describes evaluations mistakenly connected to the internet, with production cyber safeguards absent. Neither report describes the defeat of a formally verified sandbox.</p><a class="note-back" href="#ref-2" aria-label="Back to note 2 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>In research evaluations, models reached real systems outside their intended scope. <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">OpenAI’s Hugging Face report</a> describes agents circumventing intended isolation. <a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents">Anthropic’s assessment</a> describes evaluations mistakenly connected to the internet, with production cyber safeguards absent. Neither report describes the defeat of a formally verified sandbox.</p></div>
             </details>
           </aside>
         </div>
@@ -78,85 +78,83 @@
 
         <h2 id="formalization-basics">What formalization actually means</h2>
 
-        <p>A <strong>proof assistant</strong> is software for writing mathematical definitions, claims, and proofs precisely enough that a computer can check the reasoning. Lean and Coq are two examples. They provide formal languages whose expressions have defined meanings, along with a checker that enforces the rules of logic. A proof can be proposed by a person, an AI, or an automated search procedure. The checker does not care who wrote it.</p>
+        <p>A <strong>proof assistant</strong> is software for writing mathematical definitions, claims, and proofs precisely enough that a computer can check the reasoning. Lean and Coq are two examples.</p>
 
-        <p>This is different from asking a chatbot whether an argument looks correct. A proof assistant requires a justification that follows from the definitions, assumptions, and accepted logical rules. A fluent explanation cannot talk it into accepting an invalid step. Finding that justification may be difficult; checking it can be much easier. That asymmetry is a large part of the appeal.</p>
+        <p>The checker requires a justification that follows from the definitions, assumptions, and accepted logical rules. A fluent explanation cannot talk it into accepting an invalid step. Finding that justification may be difficult; checking it can be much easier. That asymmetry is a large part of the appeal.</p>
 
-        <p>Formalization includes more than finding proofs. We have to decide what objects we are talking about, define how they behave, and express the claim we want to establish. When verifying software, we build a <strong>mathematical model</strong>: a precise description of the program and the relevant parts of its environment. This is a different use of “model” from an AI model such as a neural network. We also need to describe what we want the program to do. A <strong>specification</strong> is a precise statement of those requirements. <strong>Formal verification</strong> establishes that the program satisfies the specification, within the chosen model.</p>
+        <p>Formalization includes more than finding proofs. We have to decide what objects we are talking about, define how they behave, and express the claim we want to establish. When verifying software, we build a <strong>mathematical model</strong> of the program and its environment, and a <strong>specification</strong> stating what we require of it. <strong>Formal verification</strong> establishes that the program satisfies the specification, within the chosen model.</p>
 
         <p>For example, suppose we want to verify a sorting program. We might prove that its output is always sorted. Unfortunately, a program that returns an empty list for every input meets that requirement. To capture what we intended, we also need to require that the output contains exactly the input’s elements, including repetitions. The proof checker can be doing its job perfectly while our specification is missing something essential.</p>
 
-        <p>This example is easy to repair once someone points out the omission. Later I will describe a case where the missing requirement was much harder to supply. For now, the distinction is important: writing a formal statement, proving it, and deciding whether it captures the intended outcome are different jobs.</p>
-
-        <p>I will use “formalization” broadly in this post, while keeping those jobs separate. Most of my experience involves Lean and Coq, but related questions arise in other systems for reasoning precisely about mathematics and software.</p>
+        <p>I will use “formalization” broadly in this post. Most of my experience involves Lean and Coq, but related questions arise in other systems for reasoning precisely about mathematics and software.</p>
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
         <div class="note-block">
-          <div class="note-passage"><p>The idea of learning to prove theorems predates today’s large language models—and my arrival in the field. Early neural approaches learned to select useful mathematical facts or guide a search through possible proof steps. This work also rested on decades of research in automated reasoning, proof assistants, and the mathematical libraries that their communities built.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup></p></div>
+          <div class="note-passage"><p>The idea of learning to prove theorems predates today’s large language models—and my arrival in the field. Early neural approaches learned to select useful mathematical facts or guide a search through possible proof steps. The field rests on decades of work in automated reasoning and contributions from researchers including Christian Szegedy, Tony Wu, Albert Jiang, and many others, alongside the communities building proof assistants and mathematical libraries.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup></p></div>
           <aside class="sidenote" role="note" aria-label="Note 3">
             <details id="note-3">
               <summary><span class="note-number">3</span> A much longer history</summary>
-              <div class="note-content"><p>For a few entry points, see <a href="https://arxiv.org/abs/1211.7012">learning-assisted reasoning with Flyspeck</a>, <a href="https://arxiv.org/abs/1606.04442">DeepMath</a>, and <a href="https://arxiv.org/abs/1608.02644">Holophrasm</a>. Later work on <a href="https://arxiv.org/abs/2205.12615">autoformalization</a> and <a href="https://arxiv.org/abs/2210.12283">Draft, Sketch, and Prove</a> helped connect informal mathematical reasoning to formal proofs. These are examples from a much larger collective effort, not a complete history.</p><a class="note-back" href="#ref-3" aria-label="Back to note 3 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>For a few entry points, see <a href="https://arxiv.org/abs/1211.7012">learning-assisted reasoning with Flyspeck</a>, <a href="https://arxiv.org/abs/1606.04442">DeepMath</a>, and <a href="https://arxiv.org/abs/1608.02644">Holophrasm</a>. Later work on <a href="https://arxiv.org/abs/2205.12615">autoformalization</a> and <a href="https://arxiv.org/abs/2210.12283">Draft, Sketch, and Prove</a> helped connect informal mathematical reasoning to formal proofs. These are examples from a much larger collective effort, not a complete history.</p></div>
             </details>
           </aside>
         </div>
 
         <p>One obstacle was practical: researchers needed examples to learn from and a way for their programs to interact with a proof assistant. Jia Deng and I developed <a href="https://arxiv.org/abs/1905.09381">CoqGym</a> in 2019 to help with that. In a later collaboration, I helped develop <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a>, released in 2023. It provided open tools and data for working with Lean, along with a prover that searched the mathematical library for relevant existing results. Finding the right known theorem can be as important as inventing the next step.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The checker could also become a teacher. In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/">AlphaProof</a> demonstrated the power of reinforcement learning: search for proofs, check which attempts succeed, and use that experience to improve the model. Together with the separate AlphaGeometry 2 system, it achieved silver-medal-level performance on International Mathematical Olympiad problems—a difficult competition for high-school students.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup></p>
-          <p>ByteDance’s <a href="https://arxiv.org/abs/2507.23726">Seed-Prover</a> in 2025 illustrated another useful pattern: propose intermediate mathematical results, keep the ones Lean verifies, and use them while revising the larger proof. Across these projects, a common principle is that the AI can explore many plausible ideas while the formal system checks which submitted proofs are valid.</p></div>
+          <div class="note-passage"><p>The checker could also become a teacher. In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/">AlphaProof</a> demonstrated the power of reinforcement learning: search for proofs, check which attempts succeed, and use that experience to improve the model. Together with the separate AlphaGeometry 2 system, it achieved silver-medal-level performance on International Mathematical Olympiad problems.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup></p>
+          <p>ByteDance’s <a href="https://arxiv.org/abs/2507.23726">Seed-Prover</a> in 2025 illustrated another useful pattern: propose intermediate mathematical results, keep the ones Lean verifies, and use them while revising the larger proof.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 4">
             <details id="note-4">
               <summary><span class="note-number">4</span> What the contest results mean</summary>
-              <div class="note-content"><p>AlphaProof’s 2024 result involved human translation of the contest questions into formal statements, and some solutions took much longer than the students’ time limit. The combined result included one problem solved by AlphaGeometry 2. Seed-Prover’s reported 2025 contest results likewise included a separate geometry system and human-formalized statements. These were important research milestones, with setups different from the human competition.</p><a class="note-back" href="#ref-4" aria-label="Back to note 4 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>AlphaProof’s 2024 result involved human translation of the contest questions into formal statements, and some solutions took much longer than the students’ time limit. The combined result included one problem solved by AlphaGeometry 2. Seed-Prover’s reported 2025 contest results likewise included a separate geometry system and human-formalized statements. These were important research milestones, with setups different from the human competition.</p></div>
             </details>
           </aside>
         </div>
 
-        <p>More recently, the same workflow has become increasingly accessible through general coding agents. An agent can inspect a Lean project, search for definitions, write a statement or proof, run Lean, read the error messages, and try again. Tasks that once required a person to perform every interaction with the proof assistant can increasingly be delegated. Formalization becomes another kind of programming work that an agent can help carry out.</p>
+        <p>More recently, general coding agents have made this workflow increasingly accessible: inspect a Lean project, search for definitions, write a statement or proof, run Lean, read the errors, and try again. Tasks that once required a person to perform every interaction with the proof assistant can increasingly be delegated.</p>
         <div class="note-block">
           <div class="note-passage"><p>The large mathematical projects in the news show several uses of this capability. Anthropic’s Fermat’s Last Theorem project formalizes an existing proof. In <a href="https://openai.com/index/navier-stokes-solution/">OpenAI’s account of its Navier–Stokes result</a>, discovery came before Lean verification. Formal feedback can also participate in discovery, as <a href="https://arxiv.org/abs/2605.22763">AlphaProof Nexus</a> illustrates.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> These roles are all valuable, but they are different achievements.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 5">
             <details id="note-5">
               <summary><span class="note-number">5</span> Formalization and discovery</summary>
-              <div class="note-content"><p>The Nexus paper studies open problems from the Erdős problem collection and the Online Encyclopedia of Integer Sequences. These differ from formalizing a textbook argument whose proof is already known. Its results support a role for Lean feedback during search, without establishing that it was indispensable.</p><a class="note-back" href="#ref-5" aria-label="Back to note 5 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>The Nexus paper studies open problems from the Erdős problem collection and the Online Encyclopedia of Integer Sequences. These differ from formalizing a textbook argument whose proof is already known. Its results support a role for Lean feedback during search, without establishing that it was indispensable.</p></div>
             </details>
           </aside>
         </div>
 
         <p>This is what I mean by formalization becoming cheap: less specialized human effort is needed to turn a sufficiently understood mathematical argument or software property into a machine-checked artifact. Large projects still require substantial compute, libraries, and infrastructure. The sharpest reductions are in expressing and proving claims whose meaning we already understand. Deciding which claims matter, and finding a model that connects them to the world, remain much less routine.</p>
 
-        <p>I sometimes describe proof search and parts of autoformalization as effectively solved. By <strong>autoformalization</strong>, I mean using AI to translate informal statements or arguments into a formal language. My claim is bounded: for many well-specified problems whose mathematics is already within a frontier model’s reach, getting to a checked result is becoming routine enough to stop being the main bottleneck. Mathematical insight still matters enormously. Fluency in Lean does not supply every missing idea, and translating a statement does not settle whether it is the right one.</p>
+        <p>I sometimes describe proof search and parts of autoformalization as effectively solved. By <strong>autoformalization</strong>, I mean using AI to translate informal statements or arguments into a formal language. My claim is bounded: for many well-specified problems whose mathematics is already within a frontier model’s reach, getting to a checked result is becoming routine enough to stop being the main bottleneck. The underlying mathematical insight still has to come from somewhere.</p>
 
         <p>This is much of what I hoped for when I entered the field. If the labor of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p>
 
         <h2 id="veritile">What VeriTile changed for me</h2>
 
-        <p><a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, our project led by <a href="https://lizn-zn.github.io/">Zenan Li</a>, studies the verification of Triton GPU kernels in Lean. A GPU kernel is a program that performs a particular computation on a graphics processor; Triton is a language for writing these programs. In AI training, kernels do much of the numerical work, operating on the large arrays of numbers called tensors.</p>
+        <p><a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, our project led by <a href="https://lizn-zn.github.io/">Zenan Li</a>, uses Lean to verify GPU kernels written in Triton, which perform much of the numerical work in AI training.</p>
 
         <p>They initially looked like an unusually good application. Training a large model is expensive, and subtle errors can be difficult to diagnose. Kernels are relatively small, their computations appear mathematical, and optimized implementations can be compared with simpler reference implementations. Here was a setting where both the stakes and the mathematical structure seemed right.</p>
         <div class="note-block">
-          <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, an efficient way of computing attention, the operation that lets a language model combine information from different parts of its input. A straightforward implementation constructs large intermediate arrays. FlashAttention reorganizes the computation into smaller blocks, reducing how much data has to move through GPU memory. Showing that this reorganization preserves the intended computation is a substantial verification problem.</p>
-          <p>VeriTile proves that its FlashAttention-1 forward kernel computes the same mathematical attention function as a straightforward reference implementation, under a real-number arithmetic model and the theorem’s assumptions.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> This establishes that the modeled optimized algorithm implements the intended mathematics for every valid input covered by the theorem. It is much stronger than comparing outputs on a collection of test cases.</p></div>
+          <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, an efficient way of computing attention, the operation that lets a language model combine information from different parts of its input. A straightforward implementation constructs large intermediate arrays. FlashAttention reorganizes the computation into smaller blocks, reducing how much data has to move through GPU memory.</p>
+          <p>VeriTile proves that its FlashAttention-1 forward kernel computes the same mathematical attention function as a straightforward reference implementation, under a real-number arithmetic model and the theorem’s assumptions.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The guarantee covers every valid input under those assumptions, rather than just a collection of test cases.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
-              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence to a separately verified naive kernel, including causal and noncausal variants. The result concerns modeled kernels and real arithmetic; it is not bit-for-bit equivalence to a running Hugging Face implementation, nor a verification of the GPU compiler and hardware.</p><a class="note-back" href="#ref-6" aria-label="Back to note 6 in the text">↩ Back to text</a></div>
+              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence to a separately verified naive kernel, including causal and noncausal variants. The result concerns modeled kernels and real arithmetic; it is not bit-for-bit equivalence to a running Hugging Face implementation, nor a verification of the GPU compiler and hardware.</p></div>
             </details>
           </aside>
         </div>
 
-        <p>That is a useful guarantee. But the practical decision we ultimately want help with is whether an optimization is safe to use in a long training run. There are two different cases here, and separating them matters.</p>
+        <p>That is a useful guarantee. But the practical decision we ultimately want help with is whether an optimization is safe to use in a long training run.</p>
 
-        <p>If an optimization preserves the reference implementation’s behavior exactly, and we have a faithful model of how both execute, an equivalence proof can justify the replacement. We do not need a theory of why the reference trains well to know that replacing it with something equivalent preserves its behavior.</p>
+        <p>An exact equivalence proof in a faithful execution model can justify replacing a reference implementation. We do not need a theory of why the reference trains well to make that substitution.</p>
 
         <p>The harder case is a useful optimization that changes numerical behavior. GPUs represent numbers with limited precision, so arithmetic operations may round their results. In particular, floating-point addition is <strong>not associative</strong>: grouping a sum as <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. An optimization that changes how a large sum is grouped can therefore change its answer, even though both versions compute the same thing in exact mathematics.</p>
 
-        <p>This is why mathematical correctness and numerical equivalence are separate questions. A FlashAttention algorithm can implement the correct real-number function while its floating-point execution differs from a straightforward implementation. If exact numerical equivalence is false, a better prover will not make it true.</p>
+        <p>A FlashAttention algorithm can implement the correct real-number function while its floating-point execution differs from a straightforward implementation. If exact numerical equivalence is false, a better prover will not make it true.</p>
 
         <p>We can make rounding explicit and prove a different property. VeriTile models selected rounding boundaries, although it does not contain a complete model of floating-point arithmetic and GPU execution. Suppose we went further and proved that the optimized kernel’s output differs from the reference by at most some small amount. We would still need to know how small is small enough.</p>
 
-        <p>Over a long training run, a small local difference can interact with the model’s state, the algorithm that updates its parameters, and many subsequent computations. To justify using the optimization, we need a connection between the local error we can bound and the training outcome we want to protect. Will the model learn just as well? Could a problem become visible only much later?</p>
+        <p>Over a long training run, a small local difference can interact with optimizer state and many subsequent computations. To justify using the optimization, we need a connection between the local error we can bound and the training outcome we want to protect.</p>
 
         <p>For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer. We could improve the formal model and automate more proofs while still being unable to settle the decision. Engineers therefore compare training trajectories, run experiments against trusted implementations, and sometimes give up optimizations when they cannot get enough confidence in their consequences.</p>
 
@@ -183,11 +181,11 @@
 
         <p>Our <a href="https://arxiv.org/abs/2412.16075">position paper on mathematical reasoning and verification</a> already acknowledged the gap between formal statements and informal intent. My change of view is about how much weight to put on it. I used to be more optimistic that, once formalization became sufficiently easy, these remaining problems would become manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
-        <p>Another AI can help inspect a specification, notice omitted cases, or propose a better model. That is useful work. Its conclusions still need evidence, and a model’s approval does not have the same status as a checked proof. This distinction becomes especially consequential when we ask formal verification to help us trust AI itself.</p>
+        <p>Another AI can help inspect a specification, notice omitted cases, or propose a better model. Its conclusions still need evidence, and a model’s approval does not have the same status as a checked proof. This distinction becomes especially consequential when we ask formal verification to help us trust AI itself.</p>
 
         <h2 id="where-formalization-fits">Can formal verification make AI safer?</h2>
 
-        <p>The security incidents I mentioned at the beginning raise a natural question: could formal verification help us keep increasingly capable AI agents under control? One proposed approach is a <strong>verified sandbox</strong>. A sandbox restricts what a program can access, such as files, memory, or the network. Formal verification can establish that specified restrictions hold under a precise model, even when the program inside actively tries to get around them.</p>
+        <p>The security incidents I mentioned at the beginning raise a natural question: could formal verification help us keep increasingly capable AI agents under control? A <strong>verified sandbox</strong> could establish that restrictions on file, memory, or network access hold under a precise model, even when an agent actively tries to get around them.</p>
 
         <p>This is already part of the discussion at frontier labs. In <a href="https://openai.com/index/the-defenders-window/">The Defender’s Window</a>, Greg Brockman explicitly connects models’ mathematical proof capabilities with the possibility of formally verifying software security. I share the interest in this direction. Isolation and access control can give us precisely stated properties whose practical value is immediate.</p>
 
@@ -197,7 +195,7 @@
 
         <p>There are three distinct obligations here. We need to establish that the proposed policy satisfies the formal constraint. We need the deployed system to enforce the policy in the way the model assumes. And we need to decide whether the permissions we approved are appropriate for the task. A proof about the first obligation does not automatically settle the other two.</p>
 
-        <p>The deployment question includes configuration, access credentials, the interfaces through which programs call other services, and the interactions between components. Some of this can also be modeled and verified. Proofs about individual components can be combined when their assumptions fit together. But a theorem about permitted actions is not yet a theorem about the entire system that confines the agent. We have to do the work of connecting them.</p>
+        <p>The deployment question includes configuration, credentials, APIs, and the interactions between components. Some of this can also be modeled and verified. Proofs about individual components can be combined when their assumptions fit together. But a theorem about permitted actions is not yet a theorem about the entire system that confines the agent.</p>
 
         <p>The question about permitted behavior is different again. An agent authorized to write to a repository can still write a harmful change. A permission boundary may work exactly as designed while leaving us unsure whether a particular action serves the user’s intent. We can restrict permissions further, review outputs, or formulate additional properties. Which combination is sufficient depends on the task and the consequences of getting it wrong.</p>
 
@@ -205,7 +203,7 @@
 
         <p>The debate about <a href="https://darioamodei.com/post/we-must-pace-the-frontier">pacing frontier AI development</a>—slowing capability advances when safeguards cannot keep up—makes the same distinction consequential at a larger scale. Deciding whether safeguards justify proceeding with a more capable system requires evidence about what those safeguards cover and what remains uncertain. Formal proofs can be part of that evidence. Their contribution depends on the properties established, rather than on the mere presence of formal verification somewhere in the system.</p>
 
-        <p>I therefore expect useful deployments to combine formal guarantees with testing, monitoring, and experiments. A coding agent might prove a local invariant—a condition that must always hold—and use property-based testing elsewhere, generating many inputs to check that desired properties survive those examples. Proof retains its stronger guarantee within the stated model; routine use alongside tests does not turn it into testing. The aim is to remove the uncertainties that matter for the decision.</p>
+        <p>I therefore expect useful deployments to combine formal guarantees with testing, monitoring, and experiments. A coding agent might prove properties of one component and use property-based testing elsewhere. The proof establishes its stated property within the model; tests provide evidence about the cases they exercise. The aim is to remove the uncertainties that matter for the decision.</p>
 
         <h2 id="looking-ahead">What this changes for my research</h2>
 
