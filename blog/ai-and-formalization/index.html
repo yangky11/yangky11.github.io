@@ -207,16 +207,16 @@
 <span class="dsl-line">tl.store(<span class="dsl-embedded">$(out_ptr)</span> + offsets, output)</span></code></pre>
             </div>
           </div>
-          <figcaption id="dsl-example-caption">The same vector-add kernel in Triton and VeriTile’s Lean syntax. The code stays close to Triton while giving Lean a precise program to reason about. Adapted from the <a href="https://lizn-zn.github.io/VeriTile/">VeriTile example</a>; shown for full blocks, without boundary masks.</figcaption>
+          <figcaption id="dsl-example-caption">The same vector-add kernel in Triton and VeriTile’s Lean syntax. The code stays close to Triton while giving Lean a precise program to reason about.</figcaption>
         </figure>
 
         <div class="note-block">
-          <div class="note-passage"><p>A more substantial example is <strong>FlashAttention</strong>, which makes the attention computation in language models more efficient. A straightforward implementation creates a large array of attention scores. FlashAttention works through smaller blocks and updates intermediate results as it goes, avoiding that large array and reducing how much data moves through GPU memory. The code looks quite different from the formula it implements.</p>
+          <div class="note-passage"><p>A more substantial example is <a href="https://arxiv.org/abs/2205.14135"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of attention scores. FlashAttention works through smaller blocks and updates intermediate results as it goes, avoiding that large array and reducing how much data moves through GPU memory. The code looks quite different from the formula it implements.</p>
           <p>VeriTile proves that its FlashAttention kernel computes the same mathematical function as a straightforward reference implementation, using a model of arithmetic over the real numbers.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> It covers every valid input under the theorem’s assumptions, including inputs nobody thought to test.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
-              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence between VeriTile’s FlashAttention-1 forward kernel and a separately verified naive kernel, including causal and noncausal variants. This result uses real-number arithmetic; it does not establish identical floating-point outputs on a GPU. VeriTile also models selected rounding boundaries, but does not provide a complete model of hardware arithmetic or verify the compiler and GPU.</p></div>
+              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence between VeriTile’s FlashAttention-1 forward kernel and a separately verified naive kernel, including causal and noncausal variants. This result uses real-number arithmetic; it does not establish identical floating-point outputs on a GPU.</p></div>
             </details>
           </aside>
         </div>
@@ -225,11 +225,27 @@
 
         <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
-        <p>For optimizations that preserve exact numerical behavior, an equivalence proof in a faithful execution model can justify the replacement. We do not need a theory of why the reference trains well to show that the replacement behaves the same way.</p>
+        <p>If the faster kernel produces the same output for every input, down to the last bit, and otherwise behaves the same way, the rest of training cannot tell the difference. A proof of this <em>bitwise equivalence</em>, using an accurate model of execution, would justify replacing the reference kernel.</p>
 
         <p>Many useful optimizations, however, change how arithmetic is carried out. GPUs calculate with limited precision, rounding results along the way. Floating-point addition is <strong>not associative</strong>: <code>(a + b) + c</code> can give a different result from <code>a + (b + c)</code>. Two implementations can compute the same function over the real numbers while giving different floating-point outputs.</p>
 
-        <p>This changes the verification problem. If we demand exactly the same numbers, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
+        <figure class="lean-example" id="floating-point-example">
+          <figcaption>Python · Same sum, different grouping</figcaption>
+          <pre tabindex="0" aria-label="Python example comparing sequential and pairwise floating-point addition"><code class="language-python">a, b = 1e16, 1.0
+c, d = -1e16, 1.0
+
+sequential = ((a + b) + c) + d
+
+<span class="code-comment"># Two independent partial sums</span>
+pairwise = (a + b) + (c + d)
+
+print(sequential)  <span class="code-comment"># 1.0</span>
+print(pairwise)    <span class="code-comment"># 0.0</span></code></pre>
+        </figure>
+
+        <p>Both expressions equal 2 in real arithmetic. With Python’s floating-point numbers, adding 1 to either 10<sup>16</sup> or −10<sup>16</sup> loses the 1 to rounding. The sequential version keeps the final 1; the pairwise version loses both. Regrouping a sum this way lets a GPU compute partial sums in parallel, but it can change the result.</p>
+
+        <p>This changes the verification problem. If we demand bitwise equivalence, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
 
         <p>A more faithful model of floating-point arithmetic would help us describe those differences. It would not make the two computations equal. A better prover cannot prove a statement that is false. We need a different claim, perhaps a bound on how much the optimized kernel’s output can differ from the reference.</p>
 
@@ -237,7 +253,9 @@
 
         <p>Suppose we could prove such a bound for every relevant input. That would be stronger than checking a numerical tolerance on a collection of test cases. But we would still need to choose the tolerance. What difference can we afford, and why?</p>
 
-        <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
+        <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect.</p>
+
+        <p>That connection may also depend on the training data. There may be no useful worst-case guarantee across all datasets; the practical question may be whether an optimization works for the particular dataset we have. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
         <figure class="verification-figure" aria-labelledby="veritile-figure-caption">
           <div class="verification-figure-title">From a kernel theorem to a training decision</div>
@@ -258,7 +276,7 @@
               <span class="verification-status">The practical decision</span>
               <strong>Safe to use in training?</strong>
               <div class="verification-symbol" aria-hidden="true">?</div>
-              <span>Connect that difference to the training outcome we want to preserve.</span>
+              <span>Connect that difference to training outcomes on the data we actually use.</span>
             </li>
           </ol>
           <figcaption id="veritile-figure-caption">For optimizations that change numerical behavior, answering the first question does not automatically answer the next two. Even a numerical bound needs a justification for why it is sufficient for training.</figcaption>
@@ -266,7 +284,7 @@
 
         <p>It is tempting to treat this as one more specification-writing task: tell the AI what error bound we want, then let it prove the bound. But the difficult part is knowing which bound would be enough. Asking the AI to choose one does not remove the need to justify that choice.</p>
 
-        <p>In practice, engineers compare training trajectories using different implementations, including a slower trusted reference. These experiments are expensive and cannot guarantee what will happen in the eventual full-scale run, but they test the behavior we care about more directly. Sometimes engineers disable an optimization and accept slower training when they cannot get enough confidence in its consequences.</p>
+        <p>In practice, engineers compare training trajectories on relevant data, using both optimized kernels and a slower trusted reference. These experiments are expensive and cannot guarantee what will happen in the eventual full-scale run, but they test the behavior we care about more directly. Sometimes engineers disable an optimization and accept slower training when they cannot get enough confidence in its consequences.</p>
 
         <p>Proofs can still improve this process. Ruling out an indexing mistake or establishing mathematical equivalence removes a real source of uncertainty. Experiments can then investigate consequences the theorem does not address. Making the proof cheap does not make those experiments unnecessary.</p>
 
