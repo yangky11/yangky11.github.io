@@ -103,7 +103,7 @@
 .code-comment { color: var(--muted); }
 .lean-example pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
-.note-block, .note-passage, .sidenote { min-width: 0; }
+.note-block, .note-passage, .sidenote, .sidenote-stack { min-width: 0; }
 .note-ref {
   margin-left: 0.15em;
   font-family: var(--mono);
@@ -146,6 +146,7 @@
   .post-body > * { grid-column: 1; min-width: 0; }
   .note-block { display: contents; }
   .note-passage { grid-column: 1; }
+  .sidenote-stack { grid-column: 2; }
   .sidenote { grid-column: 2; margin: 0.25rem 0 1.5rem; }
 }
 
