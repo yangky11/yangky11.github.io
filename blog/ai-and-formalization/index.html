@@ -258,7 +258,7 @@ print(sequential, pairwise)</code></pre>
               <span class="verification-status">Proved in VeriTile</span>
               <strong>Same function?</strong>
               <div class="verification-symbol" aria-hidden="true">f<sub>optimized</sub> = f<sub>reference</sub></div>
-              <span>Our FlashAttention kernel matches the reference over real numbers.</span>
+              <span>The optimized kernel matches the reference over real numbers.</span>
             </li>
             <li>
               <span class="verification-status">Numerical question</span>
@@ -288,60 +288,65 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="specifications">The work before the proof</h2>
 
-        <p>The experience helped me separate four steps that often get bundled together:</p>
+        <p>VeriTile helped me separate four parts of the work that often get bundled together:</p>
 
         <ol class="reasoning-steps" role="list">
           <li><span class="step-number" aria-hidden="true">01</span><span><span class="step-title">Intent</span><span class="step-description">Figure out what we want.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">02</span><span><span class="step-title">Mathematical model</span><span class="step-description">Find a model and a property that capture the relevant outcome.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">03</span><span><span class="step-title">Formal statement</span><span class="step-description">Express that property in a formal system.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">04</span><span><span class="step-title">Proof</span><span class="step-description">Prove the claim under the stated assumptions.</span></span></li>
+          <li><span class="step-number" aria-hidden="true">02</span><span><span class="step-title">Mathematical model</span><span class="step-description">Connect that goal to a mathematical claim.</span></span></li>
+          <li><span class="step-number" aria-hidden="true">03</span><span><span class="step-title">Formal statement</span><span class="step-description">Express the claim in Lean or another formal system.</span></span></li>
+          <li><span class="step-number" aria-hidden="true">04</span><span><span class="step-title">Proof</span><span class="step-description">Prove it under the stated assumptions.</span></span></li>
         </ol>
 
-        <p>For a long time, steps three and four consumed so much effort that they dominated the discussion. AI is rapidly reducing that effort. But encoding a theorem or a software specification in Lean is different from discovering which claim would answer our question.</p>
+        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore.</p>
 
-        <p>Sometimes the difficulty starts with intent. A request is incomplete, people disagree, or nobody has decided what should happen in an unusual case. VeriTile illustrates a different difficulty: even when the desired outcome is reasonably clear, we may lack the understanding needed to connect it to a useful mathematical guarantee.</p>
+        <p>Sometimes we have not settled what we want. An instruction such as “make this app safe” leaves many decisions unstated. People may disagree about acceptable risks, or nobody has considered an unusual case. VeriTile illustrates a different difficulty: we knew the outcome we wanted, but lacked a useful mathematical connection between numerical changes and that outcome.</p>
 
-        <p>Our <a href="https://arxiv.org/abs/2412.16075">position paper on mathematical reasoning and verification</a> already acknowledged the gap between formal statements and informal intent. My change of view is about how much weight to put on it. I used to be more optimistic that, once formalization became sufficiently easy, these remaining problems would become manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
+        <p>Our <a href="https://arxiv.org/abs/2412.16075">2024 position paper</a> already acknowledged the gap between formal specifications and what people intend. What changed for me is how much weight I put on it. I used to expect that making formalization sufficiently easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
-        <p>Another AI can help inspect a specification, notice omitted cases, or propose a better model. Its conclusions still need evidence, and a model’s approval does not have the same status as a checked proof. This distinction becomes especially consequential when we rely on AI-generated code or let agents act on our behalf.</p>
+        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good. A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want. That distinction matters especially when agents act on our behalf.</p>
 
         <h2 id="where-formalization-fits">Can formal verification make AI safer?</h2>
 
-        <p>The security incidents I mentioned at the beginning raise a natural question: could formal verification help us keep increasingly capable AI agents under control? A <strong>verified sandbox</strong> could establish that restrictions on file, memory, or network access hold under a precise model, even when an agent actively tries to get around them.</p>
-
-        <p>This is already part of the discussion at frontier labs. In <a href="https://openai.com/index/the-defenders-window/">The Defender’s Window</a>, Greg Brockman explicitly connects models’ mathematical proof capabilities with the possibility of formally verifying software security. I share the interest in this direction. Isolation and access control can give us precisely stated properties whose practical value is immediate.</p>
+        <p>The security incidents I mentioned at the beginning make <strong>verified sandboxes</strong> an appealing idea: put an agent in an environment with restrictions it cannot bypass, even if it tries. I think formal verification could make a real contribution here.</p>
 
         <p>A sound proof that untrusted code cannot access protected memory, under an adequate machine model, rules out a real class of attacks. The attacker becoming smarter does not invalidate the theorem. Work such as <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/bosamiya">vWasm’s verified sandboxing compiler</a> demonstrates that meaningful guarantees of this kind are possible. We do not need a complete theory of an agent’s intentions to benefit from them.</p>
 
-        <p>The important question is what has actually been established. <a href="https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-10-learning-formal-methods-agent-policy-prover/">NVIDIA’s recent OpenShell work</a> gives a useful example. It uses formal reasoning to check whether permissions proposed by an agent allow any modeled action outside an expert-approved maximum policy. This can catch a permission expansion that a reviewer might overlook. The authors also explicitly discuss the need to keep the model current and to use human or AI judgment for context.</p>
+        <div class="note-block">
+          <div class="note-passage"><p>But we need to distinguish what a proof establishes from what we hope it establishes. A proof can show that a proposed permission policy stays within an approved limit.<sup><a class="note-ref" id="ref-7" href="#note-7" aria-label="Read note 7">7</a></sup> We still need to know that the running system enforces that policy, and that the limit is appropriate for the task.</p>
+          <p>The enforcement question is about how the model matches the deployed software. A policy model might omit a route through another API or a credential. We can model more of the system and combine proofs about its components when their assumptions fit together. That is useful work, but a proof about a policy alone does not establish that the whole system enforces it.</p></div>
+          <aside class="sidenote" role="note" aria-label="Note 7">
+            <details id="note-7">
+              <summary><span class="note-number">7</span> Checking agent permissions</summary>
+              <div class="note-content"><p><a href="https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-10-learning-formal-methods-agent-policy-prover/">NVIDIA’s OpenShell research</a> checks whether an agent’s proposed permissions allow any modeled action outside an expert-approved policy. The authors emphasize that the model must stay current and that context still requires human or AI judgment. This verifies a property of the policy model; it does not verify the entire sandbox.</p></div>
+            </details>
+          </aside>
+        </div>
 
-        <p>There are three distinct obligations here. We need to establish that the proposed policy satisfies the formal constraint. We need the deployed system to enforce the policy in the way the model assumes. And we need to decide whether the permissions we approved are appropriate for the task. A proof about the first obligation does not automatically settle the other two.</p>
+        <p>Even perfect enforcement leaves a question about allowed behavior. An agent authorized to edit a repository can still write a harmful change. We may need additional specifications, review, or tighter permissions. Deciding what is sufficient brings us back to the user’s intent and the consequences of getting it wrong.</p>
 
-        <p>The deployment question includes configuration, credentials, APIs, and the interactions between components. Some of this can also be modeled and verified. Proofs about individual components can be combined when their assumptions fit together. But a theorem about permitted actions is not yet a theorem about the entire system that confines the agent.</p>
+        <p>The comparison with VeriTile helps explain why I remain interested in formal verification. Preventing access to protected memory can settle an important question directly. Connecting a numerical change to a training outcome is much harder. The value of a proof depends on which uncertainty it removes.</p>
 
-        <p>The question about permitted behavior is different again. An agent authorized to write to a repository can still write a harmful change. A permission boundary may work exactly as designed while leaving us unsure whether a particular action serves the user’s intent. We can restrict permissions further, review outputs, or formulate additional properties. Which combination is sufficient depends on the task and the consequences of getting it wrong.</p>
+        <p>The debate about <a href="https://darioamodei.com/post/we-must-pace-the-frontier">pacing frontier AI development</a> makes this consequential at a larger scale. To decide whether safeguards justify proceeding with a more capable system, we need to know which failures they rule out and what remains uncertain. Formal proofs can provide part of that evidence. Saying that a system “uses formal verification” does not tell us how much of the safety case has been established.</p>
 
-        <p>This is where the comparison with VeriTile helps. For some isolation properties, the connection to the desired outcome is direct enough that a proof can settle an important question. For the numerical changes we studied, the connection to training behavior was much less clear. “Formal verification works” is too broad a claim to tell us which situation we are in.</p>
-
-        <p>The debate about <a href="https://darioamodei.com/post/we-must-pace-the-frontier">pacing frontier AI development</a>—slowing capability advances when safeguards cannot keep up—makes the same distinction consequential at a larger scale. Deciding whether safeguards justify proceeding with a more capable system requires evidence about what those safeguards cover and what remains uncertain. Formal proofs can be part of that evidence. Their contribution depends on the properties established, rather than on the mere presence of formal verification somewhere in the system.</p>
-
-        <p>I therefore expect useful deployments to combine formal guarantees with testing, monitoring, and experiments. A coding agent might prove properties of one component and use property-based testing elsewhere. The proof establishes its stated property within the model; tests provide evidence about the cases they exercise. The aim is to remove the uncertainties that matter for the decision.</p>
+        <p>I expect useful deployments to combine formal guarantees with testing, monitoring, and experiments. A proof that rules out one important failure mode can be worth a great deal. It should be clear which decision that proof supports, and what still depends on other evidence.</p>
 
         <h2 id="looking-ahead">What this changes for my research</h2>
 
-        <p>This gives me a different starting point for choosing problems. I am most excited when an important uncertainty can be removed by a meaningful mathematical guarantee. Parts of hardware, cryptography, access control, and financial infrastructure have this shape. <a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/">Jane Street’s recent discussion of formal methods</a> illustrates how cheaper proof work and more AI-generated code can change the economics. Regulated industries may offer further applications where precise requirements and strong evidence matter.</p>
+        <p>I still expect formalization to become more useful and more widely used. I am most excited about applications where a mathematical guarantee answers an important practical question. Parts of hardware, cryptography, access control, and financial infrastructure have this shape. Regulated industries may offer further opportunities where precise requirements and strong evidence matter.</p>
 
-        <p>At the same time, cheaper formalization changes what I expect from research aimed primarily at making provers better. My default bet is that Lean will increasingly be a capability of the strongest general reasoning models. I would want a concrete reason to build a separate model: substantially lower cost, distinctive data, or a process that continually produces valuable verified training data from real use. Those can be excellent reasons. The research question is where further work creates an advantage that general capability progress does not already supply.</p>
+        <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/">Jane Street’s recent change of view</a> shows how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing. An agent might prove a property of one component and use property-based tests—checking a general property on many generated inputs—elsewhere. Those provide different guarantees, but both can help us build more reliable software without proving the entire system correct.</p>
 
-        <p id="ai-for-mathematics">This also changes what I want from mathematics as an AI research domain. I distinguish two motivations: demonstrating what AI can do, and creating challenging environments with reliable feedback. For the first motivation, if the whole pitch is “look, AI can do math,” I think that particular party is largely over. I now want a sharper explanation of what another benchmark gain teaches us or enables. This is a claim about AI research motivation; mathematical progress remains valuable in its own right.</p>
+        <p>For research on provers themselves, I would ask what a project adds as general models keep improving. I would look for substantially lower cost or an advantage in training data, such as proprietary examples or a way to keep collecting valuable data from real use. Lean expertise alone looks less likely to provide a lasting advantage.</p>
 
-        <p>The second motivation remains strong. Difficult mathematical environments with reliable feedback can help train better reasoning systems. Formal checkers provide an unusually dependable signal. Strong models are also becoming useful critics of informal arguments, though their approval remains fallible. Understanding when cheaper, less exact feedback is enough is itself an interesting verification problem.</p>
+        <p id="ai-for-mathematics">I make a similar distinction about mathematics as an AI research domain. One motivation is to demonstrate what AI can do; another is to create challenging environments with reliable feedback. If the whole pitch is “look, AI can do math,” I think that particular party is largely over. I want to know what another benchmark gain teaches us or enables. Mathematical progress remains valuable in its own right.</p>
 
-        <p>For a student choosing a research topic, I would ask: what uncertainty would this work remove? Is that uncertainty preventing someone from doing something useful? What would remain unresolved even with perfect proof automation? The answers might point toward a better prover, a better specification, a numerical experiment, or a problem outside formal methods altogether.</p>
+        <p>The second motivation remains strong. Difficult mathematical problems with reliable feedback can help train better reasoning systems. Formal checkers provide an unusually dependable signal. Strong models are also becoming useful critics of informal arguments, though their approval remains fallible. Understanding when cheaper, less exact feedback is enough is itself an interesting verification problem.</p>
 
-        <p>My own interests are broadening toward verification in this wider sense. How can a weaker or cheaper verifier evaluate a stronger system? Can we train systems to make their work easier to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>? What evidence should make us trust agents working together, especially when they help develop the next generation of AI? These questions reach into alignment, safety, and how we organize increasingly automated research.</p>
+        <p>That question is close to where my own interests are moving. How can a weaker or cheaper verifier evaluate a stronger system? Can we train systems to make their work easier to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>? What evidence should make us trust agents working together, especially when they help develop the next generation of AI? These questions reach into alignment, safety, and how we organize increasingly automated research.</p>
 
-        <p>I do not have a settled answer about what comes next. I expect formalization to become more capable and more widely used, while a smaller fraction of the questions I most want to work on will be settled by formalization alone.</p>
+        <p>For students thinking about research topics, these are the questions I would start with: what uncertainty would your work remove? Is that uncertainty preventing someone from doing something useful? What would remain unresolved even with perfect proof automation? The answers might point toward a better prover, a better specification, a numerical experiment, or a problem outside formal methods altogether.</p>
+
+        <p>I do not have a settled answer about what comes next. Formalization will remain part of my work, but I expect a smaller fraction of the questions I most want to study to be settled by formalization alone.</p>
 
         <p>Working on proof assistants taught me to ask exactly what a claim says, what it assumes, and what would count as evidence for it. I expect to keep that habit. Increasingly, I want to spend my time on the questions that remain after the proof checker says yes.</p>
         </div>
