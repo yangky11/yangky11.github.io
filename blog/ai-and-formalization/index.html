@@ -288,20 +288,32 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="specifications">The work before the proof</h2>
 
-        <p>VeriTile helped me separate four parts of the work that often get bundled together:</p>
+        <p>With VeriTile, we knew what we wanted but lacked a useful mathematical connection to it. Sometimes the work starts even earlier: we have not settled what we want.</p>
 
-        <ol class="reasoning-steps" role="list">
-          <li><span class="step-number" aria-hidden="true">01</span><span><span class="step-title">Intent</span><span class="step-description">Figure out what we want.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">02</span><span><span class="step-title">Mathematical model</span><span class="step-description">Connect that goal to a mathematical claim.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">03</span><span><span class="step-title">Formal statement</span><span class="step-description">Express the claim in Lean or another formal system.</span></span></li>
-          <li><span class="step-number" aria-hidden="true">04</span><span><span class="step-title">Proof</span><span class="step-description">Prove it under the stated assumptions.</span></span></li>
-        </ol>
+        <p>Consider smart contracts: programs on a blockchain that can control real money. Bugs can be expensive, and <a href="https://ethereum.org/developers/docs/smart-contracts/upgrading/">deployed code cannot simply be patched</a>, though some contracts have upgrade mechanisms. This looks like an excellent application for formal verification. Tools such as the <a href="https://docs.certora.com/en/latest/docs/user-guide/index.html">Certora Prover</a> already let developers check properties of their contracts.</p>
 
-        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore.</p>
+        <p>Yet smart-contract auditing involves much more than proving theorems. <a href="https://www.openzeppelin.com/news/what-is-a-smart-contract-audit-lessons-from-openzeppelins-1000-audits">OpenZeppelin’s audit process</a>, for example, centers on human review of code, business logic, permissions, and assumptions, alongside automated tools. Part of that work is figuring out what should count as a bug. A client can know that they want to protect users’ money without knowing which properties they need to prove.</p>
 
-        <p>Sometimes we have not settled what we want. An instruction such as “make this app safe” leaves many decisions unstated. People may disagree about acceptable risks, or nobody has considered an unusual case. VeriTile illustrates a different difficulty: we knew the outcome we wanted, but lacked a useful mathematical connection between numerical changes and that outcome.</p>
+        <p>Suppose a contract holds users’ deposits. Who should be allowed to withdraw them? Only the depositor? Someone they authorize? An administrator recovering funds in an emergency? These choices have consequences. A prover can check that the code enforces the chosen policy; it cannot settle the policy simply by proving it.</p>
 
-        <p>Our <a href="https://arxiv.org/abs/2412.16075">2024 position paper</a> already acknowledged the gap between formal specifications and what people intend. What changed for me is how much weight I put on it. I used to expect that making formalization sufficiently easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
+        <figure class="specification-figure" aria-labelledby="specification-figure-title">
+          <div class="specification-figure-title" id="specification-figure-title">From “protect deposits” to a checked rule</div>
+          <div class="specification-phase">Choose what the guarantee should mean</div>
+          <ol class="reasoning-steps" role="list">
+            <li><span class="step-number" aria-hidden="true">01</span><div><span class="step-title">Intent</span><span class="step-description">Decide who should control the funds.</span><span class="step-example">Depositors may withdraw or authorize someone else. No administrator override.</span></div></li>
+            <li><span class="step-number" aria-hidden="true">02</span><div><span class="step-title">Mathematical model</span><span class="step-description">Turn that policy into precise rules.</span><span class="step-example">Represent accounts, approvals, and withdrawals. Define how approvals are granted and revoked.</span></div></li>
+          </ol>
+          <div class="specification-phase specification-phase-formal">Express and check the guarantee</div>
+          <ol class="reasoning-steps reasoning-steps-formal" start="3" role="list">
+            <li><span class="step-number" aria-hidden="true">03</span><div><span class="step-title">Formal statement</span><span class="step-description">Encode the rule in a formal system.</span><span class="step-example">Every successful withdrawal requires the caller to be the depositor or have a valid approval.</span></div></li>
+            <li><span class="step-number" aria-hidden="true">04</span><div><span class="step-title">Proof</span><span class="step-description">Establish that the code obeys the rule.</span><span class="step-example">Check all cases covered by the model, including attempts to use a revoked approval.</span></div></li>
+          </ol>
+          <figcaption>An illustrative authorization guarantee. The proof checks the chosen rule; deciding whether that rule protects users comes earlier. In practice, these steps inform one another.</figcaption>
+        </figure>
+
+        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore. Certora’s own documentation makes the dependency clear: without adequate specifications, the prover can check only very basic properties.</p>
+
+        <p>This is not a new observation. What changed for me is how much weight I put on it. I used to expect that making formalization sufficiently easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
         <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good. A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want. That distinction matters especially when agents act on our behalf.</p>
 
