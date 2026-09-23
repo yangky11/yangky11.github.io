@@ -115,42 +115,35 @@
         <p>For years, the labor of writing all this down and getting the proofs checked was the obstacle that dominated my thinking.</p>
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
+
+        <p>Much of my early work started with a theorem already formalized by a human. The model’s task was to find its proof.</p>
+
+        <p><a href="https://arxiv.org/abs/1905.09381">CoqGym</a> (2019) and <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a> (2023), which I developed with my collaborators, supplied data and tools for this work: learning from human proofs, trying proof steps, and getting feedback from Coq or Lean. LeanDojo also made it easier to find useful existing results in Lean’s library.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The idea of learning to prove theorems predates today’s large language models—and my arrival in the field. Early neural approaches learned to select useful mathematical facts or guide a search through possible proof steps. The field rests on decades of work in automated reasoning and contributions from researchers including Christian Szegedy, Tony Wu, Albert Jiang, and many others, alongside the communities building proof assistants and mathematical libraries.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup></p></div>
+          <div class="note-passage"><p>The checker also became a source of training feedback. Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/">AlphaProof</a> learned from proofs it generated and Lean verified, reaching silver-medal-level performance on the 2024 International Mathematical Olympiad problems together with AlphaGeometry 2.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup> ByteDance’s <a href="https://arxiv.org/abs/2507.23726">Seed-Prover</a> (2025) used Lean’s feedback to revise whole proofs and reuse verified intermediate results across attempts.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 3">
             <details id="note-3">
-              <summary><span class="note-number">3</span> A much longer history</summary>
-              <div class="note-content"><p>For a few entry points, see <a href="https://arxiv.org/abs/1211.7012">learning-assisted reasoning with Flyspeck</a>, <a href="https://arxiv.org/abs/1606.04442">DeepMath</a>, and <a href="https://arxiv.org/abs/1608.02644">Holophrasm</a>. Later work on <a href="https://arxiv.org/abs/2205.12615">autoformalization</a> and <a href="https://arxiv.org/abs/2210.12283">Draft, Sketch, and Prove</a> helped connect informal mathematical reasoning to formal proofs. These are examples from a much larger collective effort, not a complete history.</p></div>
+              <summary><span class="note-number">3</span> The 2024 contest result</summary>
+              <div class="note-content"><p>Humans translated the contest problems into formal statements. AlphaProof solved three problems and AlphaGeometry 2 solved one; some solutions took up to three days, compared with the students’ two 4.5-hour sessions.</p></div>
             </details>
           </aside>
         </div>
 
-        <p>One obstacle was practical: researchers needed examples to learn from and a way for their programs to interact with a proof assistant. Jia Deng and I developed <a href="https://arxiv.org/abs/1905.09381">CoqGym</a> in 2019 to help with that. In a later collaboration, I developed <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a>, released in 2023. It provided open tools and data for working with Lean, along with a prover that searched the mathematical library for relevant existing results. Finding the right known theorem can be as important as inventing the next step.</p>
+        <p>The more recent change is that general coding agents can take on much more of the surrounding work. Codex and Claude Code can move between informal reasoning and Lean, developing definitions, statements, and proofs together. For software, they can build implementations alongside specifications and correctness proofs—the same ingredients as the sorting example, now across large projects.</p>
+
+        <p>By formalization becoming “cheap,” I mainly mean cheaper in specialist human labor. Models can take over more of the translation into Lean and more of the proof construction. Large projects still consume substantial compute and depend on mature libraries. But much less of the detailed work has to be done by hand.</p>
+
         <div class="note-block">
-          <div class="note-passage"><p>The checker could also become a teacher. In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/">AlphaProof</a> demonstrated the power of reinforcement learning: search for proofs, check which attempts succeed, and use that experience to improve the model. Together with the separate AlphaGeometry 2 system, it achieved silver-medal-level performance on International Mathematical Olympiad problems.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup></p>
-          <p>ByteDance’s <a href="https://arxiv.org/abs/2507.23726">Seed-Prover</a> in 2025 illustrated another useful pattern: propose intermediate mathematical results, keep the ones Lean verifies, and use them while revising the larger proof.</p></div>
+          <div class="note-passage"><p>The underlying reasoning still matters enormously. Anthropic’s Fermat’s Last Theorem project formalized an existing human proof. In <a href="https://openai.com/index/navier-stokes-solution/">OpenAI’s account of its Navier–Stokes result</a>, the model found the argument before formalizing it in Lean. Formal feedback can also help during discovery, as <a href="https://arxiv.org/abs/2605.22763">AlphaProof Nexus</a> illustrates.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup> If a model cannot reason its way through the problem, fluency in Lean is unlikely to get it very far.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 4">
             <details id="note-4">
-              <summary><span class="note-number">4</span> What the contest results mean</summary>
-              <div class="note-content"><p>AlphaProof’s 2024 result involved human translation of the contest questions into formal statements, and some solutions took much longer than the students’ time limit. The combined result included one problem solved by AlphaGeometry 2. Seed-Prover’s reported 2025 contest results likewise included a separate geometry system and human-formalized statements. These were important research milestones, with setups different from the human competition.</p></div>
+              <summary><span class="note-number">4</span> Formalization and discovery</summary>
+              <div class="note-content"><p>AlphaProof Nexus uses Lean feedback while working on open problems from the Erdős problem collection and the Online Encyclopedia of Integer Sequences. Checked intermediate results can guide further search. This is evidence that formalization can participate in discovery, though it does not establish that Lean was essential to those discoveries.</p></div>
             </details>
           </aside>
         </div>
 
-        <p>More recently, general coding agents have made these workflows increasingly accessible. They can inspect a project, write definitions, specifications, and proofs, then use the checker’s feedback to revise their work. The target might be a mathematical theorem or a property of a program—for example, that an optimized routine preserves the behavior of a simpler implementation.</p>
-        <div class="note-block">
-          <div class="note-passage"><p>The large mathematical projects in the news show several uses of this capability. Anthropic’s Fermat’s Last Theorem project formalizes an existing proof. In <a href="https://openai.com/index/navier-stokes-solution/">OpenAI’s account of its Navier–Stokes result</a>, discovery came before Lean verification. Formal feedback can also participate in discovery, as <a href="https://arxiv.org/abs/2605.22763">AlphaProof Nexus</a> illustrates.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> These roles are all valuable, but they are different achievements.</p></div>
-          <aside class="sidenote" role="note" aria-label="Note 5">
-            <details id="note-5">
-              <summary><span class="note-number">5</span> Formalization and discovery</summary>
-              <div class="note-content"><p>The Nexus paper studies open problems from the Erdős problem collection and the Online Encyclopedia of Integer Sequences. These differ from formalizing a textbook argument whose proof is already known. Its results support a role for Lean feedback during search, without establishing that it was indispensable.</p></div>
-            </details>
-          </aside>
-        </div>
-
-        <p>This is what I mean by formalization becoming cheap: less specialized human effort is needed to turn a sufficiently understood mathematical argument or software property into a machine-checked artifact. Large projects still require substantial compute, libraries, and infrastructure. The sharpest reductions are in expressing and proving claims whose meaning we already understand. Deciding which claims matter, and finding a model that connects them to the world, remain much less routine.</p>
-
-        <p>I sometimes describe proof search and parts of autoformalization as effectively solved. By <strong>autoformalization</strong>, I mean using AI to translate informal statements or arguments into a formal language. My claim is bounded: for many well-specified problems whose underlying reasoning is already within a frontier model’s reach, getting to a checked result is becoming routine enough to stop being the main bottleneck. The key insight still has to come from somewhere.</p>
+        <p>This is why I sometimes say proof search and parts of <em>autoformalization</em>—the translation from informal arguments into formal statements and proofs—are effectively solved. For many well-specified problems within a frontier model’s reasoning ability, getting the formalization to work is becoming routine enough to stop being the main obstacle.</p>
 
         <p>This is much of what I hoped for when I entered the field. If the labor of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p>
 
@@ -161,10 +154,10 @@
         <p>They initially looked like an unusually good application. Training a large model is expensive, and subtle errors can be difficult to diagnose. Kernels are relatively small, their computations appear mathematical, and optimized implementations can be compared with simpler reference implementations. Here was a setting where both the stakes and the mathematical structure seemed right.</p>
         <div class="note-block">
           <div class="note-passage"><p>Consider <strong>FlashAttention</strong>, an efficient way of computing attention, the operation that lets a language model combine information from different parts of its input. A straightforward implementation constructs large intermediate arrays. FlashAttention reorganizes the computation into smaller blocks, reducing how much data has to move through GPU memory.</p>
-          <p>VeriTile proves that its FlashAttention-1 forward kernel computes the same mathematical attention function as a straightforward reference implementation, under a real-number arithmetic model and the theorem’s assumptions.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The guarantee covers every valid input under those assumptions, rather than just a collection of test cases.</p></div>
-          <aside class="sidenote" role="note" aria-label="Note 6">
-            <details id="note-6">
-              <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
+          <p>VeriTile proves that its FlashAttention-1 forward kernel computes the same mathematical attention function as a straightforward reference implementation, under a real-number arithmetic model and the theorem’s assumptions.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> The guarantee covers every valid input under those assumptions, rather than just a collection of test cases.</p></div>
+          <aside class="sidenote" role="note" aria-label="Note 5">
+            <details id="note-5">
+              <summary><span class="note-number">5</span> The FlashAttention guarantee</summary>
               <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence to a separately verified naive kernel, including causal and noncausal variants. The result concerns modeled kernels and real arithmetic; it is not bit-for-bit equivalence to a running Hugging Face implementation, nor a verification of the GPU compiler and hardware.</p></div>
             </details>
           </aside>
