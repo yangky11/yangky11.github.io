@@ -237,7 +237,7 @@ pairwise = (a + b) + (c + d)
 print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Regrouping a sum this way lets a GPU compute partial sums in parallel, but it can change the result.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs creates an opportunity for parallel execution, but also changes the result.</p>
 
         <p>This changes the verification problem. If we demand bitwise equivalence, we exclude optimizations we might be perfectly happy to use. A difference in output does not, by itself, tell us that an optimization is bad for training. But neither can we declare every small difference harmless.</p>
 
