@@ -80,20 +80,50 @@
 
         <p>The appeal of formalization is that we can check an AI’s work without having to trust the AI. Whether it gives us a mathematical proof or a piece of software, we can ask it to spell out its claims, assumptions, and reasoning in a form a computer can check.</p>
 
-        <p>Suppose we want a program that sorts a list of numbers. Its output should be in ascending order and contain exactly the same numbers, including repetitions. Those two requirements are its <em>specification</em>. Here is how we can express them in Lean, a proof assistant for writing and checking proofs:</p>
+        <p>Suppose we want a program that sorts a list of numbers. Its output should be in ascending order and contain exactly the same numbers, including repetitions. Those two requirements are its <em>specification</em>.</p>
+
+        <p>Here is a complete example in Lean, a proof assistant for writing and checking proofs. It uses the library’s merge sort implementation and <a href="https://lean-lang.org/doc/api/Init/Data/List/Sort/Lemmas.html">existing proofs</a>:</p>
 
         <figure class="lean-example">
-          <figcaption>Lean · A sorting specification</figcaption>
+          <figcaption>Lean · Specification, implementation, and proof</figcaption>
           <p class="code-explanation"><code>Pairwise (· ≤ ·)</code> requires the output to be sorted; <code>Perm</code> requires it to preserve the input’s elements.</p>
-          <pre tabindex="0" aria-label="Lean specification requiring sorted output with the same elements as the input"><code class="language-lean"><span class="code-keyword">def</span> SortsCorrectly
+          <pre tabindex="0" aria-label="Complete Lean sorting example with a specification, implementation, and correctness proof"><code class="language-lean"><span class="code-keyword">import</span> Std
+
+<span class="code-comment">-- Specification</span>
+<span class="code-keyword">def</span> SortsCorrectly
     (sort : List Nat → List Nat) : Prop :=
   ∀ xs, (sort xs).Pairwise (· ≤ ·) ∧
-    (sort xs).Perm xs</code></pre>
+    (sort xs).Perm xs
+
+<span class="code-comment">-- Implementation</span>
+<span class="code-keyword">def</span> sort (xs : List Nat) : List Nat :=
+  xs.mergeSort
+
+<span class="code-comment">-- Proof</span>
+<span class="code-keyword">theorem</span> sort_correct :
+    SortsCorrectly sort := <span class="code-keyword">by</span>
+  intro xs
+  constructor
+  · simpa [sort] using
+      List.pairwise_mergeSort
+        (le := fun a b : Nat => a ≤ b)
+        (<span class="code-keyword">by</span>
+          intros
+          simp_all only
+            [decide_eq_true_eq]
+          omega)
+        (<span class="code-keyword">by</span>
+          intros
+          simp only [Bool.or_eq_true,
+            decide_eq_true_eq]
+          omega) xs
+  · exact List.mergeSort_perm xs _
+
+<span class="code-keyword">#eval</span> sort [3, 1, 2, 1]
+<span class="code-comment">-- [1, 1, 2, 3]</span></code></pre>
         </figure>
 
         <p>An AI can then write the program and prove that it meets this specification. Lean checks the proof. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification.</p>
-
-        <p>A <a href="sorting.lean">complete Lean example</a> combines this specification with a sorting implementation and a proof, using <a href="https://lean-lang.org/doc/api/Init/Data/List/Sort/Lemmas.html">Lean’s existing library results</a>.</p>
 
         <p>For years, the labor of writing all this down and getting the proofs checked was the obstacle that dominated my thinking.</p>
 
