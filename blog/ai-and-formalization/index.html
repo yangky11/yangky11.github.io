@@ -31,7 +31,7 @@
 <body>
   <div class="page post-page post-with-notes">
     <nav class="post-nav" aria-label="Breadcrumb">
-      <a href="/">← Kaiyu Yang</a>
+      <a href="/" target="_blank" rel="noopener">← Kaiyu Yang</a>
       <span>Writing</span>
     </nav>
 
@@ -41,7 +41,7 @@
           <h1 id="post-title">What Happens When Formalization Becomes Cheap?</h1>
           <p class="post-subtitle">A personal reflection on eight years of AI and formalization</p>
           <div class="post-meta">
-            <span class="post-author"><img src="/images/Kaiyu%20Yang.jpg" alt="" width="32" height="32"><a href="/" rel="author">Kaiyu Yang</a></span>
+            <span class="post-author"><img src="/images/Kaiyu%20Yang.jpg" alt="" width="32" height="32"><a href="/" rel="author noopener" target="_blank">Kaiyu Yang</a></span>
             <time datetime="2026-09-22">September 22, 2026</time>
             <span>25 min read</span>
           </div>
@@ -53,14 +53,14 @@
 
         <p>The actual story is that my advisor had a student leaving, and he assigned the project to me. My apologies to everyone who got the visionary version.</p>
 
-        <p>It was a fortunate assignment. Over the following years, I developed <a href="https://arxiv.org/abs/1905.09381">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a> and contributed to <a href="https://arxiv.org/abs/2508.03613">Goedel-Prover</a>. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI’s outputs verifiable and trustworthy.</p>
+        <p>It was a fortunate assignment. Over the following years, I developed <a href="https://arxiv.org/abs/1905.09381" target="_blank" rel="noopener">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626" target="_blank" rel="noopener">LeanDojo</a> and contributed to <a href="https://arxiv.org/abs/2508.03613" target="_blank" rel="noopener">Goedel-Prover</a>. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI’s outputs verifiable and trustworthy.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/">Lean</a>, checked it. A major obstacle was the labor of expressing everything precisely enough in Lean. Coding agents such as Codex and Claude Code are taking over more of that labor. With Lean’s feedback, they can now formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
+          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/" target="_blank" rel="noopener">Lean</a>, checked it. A major obstacle was the labor of expressing everything precisely enough in Lean. Coding agents such as Codex and Claude Code are taking over more of that labor. With Lean’s feedback, they can now formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
           <p>That progress has made another question harder to ignore: once we have formalized a claim and proved it in Lean, how much of the original problem have we actually solved? Sometimes a great deal; sometimes the important problem remains largely unresolved. Cheaper formalization has made me pay more attention to the gap between what we can prove and what we need to trust.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 1">
             <details id="note-1">
               <summary><span class="note-number">1</span> Coding agents and Fermat</summary>
-              <div class="note-content"><p>In <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s September 2026 formalization of Fermat’s Last Theorem</a>, Claude agents worked largely autonomously for 11 days to produce a complete Lean proof—a project previously expected to take years. They used an internal research model in a Claude Code-based harness and built on Mathlib and community work, including Kevin Buzzard’s FLT project.</p></div>
+              <div class="note-content"><p>In <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" target="_blank" rel="noopener">Anthropic’s September 2026 formalization of Fermat’s Last Theorem</a>, Claude agents worked largely autonomously for 11 days to produce a complete Lean proof—a project previously expected to take years. They used an internal research model in a Claude Code-based harness and built on Mathlib and community work, including Kevin Buzzard’s FLT project.</p></div>
             </details>
           </aside>
         </div>
@@ -70,7 +70,7 @@
           <aside class="sidenote" role="note" aria-label="Note 2">
             <details id="note-2">
               <summary><span class="note-number">2</span> Security and pacing the frontier</summary>
-              <div class="note-content"><p><a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">OpenAI</a> and <a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents">Anthropic</a> have reported AI agents gaining unauthorized access to real systems during research evaluations.</p><p>Both <a href="https://x.com/sama/status/2098811563415150910">OpenAI</a> and <a href="https://darioamodei.com/post/we-must-pace-the-frontier">Anthropic</a> have committed to embedded independent evaluators as part of their pacing efforts. See also the employee-led <a href="https://www.pacingthefrontier.com/">Pacing the Frontier</a> statement.</p></div>
+              <div class="note-content"><p><a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener">OpenAI</a> and <a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents" target="_blank" rel="noopener">Anthropic</a> have reported AI agents gaining unauthorized access to real systems during research evaluations.</p><p>Both <a href="https://x.com/sama/status/2098811563415150910" target="_blank" rel="noopener">OpenAI</a> and <a href="https://darioamodei.com/post/we-must-pace-the-frontier" target="_blank" rel="noopener">Anthropic</a> have committed to embedded independent evaluators as part of their pacing efforts. See also the employee-led <a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">Pacing the Frontier</a> statement.</p></div>
             </details>
           </aside>
         </div>
@@ -84,7 +84,7 @@
 
         <details class="optional-example" id="sorting-example">
           <summary>See the complete Lean example</summary>
-          <p class="example-intro">This example uses the library’s merge sort implementation and <a href="https://lean-lang.org/doc/api/Init/Data/List/Sort/Lemmas.html">existing proofs</a>. Tested with Lean 4.27.0.</p>
+          <p class="example-intro">This example uses the library’s merge sort implementation and <a href="https://lean-lang.org/doc/api/Init/Data/List/Sort/Lemmas.html" target="_blank" rel="noopener">existing proofs</a>. Tested with Lean 4.27.0.</p>
         <figure class="lean-example">
           <figcaption>Lean · Specification, implementation, and proof</figcaption>
           <p class="code-explanation"><code>Pairwise (· ≤ ·)</code> requires the output to be sorted; <code>Perm</code> requires it to preserve the input’s elements.</p>
@@ -118,13 +118,13 @@
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
 
-        <p>Early on, getting neural models to reliably produce useful formal proofs was itself a research problem. Open tools and datasets, including our <a href="https://arxiv.org/abs/1905.09381">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a> projects, helped more researchers work on it.</p>
+        <p>Early on, getting neural models to reliably produce useful formal proofs was itself a research problem. Open tools and datasets, including our <a href="https://arxiv.org/abs/1905.09381" target="_blank" rel="noopener">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626" target="_blank" rel="noopener">LeanDojo</a> projects, helped more researchers work on it.</p>
 
-        <p>One successful approach was <em>post-training</em>: take an existing language model and give it more training on Lean statements and proofs. <a href="https://arxiv.org/abs/2508.03613">Goedel-Prover</a> (2025) followed this approach, building a large collection of generated and checked Lean proofs and using them to train increasingly capable specialized provers.</p>
+        <p>One successful approach was <em>post-training</em>: take an existing language model and give it more training on Lean statements and proofs. <a href="https://arxiv.org/abs/2508.03613" target="_blank" rel="noopener">Goedel-Prover</a> (2025) followed this approach, building a large collection of generated and checked Lean proofs and using them to train increasingly capable specialized provers.</p>
 
-        <p>In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/">AlphaProof</a> used Lean to solve problems from the International Mathematical Olympiad, a competition for some of the world’s strongest young mathematicians. Together with AlphaGeometry 2, it reached silver-medal-level performance. The following year, ByteDance reported silver-medal-level performance with its Lean-based <a href="https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025">Seed-Prover</a> system. AI could find arguments requiring substantial mathematical insight and produce proofs that a computer could check.</p>
+        <p>In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">AlphaProof</a> used Lean to solve problems from the International Mathematical Olympiad, a competition for some of the world’s strongest young mathematicians. Together with AlphaGeometry 2, it reached silver-medal-level performance. The following year, ByteDance reported silver-medal-level performance with its Lean-based <a href="https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025" target="_blank" rel="noopener">Seed-Prover</a> system. AI could find arguments requiring substantial mathematical insight and produce proofs that a computer could check.</p>
 
-        <p>General models were also advancing. In 2025, an advanced version of <a href="https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/">Gemini Deep Think reached gold-medal-level performance</a> with proofs written directly in natural language and officially graded by the IMO.</p>
+        <p>General models were also advancing. In 2025, an advanced version of <a href="https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/" target="_blank" rel="noopener">Gemini Deep Think reached gold-medal-level performance</a> with proofs written directly in natural language and officially graded by the IMO.</p>
 
         <p class="thought">The strongest systems for large-scale Lean formalization are now built on general frontier models, often using coding agents such as Codex and Claude Code.</p>
 
@@ -136,7 +136,7 @@
           <aside class="sidenote" role="note" aria-label="Note 3">
             <details id="note-3">
               <summary><span class="note-number">3</span> Reasoning and formal feedback</summary>
-              <div class="note-content"><p><a href="https://openai.com/index/navier-stokes-solution/">OpenAI reports</a> a finite-time blow-up result for the forced three-dimensional Navier–Stokes equations, followed by a separate stage of Lean formalization and verification.</p></div>
+              <div class="note-content"><p><a href="https://openai.com/index/navier-stokes-solution/" target="_blank" rel="noopener">OpenAI reports</a> a finite-time blow-up result for the forced three-dimensional Navier–Stokes equations, followed by a separate stage of Lean formalization and verification.</p></div>
             </details>
           </aside>
         </div>
@@ -144,7 +144,7 @@
         <div class="note-block">
           <div class="note-passage"><p>More importantly, general models can acquire the same specialized skills. If we can construct useful domain training data, frontier labs can use it too, either directly or by training specialists and transferring their skills into a general model.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup> Lean expertise can become one capability among many.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup></p>
 
-          <p>Much more of a project can now be delegated. <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s Fermat’s Last Theorem project</a> illustrates the scale: Claude agents formalized an existing human proof largely autonomously in 11 days. In software, agents can develop implementations, specifications, and correctness proofs together across large codebases. This is what I mean by formalization becoming cheap: much less specialist human labor, though compute and libraries still matter.</p>
+          <p>Much more of a project can now be delegated. <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" target="_blank" rel="noopener">Anthropic’s Fermat’s Last Theorem project</a> illustrates the scale: Claude agents formalized an existing human proof largely autonomously in 11 days. In software, agents can develop implementations, specifications, and correctness proofs together across large codebases. This is what I mean by formalization becoming cheap: much less specialist human labor, though compute and libraries still matter.</p>
 
           <p>For many tasks, agents can now turn a clear statement and a correct informal argument into a checked Lean proof with little specialist intervention. In this practical sense, I sometimes call proof search and parts of <em>autoformalization</em> effectively solved. It does not settle whether we chose the right statement, or whether the resulting code is suitable for a shared library.</p>
 
@@ -153,7 +153,7 @@
             <aside class="sidenote" role="note" aria-label="Note 4">
               <details id="note-4">
                 <summary><span class="note-number">4</span> Learning from specialists</summary>
-                <div class="note-content"><p>One mechanism is <a href="https://thinkingmachines.ai/blog/on-policy-distillation/">on-policy distillation</a>: a model generates its own attempts and learns from an expert model’s predictions along the way. Specialized training can therefore contribute to a general model’s capabilities.</p></div>
+                <div class="note-content"><p>One mechanism is <a href="https://thinkingmachines.ai/blog/on-policy-distillation/" target="_blank" rel="noopener">on-policy distillation</a>: a model generates its own attempts and learns from an expert model’s predictions along the way. Specialized training can therefore contribute to a general model’s capabilities.</p></div>
               </details>
             </aside>
             <aside class="sidenote" role="note" aria-label="Note 5">
@@ -168,7 +168,7 @@
 
         <h2 id="veritile">What VeriTile changed for me</h2>
 
-        <p>I’ve been working on <a href="https://lizn-zn.github.io/VeriTile/"><strong>VeriTile</strong></a>, a project led by <a href="https://lizn-zn.github.io/">Zenan Li</a> that uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training.</p>
+        <p>I’ve been working on <a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, a project led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a> that uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training.</p>
 
         <p>We saw a promising application of formal verification, and a possible part of <em>recursive self-improvement</em>: imagine an AI optimizing its own GPU kernels, proving its changes correct, and using the faster kernels to train the next model. Formal verification could make that loop much easier to trust.</p>
 
@@ -212,12 +212,12 @@
         </details>
 
         <div class="note-block">
-          <div class="note-passage"><p>A more substantial example is <a href="https://arxiv.org/abs/2205.14135"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements.</p>
+          <div class="note-passage"><p>A more substantial example is <a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements.</p>
           <p>VeriTile proves that its Lean implementation of FlashAttention computes the same function as a straightforward reference, using arithmetic over the real numbers.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> The proof covers all inputs satisfying its assumptions.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> The FlashAttention guarantee</summary>
-              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean">proof source</a> describe equivalence between VeriTile’s Lean implementation of FlashAttention-1 forward and a separately verified naive kernel, including causal and noncausal variants. This result uses real-number arithmetic; it does not establish identical floating-point outputs on a GPU.</p></div>
+              <div class="note-content"><p>The <a href="https://lizn-zn.github.io/VeriTile/#flash-attention-example" target="_blank" rel="noopener">project documentation</a> and <a href="https://github.com/Lizn-zn/VeriTile/blob/main/VeriTile/Examples/FlashAttention1/NaiveKernel.lean" target="_blank" rel="noopener">proof source</a> describe equivalence between VeriTile’s Lean implementation of FlashAttention-1 forward and a separately verified naive kernel, including causal and noncausal variants. This result uses real-number arithmetic; it does not establish identical floating-point outputs on a GPU.</p></div>
             </details>
           </aside>
         </div>
@@ -327,7 +327,7 @@ print(sequential, pairwise)</code></pre>
           <aside class="sidenote" role="note" aria-label="Note 7">
             <details id="note-7">
               <summary><span class="note-number">7</span> Selling formal methods</summary>
-              <div class="note-content"><p>Mike Dodds’s <a href="https://www.galois.com/articles/what-works-and-doesnt-selling-formal-methods">account of selling formal methods at Galois</a> describes the same practical pressure: verification projects compete with other uses of a client’s resources. As results travel from engineers to management and marketing, caveats get lost and precise guarantees become broader promises.</p></div>
+              <div class="note-content"><p>Mike Dodds’s <a href="https://www.galois.com/articles/what-works-and-doesnt-selling-formal-methods" target="_blank" rel="noopener">account of selling formal methods at Galois</a> describes the same practical pressure: verification projects compete with other uses of a client’s resources. As results travel from engineers to management and marketing, caveats get lost and precise guarantees become broader promises.</p></div>
             </details>
           </aside>
         </div>
@@ -346,7 +346,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>High stakes help justify expensive verification. Falling costs broaden where it is worthwhile: finding a few important bugs or proving one useful property can be enough. This leaves me optimistic about formal verification becoming an everyday tool, even when it cannot provide an end-to-end guarantee.</p>
 
-        <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing. Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The concrete payoff he describes is finding and fixing bugs. That is valuable even without a claim that the entire SDK is now correct.</p>
+        <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing. Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" rel="noopener">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The concrete payoff he describes is finding and fixing bugs. That is valuable even without a claim that the entire SDK is now correct.</p>
 
         <p>An agent might prove a property of one component and use property-based tests—checking a property on generated inputs—elsewhere. Complete verification need not be the destination of every project.</p>
 
@@ -361,14 +361,14 @@ print(sequential, pairwise)</code></pre>
           <aside class="sidenote" role="note" aria-label="Note 8">
             <details id="note-8">
               <summary><span class="note-number">8</span> Checking agent permissions</summary>
-              <div class="note-content"><p><a href="https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-10-learning-formal-methods-agent-policy-prover/">NVIDIA’s OpenShell research</a> uses the Z3 solver to check proposed agent permissions against an expert-approved policy. The guarantee covers the policy model, not the entire sandbox.</p></div>
+              <div class="note-content"><p><a href="https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-10-learning-formal-methods-agent-policy-prover/" target="_blank" rel="noopener">NVIDIA’s OpenShell research</a> uses the Z3 solver to check proposed agent permissions against an expert-approved policy. The guarantee covers the policy model, not the entire sandbox.</p></div>
             </details>
           </aside>
         </div>
 
         <p><strong>Are the restrictions sufficient for the task?</strong> Even a perfectly enforced boundary leaves the agent able to act within it. An agent that cannot read protected memory may still produce a harmful code change that a user then applies. That permitted channel needs other safeguards. Deciding which actions to allow, and what checks they require, brings us back to intent and the consequences of getting it wrong.</p>
 
-        <p>The debate about <a href="https://darioamodei.com/post/we-must-pace-the-frontier">pacing frontier AI development</a> makes these distinctions consequential. Verified safeguards could provide important evidence for deploying a more capable system. We still need to know which failures the proofs rule out, whether their assumptions hold, and what requires testing, monitoring, or other safeguards. “Formally verified” alone does not tell us whether it is safe to proceed.</p>
+        <p>The debate about <a href="https://darioamodei.com/post/we-must-pace-the-frontier" target="_blank" rel="noopener">pacing frontier AI development</a> makes these distinctions consequential. Verified safeguards could provide important evidence for deploying a more capable system. We still need to know which failures the proofs rule out, whether their assumptions hold, and what requires testing, monitoring, or other safeguards. “Formally verified” alone does not tell us whether it is safe to proceed.</p>
 
         <h2 id="looking-ahead">What this changes for my research</h2>
 
@@ -376,7 +376,7 @@ print(sequential, pairwise)</code></pre>
 
         <p class="thought">I am increasingly interested in how humans can justifiably trust AI’s outputs when a complete formal guarantee is out of reach.</p>
 
-        <p>Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
+        <p>Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692" target="_blank" rel="noopener">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
 
         <p>The work I’m most excited about now connects verification with alignment and the design of systems in which humans and AI agents can reliably work together. My research agenda is still taking shape. Formalization will remain part of my work, and so will the habits it taught me: asking exactly what a claim says, what it assumes, and what would count as evidence for it. What has changed is how much I expect a formal guarantee to settle. I still want AI’s work to be trustworthy. I am less convinced that formalization alone will get us there.</p>
         </div>
