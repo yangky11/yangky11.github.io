@@ -58,7 +58,10 @@
   line-height: 1.8;
 }
 
-.post-body p { margin: 0 0 1.35rem; }
+.post-body p {
+  margin: 0 0 1.35rem;
+  text-wrap: pretty;
+}
 .post-body a { overflow-wrap: anywhere; }
 .post-body code { font-size: 0.9em; overflow-wrap: anywhere; }
 
@@ -202,10 +205,10 @@
 .sidenote summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 @media (min-width: 1200px) {
-  .post-with-notes { max-width: 65rem; }
+  .post-with-notes { max-width: 66rem; }
   .post-with-notes .post-header,
   .post-with-notes .post-nav,
-  .post-with-notes .post-footer { max-width: 44rem; }
+  .post-with-notes .post-footer { max-width: 45rem; }
   .post-with-notes .post-body {
     max-width: none;
     display: grid;
