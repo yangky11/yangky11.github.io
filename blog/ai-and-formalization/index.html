@@ -240,7 +240,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result.</p>
 
-        <p>Demanding bitwise equivalence would rule out some useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference. Formally verifying such bounds is an established field, with tools such as <a href="https://gappa.gitlabpages.inria.fr/">Gappa</a>.</p>
+        <p>Demanding bitwise equivalence would rule out some useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
@@ -289,7 +289,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>The smart-contract auditing companies I have spoken with draw on human review, static analysis, testing, fuzzing, and formal verification. In most of them, formal verification is only a small part of the work.</p>
 
-        <p>Much of the work is figuring out what the client wants the system to do. Clients often do not know at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is part of the audit; cheaper proofs do not automatically resolve it. <a href="https://www.nethermind.io/blog/formal-verification-and-the-economics-of-correctness">Nethermind’s account of specification engineering</a> describes how that work can uncover problems before any proof is attempted.</p>
+        <p>Much of the work is figuring out what the client wants the system to do. Clients often do not know at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is part of the audit; cheaper proofs do not automatically resolve it.</p>
 
         <p>The sorting example was unusually tidy: we already knew what “correct” meant and could state it directly. In other applications, reaching that point can be much of the work.</p>
 
