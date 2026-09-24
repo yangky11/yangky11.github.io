@@ -52,14 +52,6 @@
 .post-author a { color: inherit; }
 .post-author img { width: 2rem; height: 2rem; border-radius: 3px; object-fit: cover; }
 
-.post-disclaimer {
-  margin: 2rem 0 0;
-  color: var(--muted);
-  font-size: 0.875rem;
-  font-style: italic;
-  line-height: 1.6;
-}
-
 .post-body {
   max-width: 68ch;
   font-size: 1.125rem;
@@ -419,6 +411,11 @@
 
 .post-footer { color: var(--muted); }
 .post-footer a { color: var(--muted); }
+.post-footer .post-disclaimer {
+  flex-basis: 100%;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+}
 
 .post-page a:focus-visible {
   outline: 2px solid var(--accent);
