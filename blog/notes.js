@@ -4,14 +4,18 @@
   const notes = [...document.querySelectorAll('.sidenote details')];
   const wide = window.matchMedia('(min-width: 1200px)');
 
-  function revealHashNote() {
+  function revealHashContent() {
     const target = document.getElementById(window.location.hash.slice(1));
-    if (target && notes.includes(target)) target.open = true;
+    let disclosure = target?.closest('details');
+    while (disclosure) {
+      disclosure.open = true;
+      disclosure = disclosure.parentElement?.closest('details');
+    }
   }
 
   function arrangeNotes() {
     notes.forEach(note => { note.open = wide.matches; });
-    revealHashNote();
+    revealHashContent();
   }
 
   document.querySelectorAll('.note-ref').forEach(link => {
@@ -21,15 +25,16 @@
     });
   });
   wide.addEventListener('change', arrangeNotes);
-  window.addEventListener('hashchange', revealHashNote);
+  window.addEventListener('hashchange', revealHashContent);
   arrangeNotes();
 
+  const printableDetails = [...document.querySelectorAll('.sidenote details, .optional-example')];
   let beforePrint;
   window.addEventListener('beforeprint', () => {
-    beforePrint = notes.map(note => note.open);
-    notes.forEach(note => { note.open = true; });
+    beforePrint = printableDetails.map(detail => detail.open);
+    printableDetails.forEach(detail => { detail.open = true; });
   });
   window.addEventListener('afterprint', () => {
-    if (beforePrint) notes.forEach((note, i) => { note.open = beforePrint[i]; });
+    if (beforePrint) printableDetails.forEach((detail, i) => { detail.open = beforePrint[i]; });
   });
 })();

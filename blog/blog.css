@@ -52,6 +52,14 @@
 .post-author a { color: inherit; }
 .post-author img { width: 2rem; height: 2rem; border-radius: 3px; object-fit: cover; }
 
+.post-disclaimer {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
 .post-body {
   max-width: 68ch;
   font-size: 1.125rem;
@@ -61,6 +69,28 @@
 .post-body p { margin: 0 0 1.35rem; }
 .post-body a { overflow-wrap: anywhere; }
 .post-body code { font-size: 0.9em; overflow-wrap: anywhere; }
+
+.optional-example {
+  min-width: 0;
+  margin: 0 0 1.35rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.optional-example > summary {
+  padding: 0.85rem 1rem;
+  background: #f1f3ee;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.optional-example[open] > summary { border-bottom: 1px solid var(--rule); }
+.optional-example > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.post-body .example-intro { margin: 0; padding: 1rem; font-size: 0.9375rem; }
+.optional-example > .lean-example { margin: 0; border: 0; border-radius: 0; }
+.optional-example > .dsl-example { margin: 1rem; }
 
 .lean-example {
   min-width: 0;
@@ -197,6 +227,7 @@
   .sidenote-stack { grid-column: 2; }
   .sidenote { grid-column: 2; margin: 0.25rem 0 1.5rem; }
   .post-body > .dsl-example,
+  .post-body > .optional-example-wide,
   .post-body > .specification-figure { grid-column: 1 / -1; }
   .dsl-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
