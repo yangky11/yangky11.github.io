@@ -314,7 +314,11 @@ print(sequential, pairwise)</code></pre>
 
         <p>This is not a new observation. What changed for me is how much weight I put on it. I used to expect that making formalization sufficiently easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
-        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good. A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want. How much assurance we gain depends on how well we have made that connection.</p>
+        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good.</p>
+
+        <p class="thought">A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want.</p>
+
+        <p>How much assurance we gain depends on how well we have made that connection.</p>
 
         <h2 id="proof-value">When is a proof worth it?</h2>
 
@@ -332,7 +336,9 @@ print(sequential, pairwise)</code></pre>
           </aside>
         </div>
 
-        <p>The strongest applications combine high stakes with a close connection between mathematical properties and practical requirements. Hardware is a natural example: we can ask whether a circuit implements the intended arithmetic. Low-level systems software offers others: preserving program behavior through a compiler optimization, enforcing isolation in an OS kernel, or ensuring that a database transaction happens completely or not at all. Regulated industries may offer further opportunities where precise requirements and evidence are part of getting a product into use.</p>
+        <p class="thought">The strongest applications combine high stakes with a close connection between mathematical properties and practical requirements.</p>
+
+        <p>Hardware is a natural example: we can ask whether a circuit implements the intended arithmetic. Low-level systems software offers others: preserving program behavior through a compiler optimization, enforcing isolation in an OS kernel, or ensuring that a database transaction happens completely or not at all. Regulated industries may offer further opportunities where precise requirements and evidence are part of getting a product into use.</p>
 
         <h3 id="ai-for-mathematics">What about AI for mathematics?</h3>
 
@@ -372,7 +378,9 @@ print(sequential, pairwise)</code></pre>
 
         <p>I expect formalization to become more widely used as it gets cheaper. My own research is broadening because that progress has made the questions beyond the formal guarantee more pressing for me.</p>
 
-        <p>I am increasingly interested in how humans can justifiably trust AI’s outputs when a complete formal guarantee is out of reach. Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
+        <p class="thought">I am increasingly interested in how humans can justifiably trust AI’s outputs when a complete formal guarantee is out of reach.</p>
+
+        <p>Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
 
         <p>I do not have a settled research agenda for all of this. Formalization will remain part of my work, and so will the habits it taught me: asking exactly what a claim says, what it assumes, and what would count as evidence for it. What has changed is how much I expect a formal guarantee to settle. I still want AI’s work to be trustworthy. I am less convinced that formalization alone will get us there.</p>
         </div>
