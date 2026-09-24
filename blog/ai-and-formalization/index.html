@@ -55,8 +55,8 @@
 
         <p>It was a fortunate assignment. Over the following years, I developed <a href="https://arxiv.org/abs/1905.09381">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626">LeanDojo</a> and contributed to <a href="https://arxiv.org/abs/2502.07640">Goedel-Prover</a>. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI’s outputs verifiable and trustworthy.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/">Lean</a>, checked it. A major obstacle was the labor of expressing everything precisely enough in Lean. Now coding agents are taking over more of that labor. Codex and Claude Code are now the strongest systems for working in Lean—a striking change from a year ago. Using Lean’s feedback, they can formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
-          <p>That progress has made another question harder to ignore: once we have formalized a claim and proved it in Lean, how much of the original problem have we actually solved? Sometimes the answer is a great deal. Sometimes successful formalization leaves the important problem largely unresolved.</p></div>
+          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/">Lean</a>, checked it. A major obstacle was the labor of expressing everything precisely enough in Lean. Coding agents are taking over more of that labor. Codex and Claude Code are now the strongest systems for working in Lean—a striking change from a year ago. Using Lean’s feedback, they can formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
+          <p>That progress has made another question harder to ignore: once we have formalized a claim and proved it in Lean, how much of the original problem have we actually solved? Sometimes the answer is a great deal. Sometimes successful formalization leaves the important problem largely unresolved. Making formalization cheaper has made me pay more attention to the gap between what we can prove and what we need to trust.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 1">
             <details id="note-1">
               <summary><span class="note-number">1</span> Coding agents and Fermat</summary>
@@ -110,7 +110,7 @@
 <span class="code-comment">-- [1, 1, 2, 3]</span></code></pre>
         </figure>
 
-        <p>An AI can then write the program and prove that it meets this specification. Lean checks the proof. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification.</p>
+        <p>An AI can produce code and a proof like this, and Lean can check whether the proof is valid. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification: the guarantee depends on the checked argument, regardless of who—or what—wrote it.</p>
 
         <p>For years, the labor of writing all this down and getting the proofs checked was the obstacle that dominated my thinking.</p>
 
@@ -124,7 +124,7 @@
 
         <p class="thought">The bigger shift is that the strongest systems for working in Lean are now general coding agents such as Codex and Claude Code.</p>
 
-        <p>They often substantially outperform models built specifically for theorem proving. The tools people use to build ordinary software have also become exceptionally good at formalization.</p>
+        <p>They often substantially outperform models built specifically for theorem proving. Formalization is becoming a capability of the same agents people already use to build software.</p>
 
         <div class="note-block">
           <div class="note-passage"><p>In retrospect, I think this was to be expected. Frontier models have a higher ceiling for the reasoning the task requires. Being fluent in Lean helps, but the model still needs to find a mathematical argument or understand why a program should work. Lean’s feedback can guide that reasoning; it cannot supply all the missing insight.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup></p>
@@ -142,9 +142,9 @@
 
           <p>For users of formalization, the result is that much more of a project can be delegated. In <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Anthropic’s Fermat’s Last Theorem project</a>, Claude Code agents formalized an existing human proof in 11 days, working largely autonomously on a project previously expected to take years. In software, agents can develop implementations, specifications, and correctness proofs together across large codebases.</p>
 
-          <p>That is the sense in which I mean formalization is becoming cheap: far less specialist human labor is needed to get a mathematical argument or software property into a checked form. Compute and libraries still matter. But the automation now covers much more of the work that used to require an expert at the keyboard.</p>
+          <p>That is the sense in which I mean formalization is becoming cheap: far less specialist human labor is needed to get a mathematical argument or software property into a checked form. Compute and libraries still matter, but much more of the work can proceed without an expert at the keyboard.</p>
 
-          <p>In that practical sense, I sometimes call proof search and parts of <em>autoformalization</em> effectively solved. For many well-specified problems within the reasoning ability of a frontier model, the labor of formalization is no longer the main obstacle.</p>
+          <p>For many well-specified problems within the reasoning ability of a frontier model, the labor of formalization is no longer the main obstacle. It is in this practical sense that I sometimes call proof search and parts of <em>autoformalization</em> effectively solved.</p>
 
           <p>This is much of what I hoped for when I entered the field. If the labor of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p></div>
           <div class="sidenote-stack">
@@ -178,9 +178,7 @@
 
         <p>Performance also matters enormously. Engineers reorganize computations and combine operations to make better use of the GPU. A faster kernel can save time throughout a training run. But every optimization raises the same question: did we preserve the behavior we care about?</p>
 
-        <p>Kernels seemed to offer a good way to answer that question. They are relatively compact, and their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Here it seemed we could specify exactly what “correct” meant.</p>
-
-        <p>The hope was that AI could optimize these kernels and prove the replacements correct, giving us speed and confidence without requiring a formal-methods expert to scrutinize every change.</p>
+        <p>Kernels seemed to offer a good way to answer that question. They are relatively compact, and their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Here it seemed we could specify exactly what “correct” meant and let AI do the optimization and proof work.</p>
 
         <h3 id="veritile-guarantees">What we could prove</h3>
 
@@ -221,7 +219,7 @@
           </aside>
         </div>
 
-        <p>These proofs can rule out whole classes of implementation mistakes that testing might miss. But my motivating question was more practical: can we use the faster kernel in a long training run without harming the outcome?</p>
+        <p>These proofs can rule out whole classes of implementation mistakes that testing might miss. To answer our original question—whether we could use the faster kernel without harming training—we needed to understand what this mathematical equivalence meant for the actual computation.</p>
 
         <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
@@ -245,9 +243,7 @@ print(sequential, pairwise)</code></pre>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
-        <p>Even if we could prove an error bound for every relevant input, we would still need to know which bound is sufficient for training. Asking an AI to choose one does not remove the need to justify it.</p>
-
-        <p>A local difference can interact with optimizer state and many subsequent computations over a long training run. To turn a bound on that difference into useful assurance, we need a connection between the kernel’s numerical behavior and the training outcome we want to protect.</p>
+        <p>An error bound would answer how much the outputs can differ. It would still leave us asking how much difference training can tolerate. A local difference can interact with optimizer state and many subsequent computations over a long run. We need a connection between the kernel’s numerical behavior and the training outcome we want to protect.</p>
 
         <p>That connection may also depend on the training data. There may be no useful worst-case guarantee across all datasets; the practical question may be whether an optimization works for the particular dataset we have. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
@@ -278,9 +274,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>In practice, engineers compare training trajectories on relevant data, using both optimized kernels and a slower trusted reference. These experiments are expensive and cannot guarantee what will happen in the eventual full-scale run, but they test the behavior we care about more directly. Sometimes engineers disable an optimization and accept slower training when they cannot get enough confidence in its consequences.</p>
 
-        <p>For the self-improvement loop we imagined, proofs still remove real sources of uncertainty. But we may need expensive training experiments before adopting an AI’s faster kernel, even after Lean has checked a proof of mathematical equivalence.</p>
-
-        <p>This was the important update for me. We knew what we wanted: faster training without harming the result. VeriTile proved useful properties, but for optimizations that change numerical behavior, we did not know how to turn those properties into the assurance we wanted.</p>
+        <p>For the self-improvement loop we imagined, proofs still remove real sources of uncertainty. But we may need those expensive experiments before adopting an AI’s faster kernel, even after Lean has checked a proof of mathematical equivalence. This was the important update for me: we knew what we wanted, but for optimizations that change numerical behavior, we lacked a useful mathematical connection between the properties we could prove and the training outcome we cared about.</p>
 
         <p class="thought">A missing specification is sometimes an unfinished document. In this case, it can be a missing piece of science.</p>
 
@@ -288,13 +282,15 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="specifications">The work before the proof</h2>
 
-        <p>With VeriTile, we knew what we wanted but lacked a useful mathematical connection to it. Sometimes the work starts even earlier: we have not settled what we want.</p>
+        <p>VeriTile exposed a gap between a clear goal and a useful mathematical claim. In other applications, the work starts even earlier: we have not settled what we want.</p>
 
         <p>Consider smart contracts: programs on a blockchain that can control real money. Bugs can be expensive and difficult to fix after deployment. This looks like an excellent application for formal verification, and tools such as the <a href="https://docs.certora.com/en/latest/docs/user-guide/index.html">Certora Prover</a> already let developers check properties of their contracts.</p>
 
         <p>My conversations with smart-contract auditing companies have given me a more nuanced picture. Their work draws on human review, static analysis, testing, fuzzing, and formal verification. In most of the companies I have spoken with, formal verification is only a small part of that work.</p>
 
         <p>A lot of the work is figuring out what the client actually wants the system to do. The clients themselves often do not have a clear answer at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is part of the audit, and making proofs cheaper does not automatically resolve that work.</p>
+
+        <p>The sorting example was unusually tidy: we already knew what “correct” meant and could state it directly. In other applications, reaching that point can be much of the work.</p>
 
         <figure class="specification-figure" aria-labelledby="specification-figure-title">
           <div class="specification-figure-title" id="specification-figure-title">From an intended outcome to a checked claim</div>
@@ -315,16 +311,16 @@ print(sequential, pairwise)</code></pre>
 
         <p>This is not a new observation. What changed for me is how much weight I put on it. I used to expect that making formalization sufficiently easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
-        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good. A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want. That distinction matters especially when agents act on our behalf.</p>
+        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good. A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want. How much assurance we gain depends on how well we have made that connection.</p>
 
         <h2 id="proof-value">When is a proof worth it?</h2>
 
-        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That is a different proposition from “we ran more tests and found fewer bugs.” But in many applications, the proof closes a narrower question than the one we actually care about.</p>
+        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, the proof closes a narrower question than the one we actually care about.</p>
 
-        <p>A proof covers every case under its stated assumptions; passing a collection of tests does not. That distinction matters. But the practical benefit depends on whether ruling out the failures covered by the proof changes what we can confidently build or deploy.</p>
+        <p>A proof covers every case under its stated assumptions; passing a collection of tests does not. The practical benefit of that stronger guarantee depends on whether it rules out failures that matter to what we want to build or deploy.</p>
 
         <div class="note-block">
-          <div class="note-passage"><p>Even a complete guarantee would have to justify its cost. When the guarantee is partial, we need to be clear about which benefit we are paying for.<sup><a class="note-ref" id="ref-7" href="#note-7" aria-label="Read note 7">7</a></sup> Formal verification belongs in the same practical comparison as testing, fuzzing, code review, and experiments: which uncertainties matter, and what is the best way to address them? For VeriTile, a proof of mathematical equivalence removed one concern, but left us needing expensive training experiments before adopting a numerically different kernel. The theorem was useful without settling the decision.</p></div>
+          <div class="note-passage"><p>We therefore need to compare the benefit with the cost.<sup><a class="note-ref" id="ref-7" href="#note-7" aria-label="Read note 7">7</a></sup> Formal verification belongs in the same practical comparison as testing, fuzzing, code review, and experiments: which uncertainties matter, and what is the best way to address them? Sometimes a proof removes the uncertainty blocking a decision. Sometimes, as with VeriTile, it provides useful assurance while leaving us with substantial experimental work.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 7">
             <details id="note-7">
               <summary><span class="note-number">7</span> Selling formal methods</summary>
@@ -335,21 +331,23 @@ print(sequential, pairwise)</code></pre>
 
         <p>The strongest applications combine high stakes with a close connection between mathematical properties and practical requirements. Hardware is a natural example: we can ask whether a circuit implements the intended arithmetic. Low-level systems software offers others: preserving program behavior through a compiler optimization, enforcing isolation in an OS kernel, or ensuring that a database transaction happens completely or not at all. Regulated industries may offer further opportunities where precise requirements and evidence are part of getting a product into use.</p>
 
-        <p>This leaves me more optimistic about formal verification as an everyday tool than as a universal guarantee. High stakes help justify expensive verification. As formalization gets cheaper, finding a few important bugs or proving one useful property can be enough to justify it.</p>
+        <h3 id="ai-for-mathematics">What about AI for mathematics?</h3>
+
+        <p>Mathematics has an unusually direct connection to formal statements: the theorem itself is often what we care about. Whether the stakes are high depends on why we care about it. If a mathematical result matters to you, establishing it rigorously has value in its own right.</p>
+
+        <p>For AI research, mathematics has also been a way to demonstrate what models can do. If the whole pitch is “look, AI can do math,” I think that particular party is largely over. That says more about what now counts as an impressive AI demo than about the value of mathematics.</p>
+
+        <h3 id="everyday-verification">A routine tool for coding agents</h3>
+
+        <p>High stakes help justify expensive verification. Falling costs broaden where it is worthwhile: finding a few important bugs or proving one useful property can be enough. This leaves me optimistic about formal verification becoming an everyday tool, even when it cannot provide an end-to-end guarantee.</p>
 
         <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing. Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The concrete payoff he describes is finding and fixing bugs. That is valuable even without a claim that the entire SDK is now correct.</p>
 
         <p>An agent might prove a property of one component and use property-based tests—checking a general property on many generated inputs—elsewhere. Lower costs make it easier to use formal methods wherever they help, without requiring complete verification to be the destination of every project.</p>
 
-        <h3 id="ai-for-mathematics">What about AI for mathematics?</h3>
-
-        <p>Mathematics has an unusually direct connection to formal statements: the theorem itself is often what we care about. If a mathematical result matters to you, establishing it rigorously has value in its own right.</p>
-
-        <p>For AI research, mathematics has also been a way to demonstrate what models can do. If the whole pitch is “look, AI can do math,” I think that particular party is largely over.</p>
-
         <h2 id="where-formalization-fits">Can formal verification make AI safer?</h2>
 
-        <p>Recent security incidents make <strong>verified sandboxes</strong> an appealing idea. If an agent can find vulnerabilities that humans miss, perhaps we should put it behind boundaries that we can prove it cannot cross. This is one application of formal verification that I find compelling.</p>
+        <p>In AI safety, we may want to rely on a formal guarantee before giving an agent more freedom to act. Recent security incidents make <strong>verified sandboxes</strong> an appealing idea: if an agent can find vulnerabilities that humans miss, perhaps we should put it behind boundaries that we can prove it cannot cross. This is one application of formal verification that I find compelling.</p>
 
         <p>A sound proof can rule out an entire class of attacks, under its assumptions. The attacker becoming smarter does not invalidate the theorem. We do not have to anticipate every attack to benefit from a guarantee that untrusted code cannot access protected memory.</p>
 
@@ -369,7 +367,7 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="looking-ahead">What this changes for my research</h2>
 
-        <p>I expect formalization to become more widely used as it gets cheaper. I also expect it to settle a smaller fraction of the questions I most want to study. After eight years working on this topic, I find those expectations surprisingly compatible.</p>
+        <p>I expect formalization to become more widely used as it gets cheaper. My own research is broadening because that progress has made the questions beyond the formal guarantee more pressing for me.</p>
 
         <p>I am increasingly interested in how humans can justifiably trust AI’s outputs when a complete formal guarantee is out of reach. Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
 
