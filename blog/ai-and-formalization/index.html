@@ -284,10 +284,10 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="proof-value">When is a proof worth it?</h2>
 
-        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, the proof closes a narrower question than the one we actually care about. A proof covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
+        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, a proof settles only part of what we need to know. A proof covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
 
         <div class="note-block">
-          <div class="note-passage"><p>We therefore need to weigh the benefit against the cost.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> Formal verification belongs in the same practical comparison as testing, fuzzing, code review, and experiments: which uncertainties matter, and what is the best way to address them? Sometimes a proof removes the uncertainty blocking a decision. Sometimes, as with VeriTile, it provides useful assurance while leaving us with substantial experimental work.</p></div>
+          <div class="note-passage"><p>Like testing, fuzzing, code review, and experiments, formal verification needs to justify its cost.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> What could go wrong, and which approach gives us the most confidence for the effort involved? Sometimes a proof gives us enough evidence to adopt a change. In other cases, as with VeriTile, it rules out important errors but leaves us needing experiments to find out whether the change works as intended.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 6">
             <details id="note-6">
               <summary><span class="note-number">6</span> Selling formal methods</summary>
