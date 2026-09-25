@@ -114,13 +114,11 @@
 
         <p>An AI can write the program and prove that it meets this specification. Lean checks the proof. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification: the guarantee depends on the checked argument, regardless of who—or what—wrote it.</p>
 
-        <p>For years, the cost of writing all this down and getting the proofs checked dominated my thinking.</p>
-
         <h2 id="cheaper-proofs">Why formalization is getting cheaper</h2>
 
-        <p>Early work focused on training neural models to produce formal proofs. Open tools and datasets, including our <a href="https://arxiv.org/abs/1905.09381" target="_blank" rel="noopener">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626" target="_blank" rel="noopener">LeanDojo</a> projects, helped researchers build specialized provers. One successful approach was to specialize existing language models through post-training on formal statements and proofs. <a href="https://arxiv.org/abs/2508.03613" target="_blank" rel="noopener">Goedel-Prover</a> (2025), for example, used generated and checked Lean proofs to train increasingly capable models.</p>
+        <p>For years, the cost of formalization dominated my thinking. Early work focused on training neural models to produce formal proofs. Open tools and datasets, including our <a href="https://arxiv.org/abs/1905.09381" target="_blank" rel="noopener">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626" target="_blank" rel="noopener">LeanDojo</a> projects, helped researchers build specialized provers. One successful approach was to specialize existing language models through post-training on formal statements and proofs. <a href="https://arxiv.org/abs/2508.03613" target="_blank" rel="noopener">Goedel-Prover</a> (2025), for example, used generated and checked Lean proofs to train increasingly capable models.</p>
 
-        <p>The results showed how far this could go. In 2024, Google DeepMind’s Lean-based <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">AlphaProof</a>, together with AlphaGeometry 2, reached silver-medal-level performance at the International Mathematical Olympiad (IMO). ByteDance’s Lean-based <a href="https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025" target="_blank" rel="noopener">Seed-Prover</a> reported the same medal level the following year. AI could find arguments requiring substantial mathematical insight and produce machine-checkable proofs in Lean.</p>
+        <p>Specialized systems demonstrated substantial mathematical capabilities. In 2024, Google DeepMind’s Lean-based <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">AlphaProof</a>, together with AlphaGeometry 2, reached silver-medal-level performance at the International Mathematical Olympiad (IMO). ByteDance’s Lean-based <a href="https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025" target="_blank" rel="noopener">Seed-Prover</a> reported the same medal level the following year. AI could find arguments requiring substantial mathematical insight and produce machine-checkable proofs in Lean.</p>
 
         <p class="thought">More recently, general frontier models have taken the lead in large-scale Lean formalization, often through coding agents such as Codex and Claude Code.</p>
 
@@ -153,15 +151,11 @@
 
         <h2 id="veritile">What I learned from VeriTile</h2>
 
-        <p><a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a>, uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training.</p>
-
-        <p>We saw a promising application of formal verification, and a possible part of <em>recursive self-improvement</em>: imagine an AI optimizing its own GPU kernels, proving its changes correct, and using the faster kernels to train the next model. Formal verification could make that loop much easier to trust.</p>
+        <p><a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a>, uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training. We started the project with a possible path to <em>recursive self-improvement</em> in mind: an AI could optimize its own kernels, prove its changes correct, and use the faster kernels to train the next model.</p>
 
         <h3 id="veritile-motivation">Why kernels looked so promising</h3>
 
-        <p>Training a large model is expensive and difficult to debug. An error may stay hidden until training deteriorates much later in a run. By then, finding the cause can be harder than fixing it.</p>
-
-        <p>Engineers reorganize computations to make better use of the GPU, saving time throughout a training run. But every optimization raises the same question: did we preserve the behavior we care about?</p>
+        <p>Training a large model is expensive, so engineers reorganize computations to make better use of the GPU and save time throughout a run. But an error may stay hidden until training deteriorates much later. By then, finding the cause can be harder than fixing it. Every optimization therefore raises the same question: did we preserve the behavior we care about?</p>
 
         <p>Kernels are relatively compact, and their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Here it seemed we could specify exactly what “correct” meant and let AI do the optimization and proof work.</p>
 
@@ -197,8 +191,7 @@
         </details>
 
         <div class="note-block">
-          <div class="note-passage"><p>A more substantial example is <a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements.</p>
-          <p>VeriTile proves that its Lean implementation of FlashAttention computes the same function as a straightforward reference, using arithmetic over the real numbers.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> The proof covers all inputs satisfying its assumptions.</p></div>
+          <div class="note-passage"><p>One example is <a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements. VeriTile proves that its Lean implementation of FlashAttention computes the same function as a straightforward reference, using arithmetic over the real numbers.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> The proof covers all inputs satisfying its assumptions.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 5">
             <details id="note-5">
               <summary><span class="note-number">5</span> The FlashAttention guarantee</summary>
@@ -211,9 +204,7 @@
 
         <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
-        <p>If a replacement preserves outputs down to the last bit and all other relevant behavior, training cannot tell the difference. Proving this <em>bitwise equivalence</em> in an accurate execution model would justify the replacement.</p>
-
-        <p>Many useful optimizations, however, change how arithmetic is grouped. Floating-point calculations round intermediate results, so addition is <strong>not associative</strong>: changing the grouping can change the result.</p>
+        <p>If a replacement preserves outputs down to the last bit and all other relevant behavior, training cannot tell the difference. Proving this <em>bitwise equivalence</em> in an accurate execution model would justify the replacement. Many useful optimizations, however, change how arithmetic is grouped. Floating-point calculations round intermediate results, so addition is <strong>not associative</strong>: changing the grouping can change the result.</p>
 
         <figure class="lean-example" id="floating-point-example">
           <figcaption>Python · Same sum, different grouping</figcaption>
@@ -223,15 +214,11 @@ pairwise = (a + b) + (c + d)
 print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result.</p>
-
-        <p>Demanding bitwise equivalence would rule out some useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result. Demanding bitwise equivalence would rule out some useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
-        <p>An error bound tells us how much the outputs can differ, but how much can training tolerate? Small differences can affect many later steps. We need to connect the kernel’s numerical behavior to the training outcome we want to protect.</p>
-
-        <p>That connection may depend on the data. There may be no useful worst-case guarantee across all datasets; we may need to know whether an optimization works on ours. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
+        <p>An error bound tells us how much the outputs can differ, but how much can training tolerate? Small differences can affect many later steps. We need to connect the kernel’s numerical behavior to the training outcome we want to protect, and that connection may depend on the data. There may be no useful worst-case guarantee across all datasets; we may need to know whether an optimization works on ours. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
         <figure class="verification-figure" aria-labelledby="veritile-figure-caption">
           <div class="verification-figure-title">Three questions about correctness</div>
@@ -270,13 +257,9 @@ print(sequential, pairwise)</code></pre>
 
         <p>VeriTile exposed a gap between a clear goal and a useful mathematical claim. In other applications, the work starts even earlier: we have not settled what we want.</p>
 
-        <p>Consider smart contracts: programs on a blockchain that can control real money. Bugs can be expensive and difficult to fix after deployment. This looks like an excellent application for formal verification, and tools already exist for checking properties of these contracts.</p>
+        <p>Consider smart contracts: programs on a blockchain that can control real money. Bugs can be expensive and difficult to fix after deployment. This looks like an excellent application for formal verification, and tools already exist for checking properties of these contracts. In practice, auditing draws on human review, static analysis, testing, fuzzing, and formal verification. Formal verification is often only a small part of that work.</p>
 
-        <p>Smart-contract auditing draws on human review, static analysis, testing, fuzzing, and formal verification. Formal verification is often only a small part of that work.</p>
-
-        <p>Much of the work is figuring out what the client wants the system to do. Clients often do not know at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is a major part of the audit; cheaper proofs do not automatically resolve it.</p>
-
-        <p>The sorting example was unusually tidy: we already knew what “correct” meant and could state it directly. In other applications, reaching that point can be much of the work.</p>
+        <p>Much of the work is figuring out what the client wants the system to do. Clients often do not know at the outset. Knowing that you want to protect users’ money does not tell you exactly what to prove. Arriving at a useful specification is a major part of the audit; cheaper proofs do not automatically resolve it. The sorting example started with this work already done: we knew what “correct” meant and could state it directly.</p>
 
         <figure class="specification-figure" aria-labelledby="specification-figure-title">
           <div class="specification-figure-title" id="specification-figure-title">From an intended outcome to a checked claim</div>
@@ -293,9 +276,7 @@ print(sequential, pairwise)</code></pre>
           <figcaption>These steps inform one another. The practical value of a proof depends on how well the model and statement capture the intended outcome.</figcaption>
         </figure>
 
-        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore.</p>
-
-        <p>This is not a new observation, but I used to expect that making formalization easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
+        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore. This is not a new observation, but I used to expect that making formalization easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
         <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good.</p>
 
@@ -303,9 +284,7 @@ print(sequential, pairwise)</code></pre>
 
         <h2 id="proof-value">When is a proof worth it?</h2>
 
-        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, the proof closes a narrower question than the one we actually care about.</p>
-
-        <p>A proof covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
+        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, the proof closes a narrower question than the one we actually care about. A proof covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
 
         <div class="note-block">
           <div class="note-passage"><p>We therefore need to weigh the benefit against the cost.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> Formal verification belongs in the same practical comparison as testing, fuzzing, code review, and experiments: which uncertainties matter, and what is the best way to address them? Sometimes a proof removes the uncertainty blocking a decision. Sometimes, as with VeriTile, it provides useful assurance while leaving us with substantial experimental work.</p></div>
@@ -341,17 +320,13 @@ print(sequential, pairwise)</code></pre>
 
         <h3 id="everyday-verification">A routine tool for coding agents</h3>
 
-        <p>High stakes help justify expensive verification. Falling costs broaden where it is worthwhile: finding a few important bugs or proving one useful property can be enough. This leaves me optimistic about formal verification becoming an everyday tool, even when it cannot provide an end-to-end guarantee.</p>
+        <p>Beyond high-stakes applications, falling costs make verification worthwhile in more everyday software development. Finding a few important bugs or proving one useful property can be enough. <a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing.</p>
 
-        <p><a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing. Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" rel="noopener">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The concrete payoff he describes is finding and fixing bugs. That is valuable even without a claim that the entire SDK is now correct.</p>
-
-        <p>An agent might prove a property of one component and use property-based tests—checking a property on generated inputs—elsewhere. Complete verification need not be the destination of every project.</p>
+        <p>Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" rel="noopener">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The payoff is finding and fixing bugs, even without a claim that the entire SDK is now correct. An agent might prove a property of one component and use property-based tests—checking a property on generated inputs—elsewhere. Complete verification need not be the destination of every project.</p>
 
         <h2 id="where-formalization-fits">Can formal verification make AI safer?</h2>
 
-        <p>In AI safety, recent security incidents make <strong>verified sandboxes</strong> an appealing idea: if an agent can find vulnerabilities that humans miss, perhaps we should put it behind boundaries that we can prove it cannot cross. I find this application compelling.</p>
-
-        <p>A valid proof can rule out an entire class of attacks, under its assumptions. The attacker becoming smarter does not invalidate the theorem. We do not have to anticipate every attack to benefit from a guarantee that untrusted code cannot access protected memory.</p>
+        <p>In AI safety, recent security incidents make <strong>verified sandboxes</strong> an appealing idea: if an agent can find vulnerabilities that humans miss, perhaps we should put it behind boundaries that we can prove it cannot cross. I find this application compelling because a valid proof can rule out an entire class of attacks, under its assumptions. The attacker becoming smarter does not invalidate the theorem. We do not have to anticipate every attack to benefit from a guarantee that untrusted code cannot access protected memory.</p>
 
         <div class="note-block">
           <div class="note-passage"><p>For a particular deployment, two questions remain. <strong>Does the running system enforce the boundary?</strong> A proof about sandboxed code may rely on assumptions about the runtime and the underlying machine. Those assumptions need to hold in the deployed system. If another tool can retrieve the same data for the agent, the memory guarantee does not close that route.<sup><a class="note-ref" id="ref-8" href="#note-8" aria-label="Read note 8">8</a></sup></p></div>
