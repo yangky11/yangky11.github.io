@@ -214,7 +214,7 @@ pairwise = (a + b) + (c + d)
 print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result. Demanding bitwise equivalence would rule out some useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
