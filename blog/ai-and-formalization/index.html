@@ -133,7 +133,7 @@
 
           <p>This is what I mean by formalization becoming cheap: much less specialist human labor, though compute and libraries still matter. For many tasks with a clear statement and a correct informal argument, so little specialist intervention is needed that I sometimes call proof search and parts of <em>autoformalization</em> effectively solved.</p>
 
-          <p>This is much of what I hoped for when I entered the field. But how much closer does cheaper formalization bring us to software we can trust? VeriTile gave me a concrete way to explore that question.</p></div>
+          <p>This is much of what I hoped for when I entered the field. But working on VeriTile changed my expectations of what cheaper proofs would let us guarantee.</p></div>
           <div class="sidenote-stack">
             <aside class="sidenote" role="note" aria-label="Note 3">
               <details id="note-3">
@@ -153,7 +153,7 @@
 
         <h2 id="veritile">What I learned from VeriTile</h2>
 
-        <p>I’ve been working on <a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, a project led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a> that uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training.</p>
+        <p><a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a>, uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training.</p>
 
         <p>We saw a promising application of formal verification, and a possible part of <em>recursive self-improvement</em>: imagine an AI optimizing its own GPU kernels, proving its changes correct, and using the faster kernels to train the next model. Formal verification could make that loop much easier to trust.</p>
 
