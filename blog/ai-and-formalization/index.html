@@ -191,7 +191,7 @@
         </details>
 
         <div class="note-block">
-          <div class="note-passage"><p>One example is <a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements. VeriTile proves that its Lean implementation of FlashAttention computes the same function as a straightforward reference, using arithmetic over the real numbers.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> The proof covers all inputs satisfying its assumptions.</p></div>
+          <div class="note-passage"><p>One example is <a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener"><strong>FlashAttention</strong></a>, which makes the attention computation in language models more efficient. A straightforward implementation of attention creates a large array of scores; FlashAttention works through smaller blocks to avoid it. The code looks quite different from the formula it implements. VeriTile proves that FlashAttention computes the same function as a straightforward reference, using arithmetic over the real numbers.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup> The proof covers all inputs satisfying its assumptions.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 5">
             <details id="note-5">
               <summary><span class="note-number">5</span> The FlashAttention guarantee</summary>
@@ -204,7 +204,7 @@
 
         <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
-        <p>If a replacement preserves outputs down to the last bit and all other relevant behavior, training cannot tell the difference. Proving this <em>bitwise equivalence</em> in an accurate execution model would justify the replacement. Many useful optimizations, however, change how arithmetic is grouped. Floating-point calculations round intermediate results, so addition is <strong>not associative</strong>: changing the grouping can change the result.</p>
+        <p>If a replacement preserves outputs down to the last bit and all other relevant behavior, training cannot tell the difference. Proving this <em>bitwise equivalence</em> in an accurate execution model would justify the replacement. Many useful optimizations, however, change how arithmetic is grouped. Floating-point arithmetic is <strong>not associative</strong>: rounding intermediate results means that changing the grouping can change the result.</p>
 
         <figure class="lean-example" id="floating-point-example">
           <figcaption>Python · Same sum, different grouping</figcaption>
