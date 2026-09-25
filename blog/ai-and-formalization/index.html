@@ -124,20 +124,23 @@
 
         <p>In 2024, Google DeepMind’s <a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">AlphaProof</a> used Lean to solve problems from the International Mathematical Olympiad (IMO). Together with AlphaGeometry 2, it reached silver-medal-level performance. The following year, ByteDance reported silver-medal-level performance with its Lean-based <a href="https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025" target="_blank" rel="noopener">Seed-Prover</a> system. AI could find arguments requiring substantial mathematical insight and produce machine-checkable proofs in Lean.</p>
 
-        <p>General models were also advancing. In 2025, an advanced version of <a href="https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/" target="_blank" rel="noopener">Gemini Deep Think reached gold-medal-level performance</a> with proofs written directly in natural language and officially graded by the IMO. This progress in general reasoning has carried over to Lean.</p>
-
-        <p class="thought">The strongest systems for large-scale Lean formalization are now built on general frontier models, often using coding agents such as Codex and Claude Code.</p>
+        <p>General models were also advancing. In 2025, an advanced version of <a href="https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/" target="_blank" rel="noopener">Gemini Deep Think reached gold-medal-level performance</a> with proofs written directly in natural language and officially graded by the IMO.</p>
 
         <div class="note-block">
-          <div class="note-passage"><p>They often substantially outperform models built specifically for theorem proving. In retrospect, this makes sense: frontier models have a higher reasoning ceiling. Being fluent in Lean helps, but the model still needs to find a mathematical argument or understand why a program should work. Lean’s feedback can guide that reasoning; it cannot supply all the missing insight.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup></p>
-          <p>General coding agents can also navigate codebases, search documentation, test ideas with small programs, and coordinate changes across files. These skills matter when the task grows from an isolated theorem to a large mathematical development or software project.</p></div>
+          <div class="note-passage"><p>OpenAI’s Navier–Stokes work takes the story beyond contest mathematics. Its agents found the argument before a separate stage of Lean formalization and verification.<sup><a class="note-ref" id="ref-3" href="#note-3" aria-label="Read note 3">3</a></sup> Lean served to check the proof and give others grounds to trust it. These gains in general reasoning also make models better at formalization.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 3">
             <details id="note-3">
-              <summary><span class="note-number">3</span> Reasoning and formal feedback</summary>
-              <div class="note-content"><p><a href="https://openai.com/index/navier-stokes-solution/" target="_blank" rel="noopener">OpenAI reports</a> a finite-time blow-up result for the forced three-dimensional Navier–Stokes equations, followed by a separate stage of Lean formalization and verification.</p></div>
+              <summary><span class="note-number">3</span> Discovery, then verification</summary>
+              <div class="note-content"><p>The <a href="https://openai.com/index/navier-stokes-solution/" target="_blank" rel="noopener">reported result</a> concerns finite-time blow-up for the forced three-dimensional Navier–Stokes equations. OpenAI describes Lean formalization and verification as a separate stage after the agents arrived at their proof.</p></div>
             </details>
           </aside>
         </div>
+
+        <p class="thought">The strongest systems for large-scale Lean formalization are now built on general frontier models, often using coding agents such as Codex and Claude Code.</p>
+
+        <p>They often substantially outperform models built specifically for theorem proving. In retrospect, this makes sense: frontier models have a higher reasoning ceiling. Being fluent in Lean helps, but the model still needs to find a mathematical argument or understand why a program should work. Lean’s feedback can guide that reasoning; it cannot supply all the missing insight.</p>
+
+        <p>General coding agents can also navigate codebases, search documentation, test ideas with small programs, and coordinate changes across files. These skills matter when the task grows from an isolated theorem to a large mathematical development or software project.</p>
 
         <div class="note-block">
           <div class="note-passage"><p>More importantly, general models can acquire the same specialized skills. If we can construct useful domain training data, frontier labs can use it too, either directly or by training specialists and transferring their skills into a general model.<sup><a class="note-ref" id="ref-4" href="#note-4" aria-label="Read note 4">4</a></sup> Lean expertise can become one capability among many.<sup><a class="note-ref" id="ref-5" href="#note-5" aria-label="Read note 5">5</a></sup></p>
