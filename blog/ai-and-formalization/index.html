@@ -214,7 +214,7 @@ pairwise = (a + b) + (c + d)
 print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Grouping the additions into independent pairs allows parallel execution, but changes the result. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Regrouping the additions changes the result. In a GPU kernel, such regrouping can enable parallel execution. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
@@ -348,7 +348,7 @@ print(sequential, pairwise)</code></pre>
 
         <p class="thought">I am increasingly interested in how humans can justifiably trust AI’s outputs when a complete formal guarantee is out of reach.</p>
 
-        <p>Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. How can stronger systems earn our trust despite that gap? One approach is to train them to make their work easier for weaker verifiers to check, as explored in <a href="https://arxiv.org/abs/2407.13692" target="_blank" rel="noopener">prover–verifier games</a>. I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
+        <p>Humans are weak, compute-limited verifiers: we may be unable to solve the same problems ourselves, and we cannot check everything an AI produces. I’m interested in approaches such as <a href="https://arxiv.org/abs/2407.13692" target="_blank" rel="noopener">prover–verifier games</a>: can we design interactions that help weaker verifiers distinguish correct reasoning from convincing mistakes? I am also interested in the institutions—rules, incentives, and accountability—that allow humans and AI agents to trust one another and cooperate while preserving meaningful human control.</p>
 
         <p>The work I’m most excited about now connects verification with alignment and the design of systems in which humans and AI agents can reliably work together. My research agenda is still taking shape. Formalization will remain part of my work, and so will the habits it taught me: asking exactly what a claim says, what it assumes, and what would count as evidence for it. What has changed is how much I expect a formal guarantee to settle. I still want AI’s work to be trustworthy. I am less convinced that formalization alone will get us there.</p>
         </div>
