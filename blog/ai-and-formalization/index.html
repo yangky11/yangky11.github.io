@@ -214,7 +214,7 @@ pairwise = (a + b) + (c + d)
 print(sequential, pairwise)</code></pre>
         </figure>
 
-        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. Regrouping the additions changes the result. In a GPU kernel, such regrouping can enable parallel execution. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
+        <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. In a GPU kernel, such regrouping can enable parallel execution. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
         <h3 id="veritile-training">How small is small enough for training?</h3>
 
@@ -276,15 +276,15 @@ print(sequential, pairwise)</code></pre>
           <figcaption>These steps inform one another. The practical value of a proof depends on how well the model and statement capture the intended outcome.</figcaption>
         </figure>
 
-        <p>For a long time, the last two steps consumed so much effort that they dominated my thinking. AI is rapidly reducing that effort. The first two are becoming harder to ignore. This is not a new observation, but I used to expect that making formalization easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
+        <p>For a long time, the effort of writing formal statements and proofs dominated my thinking. AI is rapidly reducing that effort, making questions of intent and modeling harder to ignore. This is not a new observation, but I used to expect that making formalization easy would make these remaining problems manageable across a broad range of applications. I now expect them to determine where formalization delivers the most value.</p>
 
-        <p>AI can help with the first two steps too: clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good.</p>
+        <p>AI can also help clarify a request, propose a model, or spot an omission. But we still need evidence that its choices are good.</p>
 
         <p class="thought">A proof can establish that code meets an AI-generated specification without establishing that the specification captures what we want.</p>
 
         <h2 id="proof-value">When is a proof worth it?</h2>
 
-        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, a proof settles only part of what we need to know. A proof covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
+        <p>Part of the appeal of formal verification is the promise of closure: we have checked this, and we can move on. That peace of mind has real value. But in many applications, a proof settles only part of what we need to know. It covers every case under its stated assumptions; passing a collection of tests does not. Its practical benefit depends on whether it rules out failures that matter.</p>
 
         <div class="note-block">
           <div class="note-passage"><p>Like testing, fuzzing, code review, and experiments, formal verification needs to justify its cost.<sup><a class="note-ref" id="ref-6" href="#note-6" aria-label="Read note 6">6</a></sup> What could go wrong, and which approach gives us the most confidence for the effort involved? Sometimes a proof gives us enough evidence to adopt a change. In other cases, as with VeriTile, it rules out important errors but leaves us needing experiments to find out whether the change works as intended.</p></div>
@@ -320,9 +320,9 @@ print(sequential, pairwise)</code></pre>
 
         <h3 id="everyday-verification">A routine tool for coding agents</h3>
 
-        <p>Beyond high-stakes applications, falling costs make verification worthwhile in more everyday software development. Finding a few important bugs or proving one useful property can be enough. <a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing.</p>
+        <p>Falling costs broaden where verification is worthwhile: finding a few important bugs or proving one useful property can be enough. <a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing.</p>
 
-        <p>Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" rel="noopener">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. The payoff is finding and fixing bugs, even without a claim that the entire SDK is now correct. An agent might prove a property of one component and use property-based tests—checking a property on generated inputs—elsewhere. Complete verification need not be the destination of every project.</p>
+        <p>Boris Cherny, the creator of Claude Code, <a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" rel="noopener">recently reported</a> that a few short prompts to Opus 5.5, using Lean, produced 16 pull requests fixing bugs and race conditions in the Claude Agent SDK. Those fixes are valuable even without a claim that the entire SDK is now correct. An agent might prove a property of one component and use property-based tests—checking a property on generated inputs—elsewhere. Complete verification need not be the destination of every project.</p>
 
         <h2 id="where-formalization-fits">Can formal verification make AI safer?</h2>
 
