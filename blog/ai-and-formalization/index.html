@@ -55,7 +55,7 @@
 
         <p>It was a fortunate assignment. Over the following years, I developed <a href="https://arxiv.org/abs/1905.09381" target="_blank" rel="noopener">CoqGym</a> and <a href="https://arxiv.org/abs/2306.15626" target="_blank" rel="noopener">LeanDojo</a> and contributed to <a href="https://arxiv.org/abs/2508.03613" target="_blank" rel="noopener">Goedel-Prover</a>. I was lucky to join a small research community and watch its ideas become widely recognized. For much of that time, I was an enthusiastic proponent of formalization as a way to make AI’s outputs verifiable and trustworthy.</p>
         <div class="note-block">
-          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/" target="_blank" rel="noopener">Lean</a>, checked it. A major obstacle was the labor of expressing everything precisely enough in Lean. Coding agents such as Codex and Claude Code are taking over more of that labor. With Lean’s feedback, they can now formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
+          <div class="note-passage"><p>The hope was appealing: AI could do the creative work, while a rigorous formal system, such as <a href="https://lean-lang.org/" target="_blank" rel="noopener">Lean</a>, checked it. A major obstacle was the cost of expressing everything precisely enough in Lean. Coding agents such as Codex and Claude Code are reducing that cost. With Lean’s feedback, they can now formalize major results like Fermat’s Last Theorem and build large software projects with specifications and correctness proofs.<sup><a class="note-ref" id="ref-1" href="#note-1" aria-label="Read note 1">1</a></sup></p>
           <p>That progress has made another question harder to ignore: once we have formalized a claim and proved it in Lean, how much of the original problem have we actually solved? Sometimes a great deal; sometimes the important problem remains largely unresolved. Cheaper formalization has made me pay more attention to the gap between what we can prove and what we need to trust.</p></div>
           <aside class="sidenote" role="note" aria-label="Note 1">
             <details id="note-1">
@@ -114,7 +114,7 @@
 
         <p>An AI can write the program and prove that it meets this specification. Lean checks the proof. The resulting guarantee covers every input list, including ones nobody thought to test. That is the attraction of formal verification: the guarantee depends on the checked argument, regardless of who—or what—wrote it.</p>
 
-        <p>For years, the labor of writing all this down and getting the proofs checked dominated my thinking.</p>
+        <p>For years, the cost of writing all this down and getting the proofs checked dominated my thinking.</p>
 
         <h2 id="cheaper-proofs">How AI changed the cost</h2>
 
@@ -148,7 +148,7 @@
 
           <p>For many tasks, agents can now turn a clear statement and a correct informal argument into a checked Lean proof with little specialist intervention. In this practical sense, I sometimes call proof search and parts of <em>autoformalization</em> effectively solved. It does not settle whether we chose the right statement, or whether the resulting code is suitable for a shared library.</p>
 
-          <p>This is much of what I hoped for when I entered the field. If the labor of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p></div>
+          <p>This is much of what I hoped for when I entered the field. If the cost of formalization were the main obstacle to trustworthy software, this progress should bring us much closer to that goal. A recent project made me look more carefully at that “if.”</p></div>
           <div class="sidenote-stack">
             <aside class="sidenote" role="note" aria-label="Note 4">
               <details id="note-4">
