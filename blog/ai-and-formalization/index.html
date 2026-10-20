@@ -156,13 +156,13 @@
 
         <p><a href="https://lizn-zn.github.io/VeriTile/" target="_blank" rel="noopener"><strong>VeriTile</strong></a>, led by <a href="https://lizn-zn.github.io/" target="_blank" rel="noopener">Zenan Li</a>, uses Lean to verify GPU kernels: the small, performance-critical programs that do much of the numerical work in AI training. We started the project with a possible path to <em>recursive self-improvement</em> in mind: an AI could optimize its own kernels, prove its changes correct, and use the faster kernels to train the next model.</p>
 
-        <h3 id="veritile-motivation">Why kernels looked so promising <a class="heading-link" href="#veritile-motivation" aria-label="Link to Why kernels looked so promising" title="Link to this section">#</a></h3>
+        <h3 id="veritile-motivation">Why kernels looked so promising</h3>
 
         <p>Training a large model is expensive, so engineers reorganize computations to make better use of the GPU and save time throughout a run. But an error may stay hidden until training deteriorates much later. By then, finding the cause can be harder than fixing it. Every optimization therefore raises the same question: did we preserve the behavior we care about?</p>
 
         <p>Kernels are relatively compact, and their intended computations appear mathematical. We can often write a slow, straightforward reference implementation, then ask whether a faster one does the same thing. Here it seemed we could specify exactly what “correct” meant and let AI do the optimization and proof work.</p>
 
-        <h3 id="veritile-guarantees">What we could prove <a class="heading-link" href="#veritile-guarantees" aria-label="Link to What we could prove" title="Link to this section">#</a></h3>
+        <h3 id="veritile-guarantees">What we could prove</h3>
 
         <p>In VeriTile, kernels are written in a Triton-style language embedded in Lean, giving each operation a precise meaning. Agents can then prove that a kernel meets a specification or matches a reference, with Lean checking their work.</p>
 
@@ -205,7 +205,7 @@
 
         <p>This rules out implementation mistakes that testing might miss. But would the faster kernel preserve training outcomes? That depends on what mathematical equivalence means for the actual computation.</p>
 
-        <h3 id="veritile-numerics">When exact equivalence asks for too much <a class="heading-link" href="#veritile-numerics" aria-label="Link to When exact equivalence asks for too much" title="Link to this section">#</a></h3>
+        <h3 id="veritile-numerics">When exact equivalence asks for too much</h3>
 
         <p>If a replacement preserves outputs down to the last bit and all other relevant behavior, training cannot tell the difference. Proving this <em>bitwise equivalence</em> in an accurate execution model would justify the replacement. Many useful optimizations, however, change how arithmetic is grouped. Floating-point arithmetic is <strong>not associative</strong>: rounding intermediate results means that changing the grouping can change the result.</p>
 
@@ -219,7 +219,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>This prints <code>1.0 0.0</code>, although both expressions equal 2 in real arithmetic. In a GPU kernel, such regrouping can enable parallel execution. Demanding bitwise equivalence would rule out many useful optimizations. Different outputs need not harm training, but small differences are not always harmless. A better prover cannot prove a false statement. We need another claim, such as a bound on the numerical difference.</p>
 
-        <h3 id="veritile-training">How small is small enough for training? <a class="heading-link" href="#veritile-training" aria-label="Link to How small is small enough for training?" title="Link to this section">#</a></h3>
+        <h3 id="veritile-training">How small is small enough for training?</h3>
 
         <p>An error bound tells us how much the outputs can differ, but how much can training tolerate? Small differences can affect many later steps. We need to connect the kernel’s numerical behavior to the training outcome we want to protect, and that connection may depend on the data. There may be no useful worst-case guarantee across all datasets; we may need to know whether an optimization works on ours. For the systems and optimizations we cared about, machine learning theory did not give us a practically useful answer.</p>
 
@@ -303,7 +303,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>Hardware is a natural example: we can ask whether a circuit implements the intended arithmetic. Low-level systems software offers others: preserving program behavior through a compiler optimization, enforcing isolation in an OS kernel, or ensuring that a database transaction happens completely or not at all. Regulated industries may offer further opportunities where deployment depends on meeting precise requirements and providing evidence.</p>
 
-        <h3 id="ai-for-mathematics">What about AI for mathematics? <a class="heading-link" href="#ai-for-mathematics" aria-label="Link to What about AI for mathematics?" title="Link to this section">#</a></h3>
+        <h3 id="ai-for-mathematics">What about AI for mathematics?</h3>
 
         <p>Mathematics has an unusually direct connection to formal statements: the theorem itself is often what mathematicians care about. If a mathematical result matters to you intrinsically, establishing it rigorously has value in its own right.</p>
 
@@ -321,7 +321,7 @@ print(sequential, pairwise)</code></pre>
 
         <p>If the whole pitch is “look, AI can do math,” I think that particular party is largely over.</p>
 
-        <h3 id="everyday-verification">A routine tool for coding agents <a class="heading-link" href="#everyday-verification" aria-label="Link to A routine tool for coding agents" title="Link to this section">#</a></h3>
+        <h3 id="everyday-verification">A routine tool for coding agents</h3>
 
         <p>Falling costs broaden where verification is worthwhile: finding a few important bugs or proving one useful property can be enough. <a href="https://blog.janestreet.com/formal-methods-at-jane-street-index/" target="_blank" rel="noopener">Jane Street’s recent change of view</a> illustrates how cheaper proofs and more AI-generated code can change the economics. I expect formalization to become a routine part of coding-agent workflows, alongside testing.</p>
 
